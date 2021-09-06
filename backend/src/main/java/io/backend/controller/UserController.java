@@ -41,7 +41,7 @@ public class UserController {
     }
     
     @GetMapping("/getUser/{userName}")
-    public ResponseEntity<UserDTO>getUser(@PathVariable String userName) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable String userName) {
         Optional<UserEntity> userEntityOPT = userService.getUser(userName);
         if (userEntityOPT.isPresent()) {
             UserEntity userEntity = userEntityOPT.get();
@@ -51,7 +51,15 @@ public class UserController {
         return notFound().build();
     }
 
-    @GetMapping
+    @GetMapping("/getUsers")
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        List<UserEntity> userEntityList = userService.getUsers();
+        if (userEntityList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<UserDTO> userDTOList = map(userEntityList);
+        return ok(userDTOList);
+    }
 
     private UserDTO map(UserEntity userEntity) {
         return UserDTO.builder()
@@ -83,6 +91,15 @@ public class UserController {
         userEntity.setDrivingStyle(userDTO.getDrivingStyle());
         userEntity.setAboutMe(userDTO.getAboutMe());
         return userEntity;
+    }
+
+    private List<UserDTO> map(List<UserEntity> userEntityList) {
+        List<UserDTO> userDTOList= new LinkedList<>();
+        for (UserEntity userEntity: userEntityList) {
+            UserDTO userDTO = map(userEntity);
+            userDTOList.add(userDTO);
+        }
+        return userDTOList;
     }
 
 }
