@@ -1,14 +1,25 @@
 package io.backend.controller;
 
+import io.backend.api.UserDTO;
+import io.backend.model.UserEntity;
 import io.backend.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 import static io.backend.controller.UserController.USER_CONTROLLER_TAG;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @CrossOrigin
 @RestController
@@ -28,4 +39,33 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    
+    @GetMapping()
+    public ResponseEntity<UserDTO>getUser(@PathVariable String userName) {
+        Optional<UserEntity> userEntityOPT = userService.getUser(userName);
+        if (userEntityOPT.isPresent()) {
+            UserEntity userEntity = userEntityOPT.get();
+            UserDTO userDTO = map(userEntityOPT.get());
+            return null;
+        }
+        return notFound().build();
+    }
+
+    private UserDTO map(UserEntity userEntity) {
+        return UserDTO.builder()
+                .userName(userEntity.getUserName())
+                .password(userEntity.getPassword())
+                .userRole(userEntity.getUserRole())
+                .eMail(userEntity.getEMail())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .age(userEntity.getAge())
+                .location(userEntity.getLocation())
+                .drivingExp(userEntity.getDrivingExp())
+                .drivingStyle(userEntity.getDrivingStyle())
+                .aboutMe(userEntity.getAboutMe())
+                .build();
+    }
+
+
 }

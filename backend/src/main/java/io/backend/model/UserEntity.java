@@ -1,21 +1,19 @@
 package io.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-@Entity
-@Table(name = "user_table")
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@Entity
+@Table(name = "user_table")
 public class UserEntity {
 /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -52,7 +50,7 @@ public class UserEntity {
     private String location;
 
     @Column(name = "driving_experience", nullable = false)
-    private int drivingExp;
+    private String drivingExp;
 
     @Column(name ="driving_style", nullable = false)
     private String drivingStyle;
@@ -60,6 +58,7 @@ public class UserEntity {
     @Column(name = "about_me")
     private String aboutMe;
 
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,5 +77,5 @@ public class UserEntity {
     public int hashCode() {
         return getUserName().hashCode();
     }
-
+ */
 }

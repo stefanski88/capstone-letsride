@@ -2,13 +2,14 @@ package io.backend.repository;
 
 import io.backend.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-  /*
-    Optional<UserEntity> findByName(String name);
 
-    Optional<UserEntity> findByContains(String name);
-    */
+    Optional<UserEntity>findByUserName(String username);
+
+    Optional<UserEntity>findByUserNameContains(String username);
 }
