@@ -1,25 +1,31 @@
 package io.backend.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//fehlt noch builder und ggf. beide Konsturuktoren
+@Builder(toBuilder = true)
 public class UserEntity {
-
-    //fehlt noch @OneToMany Motorcycles
-
+/*
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private final Set<MotorcycleEntity> motoEntitySet = new HashSet<>():
+*/
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
-    private String userID;
+    private Long userID;
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -53,4 +59,24 @@ public class UserEntity {
 
     @Column(name = "about_me")
     private String aboutMe;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        UserEntity that = (UserEntity) o;
+        return this.getUserName() != null && this.getUserName().equals(that.getUserName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getUserName().hashCode();
+    }
+
 }
