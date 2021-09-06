@@ -23,7 +23,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 
 @Tag(name = USER_CONTROLLER_TAG, description = "type in a description")
 @Api(
@@ -40,16 +40,18 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping()
+    @GetMapping("/getUser/{userName}")
     public ResponseEntity<UserDTO>getUser(@PathVariable String userName) {
         Optional<UserEntity> userEntityOPT = userService.getUser(userName);
         if (userEntityOPT.isPresent()) {
             UserEntity userEntity = userEntityOPT.get();
-            UserDTO userDTO = map(userEntityOPT.get());
-            return null;
+            UserDTO userDTO = map(userEntity);
+            return ok(userDTO);
         }
         return notFound().build();
     }
+
+    @GetMapping
 
     private UserDTO map(UserEntity userEntity) {
         return UserDTO.builder()
@@ -67,5 +69,20 @@ public class UserController {
                 .build();
     }
 
+    private UserEntity map(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserName(userDTO.getUserName());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setUserRole(userDTO.getUserRole());
+        userEntity.setEMail(userDTO.getEMail());
+        userEntity.setFirstName(userDTO.getFirstName());
+        userEntity.setLastName(userDTO.getLastName());
+        userEntity.setAge(userDTO.getAge());
+        userEntity.setLocation(userDTO.getLocation());
+        userEntity.setDrivingExp(userDTO.getDrivingExp());
+        userEntity.setDrivingStyle(userDTO.getDrivingStyle());
+        userEntity.setAboutMe(userDTO.getAboutMe());
+        return userEntity;
+    }
 
 }
