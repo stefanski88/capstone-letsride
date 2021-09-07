@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +20,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/api")
 public class UserController {
 
-    public static final String USER_CONTROLLER_TAG = "user";
     private final UserService userService;
     private final MapperService mapperService;
 
@@ -52,7 +50,13 @@ public class UserController {
         return ok(userDTOList);
     }
 
-    @PutMapping("/changeUserPassword")
+    @GetMapping("/createUser")
+    public ResponseEntity<UserDTO> createUser() {
+        return null;
+    }
+
+
+    @PutMapping("/changePassword")
     public ResponseEntity<UserDTO> createUser(AuthenticationPrincipal authP) {
         return null;
     }

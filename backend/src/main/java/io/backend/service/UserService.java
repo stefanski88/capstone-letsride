@@ -1,5 +1,6 @@
 package io.backend.service;
 
+import io.backend.api.UserDTO;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
