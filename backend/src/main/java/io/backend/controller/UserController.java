@@ -24,12 +24,6 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-
-@Tag(name = USER_CONTROLLER_TAG, description = "type in a description")
-@Api(
-        tags = (USER_CONTROLLER_TAG)
-)
-
 public class UserController {
 
     public static final String USER_CONTROLLER_TAG = "user";
