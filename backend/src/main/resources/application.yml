@@ -15,5 +15,5 @@ spring:
       ddl-auto: update
 security:
   jwt:
-    secret: "super-duper-ultra-secret-perfect"
+    secret: "super-duper-mega-ultra-perfect-secret"
     expiresAfterMin: 30

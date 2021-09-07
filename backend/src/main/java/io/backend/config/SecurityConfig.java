@@ -49,6 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers(GET);
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -58,11 +64,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers(GET);
     }
 }

@@ -1,11 +1,9 @@
 package io.backend.model;
 
 import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.*;
 
 @Getter
 @Setter
@@ -15,11 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_table")
 public class UserEntity {
-/*
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private final Set<MotorcycleEntity> motoEntitySet = new HashSet<>():
-*/
+    private final Set<MotorcycleEntity> motorcycles = new HashSet<>();
+
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
@@ -58,7 +56,31 @@ public class UserEntity {
     @Column(name = "about_me")
     private String aboutMe;
 
-/*
+    public Set<MotorcycleEntity> getMotorcycles() {
+        return Collections.unmodifiableSet(motorcycles);
+    }
+
+    public void addMotorcycle(Set<MotorcycleEntity> motorcycleEntities) {
+        this.motorcycles.addAll(motorcycleEntities);
+    }
+
+    public void setMotorcycles(Set<MotorcycleEntity> userMotorcycles) {
+        Map<Integer, MotorcycleEntity> allMotorcycles = new HashMap<>();
+        for (MotorcycleEntity motoEntity : getMotorcycles()) {
+            allMotorcycles.put(motoEntity.hashCode(), motoEntity);
+        }
+        //iterate all user motorcycles
+        Set<MotorcycleEntity> newMotocycle = new HashSet<>();
+        for (MotorcycleEntity motoEntity : userMotorcycles) {
+            MotorcycleEntity existing = allMotorcycles.get(motoEntity.hashCode());
+            //if motorcycle with same hash exists, reset it
+            newMotocycle.add(existing != null ? existing : motoEntity);
+        }
+        // clear all motorcycles and add them again
+        this.motorcycles.clear();
+        addMotorcycle(newMotocycle);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,5 +99,5 @@ public class UserEntity {
     public int hashCode() {
         return getUserName().hashCode();
     }
- */
+
 }
