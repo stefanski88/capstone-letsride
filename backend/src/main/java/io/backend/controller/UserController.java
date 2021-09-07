@@ -36,7 +36,7 @@ public class UserController {
         Optional<UserEntity> userEntityOPT = userService.getUser(userName);
         if (userEntityOPT.isPresent()) {
             UserEntity userEntity = userEntityOPT.get();
-            UserDTO userDTO = map(userEntity);
+            UserDTO userDTO = mapperService.map(userEntity);
             return ok(userDTO);
         }
         return notFound().build();
@@ -48,7 +48,7 @@ public class UserController {
         if (userEntityList.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        List<UserDTO> userDTOList = map(userEntityList);
+        List<UserDTO> userDTOList = mapperService.map(userEntityList);
         return ok(userDTOList);
     }
 
@@ -57,45 +57,6 @@ public class UserController {
         return null;
     }
 
-    private UserDTO map(UserEntity userEntity) {
-        return UserDTO.builder()
-                .userName(userEntity.getUserName())
-                .password(userEntity.getPassword())
-                .userRole(userEntity.getUserRole())
-                .eMail(userEntity.getEMail())
-                .firstName(userEntity.getFirstName())
-                .lastName(userEntity.getLastName())
-                .age(userEntity.getAge())
-                .location(userEntity.getLocation())
-                .drivingExp(userEntity.getDrivingExp())
-                .drivingStyle(userEntity.getDrivingStyle())
-                .aboutMe(userEntity.getAboutMe())
-                .build();
-    }
 
-    private UserEntity map(UserDTO userDTO) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userDTO.getUserName());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity.setUserRole(userDTO.getUserRole());
-        userEntity.setEMail(userDTO.getEMail());
-        userEntity.setFirstName(userDTO.getFirstName());
-        userEntity.setLastName(userDTO.getLastName());
-        userEntity.setAge(userDTO.getAge());
-        userEntity.setLocation(userDTO.getLocation());
-        userEntity.setDrivingExp(userDTO.getDrivingExp());
-        userEntity.setDrivingStyle(userDTO.getDrivingStyle());
-        userEntity.setAboutMe(userDTO.getAboutMe());
-        return userEntity;
-    }
-
-    private List<UserDTO> map(List<UserEntity> userEntityList) {
-        List<UserDTO> userDTOList= new LinkedList<>();
-        for (UserEntity userEntity: userEntityList) {
-            UserDTO userDTO = map(userEntity);
-            userDTOList.add(userDTO);
-        }
-        return userDTOList;
-    }
 
 }
