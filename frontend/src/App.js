@@ -1,10 +1,12 @@
 import {Router, Route, Switch} from "react-router-dom";
-import login from "./pages/Login";
+import Login from "./pages/Login";
+
 
 function App() {
   return (
       <div>
-          <p>p tag</p>
+          <Login />
+        <p>p tag from App.js</p>
       </div>
   );
 }
