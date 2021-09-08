@@ -1,13 +1,14 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export default function Header() {
 
     const title = "lets Ride"
-    const quote = "enjoy driving motorcycle - together!"
+    const image = "letsRideImage.PNG"
+    const quote = "enjoy riding motorcycle - together!"
 
     return(
         <Wrapper>
-            <img src="../images/letsRideImage.PNG" alt="lets ride - logo"/>
+            <img src={image} alt="lets ride - logo"/>
             <h1>{title}</h1>
             <blockquote>{quote}</blockquote>
         </Wrapper>
