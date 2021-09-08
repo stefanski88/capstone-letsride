@@ -2,9 +2,14 @@ import styled from 'styled-components'
 
 export default function Header() {
 
+    const title = "lets Ride"
+    const quote = "enjoy driving motorcycle - together!"
+
     return(
         <Wrapper>
-            <img src="" alt="lets ride - logo"/>
+            <img src="../images/letsRideImage.PNG" alt="lets ride - logo"/>
+            <h1>{title}</h1>
+            <blockquote>{quote}</blockquote>
         </Wrapper>
     );
 }
