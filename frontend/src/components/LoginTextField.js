@@ -14,10 +14,10 @@ export default function LoginTextField({
     return(
         <Label {...props}>
             <Input type={type}
+                   title={title}
+                   name={name}
                    value={value}
                    onChange={onChange}
-                   name={name}
-                   title={title}
             />
         </Label>
     );

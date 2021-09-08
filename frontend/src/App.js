@@ -1,12 +1,13 @@
 import Login from "./pages/Login";
-import Header from "./components/Header";
 import AuthProvider from "./auth/AuthProvider";
+import {Route, Router, Switch} from "react-router-dom";
+import Landing from "./pages/Landing";
 
 
 function App() {
   return (
       <AuthProvider>
-          <Header />
+          <Landing />
           <Login />
         </AuthProvider>
   );
