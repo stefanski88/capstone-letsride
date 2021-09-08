@@ -1,7 +1,17 @@
 import Main from '../components/Main'
 import LoginTextField from "../components/LoginTextField"
+import { useAuth } from '../auth/AuthProvider'
+import { useState } from "react";
 
-export default function login() {
+const defaultState = {
+    userName: '',
+    password: '',
+}
+
+export default function Login() {
+
+    const [credentials, setCredentials] = useState(defaultState)
+
 
     return(
         <div>
@@ -18,6 +28,7 @@ export default function login() {
                 value={null}
                 onChange={null}
                 />
+                <button>login</button>
             </Main>
 
             <div>
