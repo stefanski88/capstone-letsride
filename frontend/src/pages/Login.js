@@ -2,8 +2,6 @@ import Main from '../components/Main'
 import LoginTextField from "../components/LoginTextField"
 import { useAuth } from '../auth/AuthProvider'
 import { useState } from "react";
-import Header from "../components/Header";
-import {Redirect} from "react-router-dom";
 
 const defaultState = {
     userName: '',
@@ -39,7 +37,6 @@ export default function Login() {
 
     return(
         <div>
-            <Header />
             <Main as="form" onSubmit={null}>
                 <LoginTextField
                     title="Username"

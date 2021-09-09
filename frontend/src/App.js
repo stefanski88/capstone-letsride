@@ -1,15 +1,20 @@
 import Login from "./pages/Login";
 import AuthProvider from "./auth/AuthProvider";
-import {Route, Router, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Landing from "./pages/Landing";
-
+import Header from "./components/Header";
 
 function App() {
   return (
       <AuthProvider>
-          <Landing />
-          <Login />
-        </AuthProvider>
+          <Router>
+              <Header />
+              <Switch>
+                  <Route exact path="/" component={Landing}/>
+                  <Route path="/login" component={Login}/>
+              </Switch>
+          </Router>
+      </AuthProvider>
   );
 }
 

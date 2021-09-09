@@ -1,7 +1,6 @@
 import styled from "styled-components/macro";
 import Label from './Label'
 
-
 export default function LoginTextField({
     type = 'text',
     value,

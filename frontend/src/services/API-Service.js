@@ -6,6 +6,16 @@ export const getToken = credentials =>
         .then(response => response.data)
         .then(dto => dto.token)
 
+export const getUsers = () =>
+    axios
+        .get('api/getUsers')
+        .then(response => response.data)
+
+export const getUser = () =>
+    axios
+        .get('api/getUser/user1')
+        .then(response => response.data)
+
 /*
 const headers = token => ({
     headers: {
