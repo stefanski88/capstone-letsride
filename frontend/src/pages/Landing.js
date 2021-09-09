@@ -1,22 +1,22 @@
 import {useState} from "react";
 import RiderCard from "../components/RiderCard";
-import {getUser} from "../services/API-Service";
+import {getUsers} from "../services/API-Service";
 
 
 export default function Landing() {
 
-    const [riders, setRiders] = useState({})
+    const [riders, setRiders] = useState([])
 
     const handleClick = () => {
-        getUser().then(setRiders)
+        getUsers().then(setRiders)
     }
 
     return(
-        <div>
-            <RiderCard riders={riders}/>
+        <section>
+            {riders.map(rider => (
+                <RiderCard key={rider.id} rider={rider}/>
+            ))}
             <button onClick={handleClick}>load riders</button>
-
-
-        </div>
+        </section>
     );
 }
