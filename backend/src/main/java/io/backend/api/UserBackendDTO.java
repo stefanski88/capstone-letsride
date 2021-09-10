@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDTO {
+public class UserBackendDTO {
 
     @ApiModelProperty(required = true)
     private String userName;

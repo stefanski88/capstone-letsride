@@ -3,10 +3,10 @@ import Label from './Label'
 
 export default function LoginTextField({
     type = 'text',
+    title,
+    name,
     value,
     onChange,
-    name,
-    title,
     ...props
 }) {
 

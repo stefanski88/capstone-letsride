@@ -1,6 +1,6 @@
 package io.backend.service;
 
-import io.backend.api.UserDTO;
+import io.backend.api.UserBackendDTO;
 import io.backend.model.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class MapperService {
 
-    public UserDTO map(UserEntity userEntity) {
-        return UserDTO.builder()
+    public UserBackendDTO map(UserEntity userEntity) {
+        return UserBackendDTO.builder()
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
                 .userRole(userEntity.getUserRole())
@@ -26,28 +26,28 @@ public class MapperService {
                 .build();
     }
 
-    public UserEntity map(UserDTO userDTO) {
+    public UserEntity map(UserBackendDTO userBackendDTO) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userDTO.getUserName());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity.setUserRole(userDTO.getUserRole());
-        userEntity.setEMail(userDTO.getEMail());
-        userEntity.setFirstName(userDTO.getFirstName());
-        userEntity.setLastName(userDTO.getLastName());
-        userEntity.setAge(userDTO.getAge());
-        userEntity.setLocation(userDTO.getLocation());
-        userEntity.setDrivingExp(userDTO.getDrivingExp());
-        userEntity.setDrivingStyle(userDTO.getDrivingStyle());
-        userEntity.setAboutMe(userDTO.getAboutMe());
+        userEntity.setUserName(userBackendDTO.getUserName());
+        userEntity.setPassword(userBackendDTO.getPassword());
+        userEntity.setUserRole(userBackendDTO.getUserRole());
+        userEntity.setEMail(userBackendDTO.getEMail());
+        userEntity.setFirstName(userBackendDTO.getFirstName());
+        userEntity.setLastName(userBackendDTO.getLastName());
+        userEntity.setAge(userBackendDTO.getAge());
+        userEntity.setLocation(userBackendDTO.getLocation());
+        userEntity.setDrivingExp(userBackendDTO.getDrivingExp());
+        userEntity.setDrivingStyle(userBackendDTO.getDrivingStyle());
+        userEntity.setAboutMe(userBackendDTO.getAboutMe());
         return userEntity;
     }
 
-    public List<UserDTO> map(List<UserEntity> userEntityList) {
-        List<UserDTO> userDTOList= new LinkedList<>();
+    public List<UserBackendDTO> map(List<UserEntity> userEntityList) {
+        List<UserBackendDTO> userBackendDTOList = new LinkedList<>();
         for (UserEntity userEntity: userEntityList) {
-            UserDTO userDTO = map(userEntity);
-            userDTOList.add(userDTO);
+            UserBackendDTO userBackendDTO = map(userEntity);
+            userBackendDTOList.add(userBackendDTO);
         }
-        return userDTOList;
+        return userBackendDTOList;
     }
 }

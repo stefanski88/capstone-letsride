@@ -2,7 +2,7 @@ package io.backend.controller;
 
 import io.backend.api.AccessToken;
 import io.backend.api.Credentials;
-import io.backend.api.UserDTO;
+import io.backend.api.UserBackendDTO;
 import io.backend.model.UserEntity;
 import io.backend.service.JwtService;
 import io.backend.service.UserService;
@@ -55,8 +55,8 @@ public class AuthController {
     }
 
     @GetMapping("/auth/me")
-    public ResponseEntity<UserDTO> getLoggedInUser(@AuthenticationPrincipal UserEntity userEntity) {
-        return ok(UserDTO.builder().userName(userEntity.getUserName()).build());
+    public ResponseEntity<UserBackendDTO> getLoggedInUser(@AuthenticationPrincipal UserEntity userEntity) {
+        return ok(UserBackendDTO.builder().userName(userEntity.getUserName()).build());
     }
 
 }

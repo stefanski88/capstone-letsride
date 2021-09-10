@@ -25,4 +25,6 @@ public class UserService {
     public List<UserEntity> getUsers() {
         return userRepository.findAll();
     }
+
+
 }

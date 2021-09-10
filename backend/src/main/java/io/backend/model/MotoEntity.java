@@ -12,7 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "motorcycle_table")
-public class MotorcycleEntity {
+public class MotoEntity {
 
     @Id
     @GeneratedValue
@@ -35,7 +35,7 @@ public class MotorcycleEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MotorcycleEntity that = (MotorcycleEntity) o;
+        MotoEntity that = (MotoEntity) o;
         return Objects.equals(motoID, that.motoID) && Objects.equals(motoNickName, that.motoNickName) && Objects.equals(manufacturer, that.manufacturer) && Objects.equals(model, that.model) && Objects.equals(constructionYear, that.constructionYear);
     }
 

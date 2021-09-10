@@ -16,7 +16,7 @@ public class UserEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private final Set<MotorcycleEntity> motorcycles = new HashSet<>();
+    private final Set<MotoEntity> motorcycles = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -56,23 +56,23 @@ public class UserEntity {
     @Column(name = "about_me")
     private String aboutMe;
 
-    public Set<MotorcycleEntity> getMotorcycles() {
+    public Set<MotoEntity> getMotorcycles() {
         return Collections.unmodifiableSet(motorcycles);
     }
 
-    public void addMotorcycle(Set<MotorcycleEntity> motorcycleEntities) {
+    public void addMotorcycle(Set<MotoEntity> motorcycleEntities) {
         this.motorcycles.addAll(motorcycleEntities);
     }
 
-    public void setMotorcycles(Set<MotorcycleEntity> userMotorcycles) {
-        Map<Integer, MotorcycleEntity> allMotorcycles = new HashMap<>();
-        for (MotorcycleEntity motoEntity : getMotorcycles()) {
+    public void setMotorcycles(Set<MotoEntity> userMotorcycles) {
+        Map<Integer, MotoEntity> allMotorcycles = new HashMap<>();
+        for (MotoEntity motoEntity : getMotorcycles()) {
             allMotorcycles.put(motoEntity.hashCode(), motoEntity);
         }
         //iterate all user motorcycles
-        Set<MotorcycleEntity> newMotocycle = new HashSet<>();
-        for (MotorcycleEntity motoEntity : userMotorcycles) {
-            MotorcycleEntity existing = allMotorcycles.get(motoEntity.hashCode());
+        Set<MotoEntity> newMotocycle = new HashSet<>();
+        for (MotoEntity motoEntity : userMotorcycles) {
+            MotoEntity existing = allMotorcycles.get(motoEntity.hashCode());
             //if motorcycle with same hash exists, reset it
             newMotocycle.add(existing != null ? existing : motoEntity);
         }
