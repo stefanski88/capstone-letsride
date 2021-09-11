@@ -1,14 +1,13 @@
 package io.backend.controller;
 
-import io.backend.api.MotoBackendDTO;
 import io.backend.api.UserBackendDTO;
-import io.backend.api.UserRegFrontendDTO;
+import io.backend.api.UserRegisterDTO;
 import io.backend.model.UserEntity;
 import io.backend.service.MapperService;
 import io.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,10 +32,10 @@ public class UserController {
     
     @GetMapping("/getUser/{userName}")
     public ResponseEntity<UserBackendDTO> getUser(@PathVariable String userName) {
-        Optional<UserEntity> userEntityOPT = userService.getUser(userName);
+        Optional<UserEntity> userEntityOPT = userService.getUserByUserName(userName);
         if (userEntityOPT.isPresent()) {
-            UserEntity userEntity = userEntityOPT.get();
-            UserBackendDTO userBackendDTO = mapperService.map(userEntity);
+            UserEntity searchedUserEntity = userEntityOPT.get();
+            UserBackendDTO userBackendDTO = mapperService.map(searchedUserEntity);
             return ok(userBackendDTO);
         }
         return notFound().build();
@@ -51,12 +50,26 @@ public class UserController {
         List<UserBackendDTO> userBackendDTOList = mapperService.map(userEntityList);
         return ok(userBackendDTOList);
     }
+
+    @PostMapping("/reg")
+    public ResponseEntity<UserRegisterDTO> createUser(@RequestBody UserRegisterDTO userRegisterDTO) {
+
+        UserEntity userEntity = mapperService.map(userRegisterDTO);
+        UserEntity createdUserEntity = userService.createUser(userEntity);
+
+        UserRegisterDTO createdUser = mapperService.mapFr(createdUserEntity);
+        createdUser.setPassword(createdUserEntity.getPassword());
+        return ok(createdUser);
+    }
+
+
+
 /*
     @GetMapping("/registerUser")
     public ResponseEntity<UserRegFrontendDTO> registerUser(@AuthenticationPrincipal UserEntity authUser, @RequestBody UserRegFrontendDTO userRegFrontendDTO) {
         UserEntity userEntity = mapperService.map(userRegFrontendDTO);
     }
- */
+
 
     @PutMapping("/changePassword/{newPassword}")
     public ResponseEntity<UserBackendDTO> changePassword(@AuthenticationPrincipal UserEntity authUser, @RequestBody String newPassword) {
@@ -69,5 +82,5 @@ public class UserController {
     public ResponseEntity<MotoBackendDTO> getMoto(@AuthenticationPrincipal UserEntity authUser, String userName) {
         return null;
     }
-
+ */
 }

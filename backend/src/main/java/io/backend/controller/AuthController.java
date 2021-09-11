@@ -4,7 +4,7 @@ import io.backend.security.AccessToken;
 import io.backend.security.Credentials;
 import io.backend.api.UserBackendDTO;
 import io.backend.model.UserEntity;
-import io.backend.service.JwtService;
+import io.backend.security.JwtService;
 import io.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +44,7 @@ public class AuthController {
         try {
             authenticationManager.authenticate(authToken);
 
-            UserEntity userEntity = userService.getUser(userName).orElseThrow();
+            UserEntity userEntity = userService.getUserByUserName(userName).orElseThrow();
             String token = jwtService.createJwtToken(userEntity);
 
             AccessToken accessToken = new AccessToken(token);

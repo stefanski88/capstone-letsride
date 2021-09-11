@@ -31,4 +31,16 @@ public class UserEntityDetailsService implements UserDetailsService {
                 .authorities("user")
                 .build();
     }
+
+    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository
+                .findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found!"));
+
+        return User.builder()
+                .username(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .authorities("user")
+                .build();
+    }
 }

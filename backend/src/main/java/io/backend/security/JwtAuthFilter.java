@@ -1,7 +1,6 @@
 package io.backend.security;
 
 import io.backend.model.UserEntity;
-import io.backend.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package io.backend.service;
 
 import io.backend.api.UserBackendDTO;
+import io.backend.api.UserRegisterDTO;
 import io.backend.model.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class MapperService {
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
                 .userRole(userEntity.getUserRole())
-                .eMail(userEntity.getEMail())
+                .eMail(userEntity.getEmail())
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .age(userEntity.getAge())
@@ -31,7 +32,7 @@ public class MapperService {
         userEntity.setUserName(userBackendDTO.getUserName());
         userEntity.setPassword(userBackendDTO.getPassword());
         userEntity.setUserRole(userBackendDTO.getUserRole());
-        userEntity.setEMail(userBackendDTO.getEMail());
+        userEntity.setEmail(userBackendDTO.getEMail());
         userEntity.setFirstName(userBackendDTO.getFirstName());
         userEntity.setLastName(userBackendDTO.getLastName());
         userEntity.setAge(userBackendDTO.getAge());
@@ -40,6 +41,36 @@ public class MapperService {
         userEntity.setDrivingStyle(userBackendDTO.getDrivingStyle());
         userEntity.setAboutMe(userBackendDTO.getAboutMe());
         return userEntity;
+    }
+
+    public UserEntity map(UserRegisterDTO userRegisterDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserName(userRegisterDTO.getUserName());
+        userEntity.setPassword(userRegisterDTO.getPassword());
+        userEntity.setEmail(userRegisterDTO.getEmail());
+        userEntity.setFirstName(userRegisterDTO.getFirstName());
+        userEntity.setLastName(userRegisterDTO.getLastName());
+        userEntity.setAge(userRegisterDTO.getAge());
+        userEntity.setLocation(userRegisterDTO.getLocation());
+        userEntity.setDrivingExp(userRegisterDTO.getDrivingExp());
+        userEntity.setDrivingStyle(userRegisterDTO.getDrivingStyle());
+        userEntity.setAboutMe(userRegisterDTO.getAboutMe());
+        return userEntity;
+    }
+
+    public UserRegisterDTO mapFr(UserEntity userEntity) {
+        return UserRegisterDTO.builder()
+                .userName(userEntity.getUserName())
+                .password(userEntity.getPassword())
+                .email(userEntity.getEmail())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .age(userEntity.getAge())
+                .location(userEntity.getLocation())
+                .drivingExp(userEntity.getDrivingExp())
+                .drivingStyle(userEntity.getDrivingStyle())
+                .aboutMe(userEntity.getAboutMe())
+                .build();
     }
 
     public List<UserBackendDTO> map(List<UserEntity> userEntityList) {

@@ -7,7 +7,7 @@ import java.util.*;
 
 @Getter
 @Setter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,7 +33,7 @@ public class UserEntity {
     private String userRole;
 
     @Column(name = "eMail_address", nullable = false)
-    private String eMail;
+    private String email;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -83,6 +83,20 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return age == that.age && Objects.equals(motorcycles, that.motorcycles) && Objects.equals(userID, that.userID) && Objects.equals(userName, that.userName) && Objects.equals(password, that.password) && Objects.equals(userRole, that.userRole) && Objects.equals(email, that.email) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(location, that.location) && Objects.equals(drivingExp, that.drivingExp) && Objects.equals(drivingStyle, that.drivingStyle) && Objects.equals(aboutMe, that.aboutMe);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(motorcycles, userID, userName, password, userRole, email, firstName, lastName, age, location, drivingExp, drivingStyle, aboutMe);
+    }
+
+    /*
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -99,5 +113,5 @@ public class UserEntity {
     public int hashCode() {
         return getUserName().hashCode();
     }
-
+     */
 }

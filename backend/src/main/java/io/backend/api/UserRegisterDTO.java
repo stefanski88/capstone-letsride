@@ -7,16 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserBackendDTO {
+public class UserRegisterDTO {
 
     private String userName;
     private String password;
-    private String userRole;
-    private String eMail;
+    private String email;
     private String firstName;
     private String lastName;
     private int age;
