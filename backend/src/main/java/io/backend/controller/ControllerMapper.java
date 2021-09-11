@@ -1,17 +1,15 @@
-package io.backend.service;
+package io.backend.controller;
 
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
 import io.backend.model.UserEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
 
-@Service
-public class MapperService {
+abstract class ControllerMapper {
 
-    public UserBackendDTO map(UserEntity userEntity) {
+    protected UserBackendDTO map(UserEntity userEntity) {
         return UserBackendDTO.builder()
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
@@ -27,7 +25,7 @@ public class MapperService {
                 .build();
     }
 
-    public UserEntity map(UserBackendDTO userBackendDTO) {
+    protected UserEntity map(UserBackendDTO userBackendDTO) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userBackendDTO.getUserName());
         userEntity.setPassword(userBackendDTO.getPassword());
@@ -43,7 +41,7 @@ public class MapperService {
         return userEntity;
     }
 
-    public UserEntity map(UserRegisterDTO userRegisterDTO) {
+    protected UserEntity map(UserRegisterDTO userRegisterDTO) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userRegisterDTO.getUserName());
         userEntity.setPassword(userRegisterDTO.getPassword());
@@ -58,7 +56,7 @@ public class MapperService {
         return userEntity;
     }
 
-    public UserRegisterDTO mapFr(UserEntity userEntity) {
+    protected UserRegisterDTO mapFr(UserEntity userEntity) {
         return UserRegisterDTO.builder()
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
