@@ -1,6 +1,6 @@
 package io.backend.service;
 
-import io.backend.config.JwtConfig;
+import io.backend.security.JwtConfig;
 import io.backend.model.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

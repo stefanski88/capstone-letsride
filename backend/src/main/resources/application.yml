@@ -16,4 +16,4 @@ spring:
 security:
   jwt:
     secret: "super-duper-mega-ultra-perfect-secret"
-    expiresAfterMin: 30
+    expires-after-min: 300

@@ -1,6 +1,6 @@
-package io.backend.config;
+package io.backend.security;
 
-import io.backend.filter.JwtAuthFilter;
+import io.backend.security.JwtAuthFilter;
 import io.backend.service.UserEntityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(GET).permitAll()
                 .antMatchers(PUT).permitAll()
+                .antMatchers(POST).permitAll()
                 .antMatchers(POST, ACCESS_TOKEN_URL).permitAll()
                 .antMatchers(DELETE).permitAll()
                 .antMatchers("/**").authenticated()

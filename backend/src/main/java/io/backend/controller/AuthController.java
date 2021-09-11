@@ -1,7 +1,7 @@
 package io.backend.controller;
 
-import io.backend.api.AccessToken;
-import io.backend.api.Credentials;
+import io.backend.security.AccessToken;
+import io.backend.security.Credentials;
 import io.backend.api.UserBackendDTO;
 import io.backend.model.UserEntity;
 import io.backend.service.JwtService;

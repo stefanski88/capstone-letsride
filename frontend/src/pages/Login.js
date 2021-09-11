@@ -6,21 +6,22 @@ import {Redirect} from "react-router-dom";
 
 
 const defaultState = {
-    username: '',
+    userName: '',
     password: '',
 }
 
 export default function Login() {
 
-    const {user, login} = useAuth()
+    const {login, user} = useAuth()
     const [credentials, setCredentials] = useState(defaultState)
 
-    const handleCredentialsChange = event =>
+    const changeCredentialsHandler = event =>
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
 
-    const handleSubmit = event => {
+    const submitHandler = event => {
         event.preventDefault()
         login(credentials)
+            .catch(error => console.error(error))
     }
 
     if (user) {
@@ -29,19 +30,19 @@ export default function Login() {
 
     return(
         <div>
-            <Main as="form" onSubmit={handleSubmit}>
+            <Main as="form" onSubmit={submitHandler}>
                 <LoginTextField
                     title="Username"
-                    name="username"
-                    value={credentials.username}
-                    onChange={handleCredentialsChange}
+                    name="userName"
+                    value={credentials.userName}
+                    onChange={changeCredentialsHandler}
                 />
                 <LoginTextField
                 title="Password"
                 name="password"
                 type="password"
                 value={credentials.password}
-                onChange={handleCredentialsChange}
+                onChange={changeCredentialsHandler}
                 />
                 <button>login</button>
             </Main>

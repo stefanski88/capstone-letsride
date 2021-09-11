@@ -1,12 +1,12 @@
-package io.backend.config;
+package io.backend.security;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@ConfigurationProperties(prefix = "security.jwt")
 @Data
+@Configuration
+@ConfigurationProperties(prefix ="security.jwt")
 public class JwtConfig {
 
     String secret;

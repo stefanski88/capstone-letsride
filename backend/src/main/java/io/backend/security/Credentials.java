@@ -1,4 +1,4 @@
-package io.backend.api;
+package io.backend.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccessToken {
+public class Credentials {
 
-    private String token;
+    private String userName;
+    private String password;
 }

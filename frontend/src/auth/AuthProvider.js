@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 import {getToken} from "../services/API-Service";
 import AuthContext from "./AuthContext";
 
-
 export default function AuthProvider({ children }) {
 
     const [token, setToken] = useState()

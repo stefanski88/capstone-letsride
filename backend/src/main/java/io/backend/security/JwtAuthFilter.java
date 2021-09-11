@@ -1,4 +1,4 @@
-package io.backend.filter;
+package io.backend.security;
 
 import io.backend.model.UserEntity;
 import io.backend.service.JwtService;
