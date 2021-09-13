@@ -2,6 +2,7 @@ package io.backend.controller;
 
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
+import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
 
 import java.util.LinkedList;
@@ -61,6 +62,20 @@ abstract class ControllerMapper {
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
                 .email(userEntity.getEmail())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .age(userEntity.getAge())
+                .location(userEntity.getLocation())
+                .drivingExp(userEntity.getDrivingExp())
+                .drivingStyle(userEntity.getDrivingStyle())
+                .aboutMe(userEntity.getAboutMe())
+                .build();
+    }
+
+    protected UserUpdateDTO mapUpdate(UserEntity userEntity) {
+        return UserUpdateDTO.builder()
+                .userName(userEntity.getUserName())
+                .password(userEntity.getPassword())
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .age(userEntity.getAge())

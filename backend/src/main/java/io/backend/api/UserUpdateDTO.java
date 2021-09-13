@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRegisterDTO {
+public class UserUpdateDTO {
 
     private String userName;
     private String password;
-    private String email;
     private String firstName;
     private String lastName;
     private int age;

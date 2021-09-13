@@ -2,6 +2,7 @@ package io.backend.controller;
 
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
+import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
 import io.backend.service.UserService;
 import lombok.Getter;
@@ -63,7 +64,7 @@ public class UserController extends ControllerMapper {
         return ok(createdUser);
     }
 
-    @DeleteMapping("/del")
+    @DeleteMapping("/deleteUser")
     public ResponseEntity<UserBackendDTO> deleteUser(@AuthenticationPrincipal UserEntity authUser) {
         if (authUser.getUserRole().equals("admin")) {
             throw new IllegalArgumentException("admins and gods cannot die");
@@ -74,4 +75,12 @@ public class UserController extends ControllerMapper {
         return ok(userBackendDTO);
     }
 
+    @PutMapping("/updateUser")
+    public ResponseEntity<UserUpdateDTO> updateUser(@AuthenticationPrincipal UserEntity authUser, @RequestBody UserUpdateDTO userUpdateDTO) {
+        UserEntity userUpdateEntity = userService.updateUser(authUser);
+
+        userUpdateDTO = mapUpdate(userUpdateEntity);
+
+        return ok(userUpdateDTO);
+    }
 }
