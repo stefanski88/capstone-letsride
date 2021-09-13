@@ -6,10 +6,12 @@ import io.backend.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +59,19 @@ public class UserService {
                 .userRole("user")
                 .build());
         return savedUser.toBuilder().password(password).build();
+    }
+
+    public Optional<UserEntity> deleteUser(UserEntity authUser) {
+
+        Optional<UserEntity> userEntityOPT = userRepository.findByUserName(authUser.getUserName());
+        if (userEntityOPT.isPresent()) {
+            UserEntity userEntity = userEntityOPT.get();
+            userRepository.delete(userEntity);
+        }
+        if (userEntityOPT.isEmpty())
+        {
+            throw new EntityNotFoundException("entität wurde nicht gefunden !!!");
+        }
+        return userEntityOPT;
     }
 }

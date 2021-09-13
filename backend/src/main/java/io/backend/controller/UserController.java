@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,6 +61,17 @@ public class UserController extends ControllerMapper {
         UserRegisterDTO createdUser = mapFr(createdUserEntity);
         createdUser.setPassword(createdUserEntity.getPassword());
         return ok(createdUser);
+    }
+
+    @DeleteMapping("/del")
+    public ResponseEntity<UserBackendDTO> deleteUser(@AuthenticationPrincipal UserEntity authUser) {
+        if (authUser.getUserRole().equals("admin")) {
+            throw new IllegalArgumentException("admins and gods cannot die");
+        }
+        Optional<UserEntity> userEntityToDelete = userService.deleteUser(authUser);
+        UserEntity userEntity = userEntityToDelete.get();
+        UserBackendDTO userBackendDTO = map(userEntity);
+        return ok(userBackendDTO);
     }
 
 }
