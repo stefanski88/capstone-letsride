@@ -75,7 +75,6 @@ abstract class ControllerMapper {
     protected UserUpdateDTO mapUpdate(UserEntity userEntity) {
         return UserUpdateDTO.builder()
                 .userName(userEntity.getUserName())
-                .password(userEntity.getPassword())
                 .firstName(userEntity.getFirstName())
                 .lastName(userEntity.getLastName())
                 .age(userEntity.getAge())

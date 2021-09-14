@@ -77,7 +77,7 @@ public class UserController extends ControllerMapper {
 
     @PutMapping("/updateUser")
     public ResponseEntity<UserUpdateDTO> updateUser(@AuthenticationPrincipal UserEntity authUser, @RequestBody UserUpdateDTO userUpdateDTO) {
-        UserEntity userUpdateEntity = userService.updateUser(authUser);
+        UserEntity userUpdateEntity = userService.updateUser(userUpdateDTO, authUser);
 
         userUpdateDTO = mapUpdate(userUpdateEntity);
 

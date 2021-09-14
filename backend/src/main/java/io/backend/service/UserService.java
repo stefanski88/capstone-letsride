@@ -1,5 +1,6 @@
 package io.backend.service;
 
+import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
 import lombok.Getter;
@@ -72,28 +73,53 @@ public class UserService {
         return userEntityOPT;
     }
 
-    public UserEntity updateUser(UserEntity authUser) {
-
-        UserEntity testEntity = authUser;
-        UserEntity testEntityWithBuilder = authUser.toBuilder().build();
-        String authPW = authUser.getPassword();
+    public UserEntity updateUser(UserUpdateDTO userUpdateDTO, UserEntity authUser) {
 
         Optional<UserEntity> userEntityOPT = userRepository.findByUserName(authUser.getUserName());
 
         if (userEntityOPT.isEmpty()) {
             throw new EntityNotFoundException("entity not found! (custom");
         }
-        UserEntity userEntityToUpdate = userEntityOPT.get();
 
-        if (userEntityToUpdate.equals(authUser)) {
+        UserEntity foundUserEntity = userEntityOPT.get();
+        UserEntity mappedUserEntity = mapUpdate(userUpdateDTO);
+
+        if (mappedUserEntity.getUserID() == null) {
+            mappedUserEntity.setUserID(foundUserEntity.getUserID());
+        }
+        if (mappedUserEntity.getUserRole() == null) {
+            mappedUserEntity.setUserRole(foundUserEntity.getUserRole());
+        }
+        if (mappedUserEntity.getPassword() == null) {
+            mappedUserEntity.setPassword(foundUserEntity.getPassword());
+        }
+
+        if (foundUserEntity.equals(mappedUserEntity)) {
             throw new IllegalArgumentException("there is nothing to change ....:)");
         }
 
-
-        if (!authUser.getPassword().equals(userEntityOPT.get().getPassword())) {
-            String updatedPassword = authUser.getPassword();
-            passwordEncoder.encode(updatedPassword);
-        }
-        return userRepository.save(userEntityToUpdate);
+        return userRepository.save(mappedUserEntity);
     }
+
+    private UserEntity mapUpdate(UserUpdateDTO userUpdateDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserName(userUpdateDTO.getUserName());
+        userEntity.setEmail(userUpdateDTO.getEmail());
+        userEntity.setFirstName(userUpdateDTO.getFirstName());
+        userEntity.setLastName(userUpdateDTO.getLastName());
+        userEntity.setAge(userUpdateDTO.getAge());
+        userEntity.setLocation(userUpdateDTO.getLocation());
+        userEntity.setDrivingExp(userUpdateDTO.getDrivingExp());
+        userEntity.setDrivingStyle(userUpdateDTO.getDrivingStyle());
+        userEntity.setAboutMe(userUpdateDTO.getAboutMe());
+        return userEntity;
+    }
+
+
+
+    /*
+            if (!userUpdateDTO.getPassword().equals(foundUserEntity.getPassword())) {
+        String updatedPassword = userUpdateDTO.getPassword();
+        passwordEncoder.encode(updatedPassword);
+     */
 }
