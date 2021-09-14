@@ -1,6 +1,6 @@
 package io.backend.controller;
 
-import io.backend.api.ChangePasswordDTO;
+import io.backend.api.UpdatePasswordDTO;
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
 import io.backend.api.UserUpdateDTO;
@@ -86,8 +86,8 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected ChangePasswordDTO mapUpdatedPassword(UserEntity userEntity) {
-        return ChangePasswordDTO.builder()
+    protected UpdatePasswordDTO mapUpdatedPassword(UserEntity userEntity) {
+        return UpdatePasswordDTO.builder()
                 .currentPassword(userEntity.getPassword())
                 .newPassword(userEntity.getPassword())
                 .build();

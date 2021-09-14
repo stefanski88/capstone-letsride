@@ -1,6 +1,6 @@
 package io.backend.controller;
 
-import io.backend.api.ChangePasswordDTO;
+import io.backend.api.UpdatePasswordDTO;
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
 import io.backend.api.UserUpdateDTO;
@@ -97,11 +97,11 @@ public class UserController extends ControllerMapper {
         return ok(userUpdateDTO);
     }
 
-    @PutMapping("/change-password")
-    public ResponseEntity<ChangePasswordDTO> changeUserPassword(@AuthenticationPrincipal UserEntity authUser, @RequestBody ChangePasswordDTO changePasswordDTO) {
+    @PutMapping("/updatePassword")
+    public ResponseEntity<UpdatePasswordDTO> updateUserPassword(@AuthenticationPrincipal UserEntity authUser, @RequestBody UpdatePasswordDTO updatePasswordDTO) {
 
         String userName = authUser.getUserName();
-        String password = changePasswordDTO.getCurrentPassword();
+        String password = updatePasswordDTO.getCurrentPassword();
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userName, password);
         try {
@@ -111,8 +111,8 @@ public class UserController extends ControllerMapper {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
-            UserEntity userEntity = userService.changeUserPassword(authUser, changePasswordDTO);
-            changePasswordDTO = mapUpdatedPassword(userEntity);
-            return ok(changePasswordDTO);
+            UserEntity userEntity = userService.UpdateUserPassword(authUser, updatePasswordDTO);
+            updatePasswordDTO = mapUpdatedPassword(userEntity);
+            return ok(updatePasswordDTO);
     }
 }

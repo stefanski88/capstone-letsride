@@ -1,13 +1,12 @@
 package io.backend.service;
 
-import io.backend.api.ChangePasswordDTO;
+import io.backend.api.UpdatePasswordDTO;
 import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -105,10 +104,10 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
 
-    public UserEntity changeUserPassword(UserEntity authUser, ChangePasswordDTO changePasswordDTO) {
+    public UserEntity UpdateUserPassword(UserEntity authUser, UpdatePasswordDTO updatePasswordDTO) {
         Optional<UserEntity> userEntity = getUserByUserName(authUser.getUserName());
 
-        String newPasswordFrontend = changePasswordDTO.getNewPassword();
+        String newPasswordFrontend = updatePasswordDTO.getNewPassword();
         String hashedNewPasswordFrontend = passwordEncoder.encode(newPasswordFrontend);
 
         userEntity.get().setPassword(hashedNewPasswordFrontend);
