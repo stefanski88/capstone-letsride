@@ -1,14 +1,21 @@
 package io.backend.controller;
 
+import io.backend.api.ChangePasswordDTO;
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
 import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
+import io.backend.repository.UserRepository;
+import io.backend.service.PasswordService;
 import io.backend.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +33,16 @@ import static org.springframework.http.ResponseEntity.ok;
 public class UserController extends ControllerMapper {
 
     private final UserService userService;
+    private final PasswordService passwordService;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordService passwordService, AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.userService = userService;
+        this.passwordService = passwordService;
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
     }
     
     @GetMapping("/getUser/{userName}")
@@ -82,5 +95,24 @@ public class UserController extends ControllerMapper {
         userUpdateDTO = mapUpdate(userUpdateEntity);
 
         return ok(userUpdateDTO);
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<ChangePasswordDTO> changeUserPassword(@AuthenticationPrincipal UserEntity authUser, @RequestBody ChangePasswordDTO changePasswordDTO) {
+
+        String userName = authUser.getUserName();
+        String password = changePasswordDTO.getCurrentPassword();
+
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userName, password);
+        try {
+            authenticationManager.authenticate(authToken);
+        }
+        catch (AuthenticationException authEx) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+            UserEntity userEntity = userService.changeUserPassword(authUser, changePasswordDTO);
+            changePasswordDTO = mapUpdatedPassword(userEntity);
+            return ok(changePasswordDTO);
     }
 }

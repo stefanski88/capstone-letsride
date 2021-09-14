@@ -1,11 +1,13 @@
 package io.backend.service;
 
+import io.backend.api.ChangePasswordDTO;
 import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -93,13 +95,27 @@ public class UserService {
         if (mappedUserEntity.getPassword() == null) {
             mappedUserEntity.setPassword(foundUserEntity.getPassword());
         }
-
         if (foundUserEntity.equals(mappedUserEntity)) {
             throw new IllegalArgumentException("there is nothing to change ....:)");
         }
-
         return userRepository.save(mappedUserEntity);
     }
+
+    public String EncodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public UserEntity changeUserPassword(UserEntity authUser, ChangePasswordDTO changePasswordDTO) {
+        Optional<UserEntity> userEntity = getUserByUserName(authUser.getUserName());
+
+        String newPasswordFrontend = changePasswordDTO.getNewPassword();
+        String hashedNewPasswordFrontend = passwordEncoder.encode(newPasswordFrontend);
+
+        userEntity.get().setPassword(hashedNewPasswordFrontend);
+        return userRepository.save(userEntity.get());
+    }
+
+
 
     private UserEntity mapUpdate(UserUpdateDTO userUpdateDTO) {
         UserEntity userEntity = new UserEntity();

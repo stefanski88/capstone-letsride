@@ -1,5 +1,6 @@
 package io.backend.controller;
 
+import io.backend.api.ChangePasswordDTO;
 import io.backend.api.UserBackendDTO;
 import io.backend.api.UserRegisterDTO;
 import io.backend.api.UserUpdateDTO;
@@ -82,6 +83,13 @@ abstract class ControllerMapper {
                 .drivingExp(userEntity.getDrivingExp())
                 .drivingStyle(userEntity.getDrivingStyle())
                 .aboutMe(userEntity.getAboutMe())
+                .build();
+    }
+
+    protected ChangePasswordDTO mapUpdatedPassword(UserEntity userEntity) {
+        return ChangePasswordDTO.builder()
+                .currentPassword(userEntity.getPassword())
+                .newPassword(userEntity.getPassword())
                 .build();
     }
 
