@@ -11,7 +11,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MotoBackendDTO {
 
-
+    private String userID;
     private long motoID;
     private String motoNickName;
     private String manufacturer;

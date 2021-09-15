@@ -1,6 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.*;
+import io.backend.model.MotoEntity;
 import io.backend.model.UserEntity;
 
 import java.util.LinkedList;
@@ -97,5 +98,24 @@ abstract class ControllerMapper {
             userBackendDTOList.add(userBackendDTO);
         }
         return userBackendDTOList;
+    }
+
+    protected MotoBackendDTO mapMotoToDTO(MotoEntity motoEntity) {
+        return MotoBackendDTO.builder()
+                .motoID(motoEntity.getMotoID())
+                .motoNickName(motoEntity.getMotoNickName())
+                .manufacturer(motoEntity.getManufacturer())
+                .model(motoEntity.getModel())
+                .constructionYear(motoEntity.getConstructionYear())
+                .build();
+    }
+
+    protected List<MotoBackendDTO> mapMotos(List<MotoEntity> motoEntityList) {
+        List<MotoBackendDTO> motoBackendDTOList = new LinkedList<>();
+        for (MotoEntity motoEntity: motoEntityList) {
+            MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+            motoBackendDTOList.add(motoBackendDTO);
+        }
+        return motoBackendDTOList;
     }
 }

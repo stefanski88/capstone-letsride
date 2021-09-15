@@ -21,8 +21,7 @@ public class MotoEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user_id;
-
+    private UserEntity userid;
 
     @Column(name = "moto_nickname")
     private String motoNickName;

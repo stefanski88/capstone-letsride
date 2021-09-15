@@ -14,7 +14,7 @@ import java.util.*;
 @Table(name = "user_table")
 public class UserEntity {
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "user_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "userid")
     private List<MotoEntity> motorcycles = new ArrayList<>();
 
     @Id
