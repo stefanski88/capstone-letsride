@@ -107,7 +107,6 @@ public class UserController extends ControllerMapper {
         catch (AuthenticationException authEx) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
             UserEntity userEntity = userService.UpdateUserPassword(authUser, updatePasswordDTO);
             updatePasswordDTO = mapUpdatedPassword(userEntity);
             return ok(updatePasswordDTO);

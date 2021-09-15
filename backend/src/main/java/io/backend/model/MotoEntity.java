@@ -10,14 +10,19 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "motorcycleTable")
 @Table(name = "motorcycle_table")
 public class MotoEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "moto_id")
+    @Column(name = "moto_id", nullable = false)
     private Long motoID;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user_id;
+
 
     @Column(name = "moto_nickname")
     private String motoNickName;

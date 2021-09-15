@@ -10,13 +10,12 @@ import java.util.*;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "userTable")
 @Table(name = "user_table")
 public class UserEntity {
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private final Set<MotoEntity> motorcycles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "user_id")
+    private List<MotoEntity> motorcycles = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -56,6 +55,9 @@ public class UserEntity {
     @Column(name = "about_me")
     private String aboutMe;
 
+
+
+    /*
     public Set<MotoEntity> getMotorcycles() {
         return Collections.unmodifiableSet(motorcycles);
     }
@@ -63,23 +65,7 @@ public class UserEntity {
     public void addMotorcycle(Set<MotoEntity> motorcycleEntities) {
         this.motorcycles.addAll(motorcycleEntities);
     }
-
-    public void setMotorcycles(Set<MotoEntity> userMotorcycles) {
-        Map<Integer, MotoEntity> allMotorcycles = new HashMap<>();
-        for (MotoEntity motoEntity : getMotorcycles()) {
-            allMotorcycles.put(motoEntity.hashCode(), motoEntity);
-        }
-        //iterate all user motorcycles
-        Set<MotoEntity> newMotocycle = new HashSet<>();
-        for (MotoEntity motoEntity : userMotorcycles) {
-            MotoEntity existing = allMotorcycles.get(motoEntity.hashCode());
-            //if motorcycle with same hash exists, reset it
-            newMotocycle.add(existing != null ? existing : motoEntity);
-        }
-        // clear all motorcycles and add them again
-        this.motorcycles.clear();
-        addMotorcycle(newMotocycle);
-    }
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -93,25 +79,4 @@ public class UserEntity {
     public int hashCode() {
         return Objects.hash(motorcycles, userID, userName, password, userRole, email, firstName, lastName, age, location, drivingExp, drivingStyle, aboutMe);
     }
-
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        UserEntity that = (UserEntity) o;
-        return this.getUserName() != null && this.getUserName().equals(that.getUserName());
-    }
-
-    @Override
-    public int hashCode() {
-        return getUserName().hashCode();
-    }
-     */
 }
