@@ -1,9 +1,6 @@
 package io.backend.controller;
 
-import io.backend.api.UpdatePasswordDTO;
-import io.backend.api.UserBackendDTO;
-import io.backend.api.UserRegisterDTO;
-import io.backend.api.UserUpdateDTO;
+import io.backend.api.*;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
 import io.backend.service.PasswordService;
@@ -114,5 +111,13 @@ public class UserController extends ControllerMapper {
             UserEntity userEntity = userService.UpdateUserPassword(authUser, updatePasswordDTO);
             updatePasswordDTO = mapUpdatedPassword(userEntity);
             return ok(updatePasswordDTO);
+    }
+
+    @GetMapping("/resetPassword")
+    public ResponseEntity<ResetPasswordDTO> resetUserPassword(@AuthenticationPrincipal UserEntity authUser) {
+
+        ResetPasswordDTO resetPasswordDTO = userService.resetUserPassword(authUser);
+
+        return ok(resetPasswordDTO);
     }
 }

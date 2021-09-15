@@ -1,9 +1,6 @@
 package io.backend.controller;
 
-import io.backend.api.UpdatePasswordDTO;
-import io.backend.api.UserBackendDTO;
-import io.backend.api.UserRegisterDTO;
-import io.backend.api.UserUpdateDTO;
+import io.backend.api.*;
 import io.backend.model.UserEntity;
 
 import java.util.LinkedList;

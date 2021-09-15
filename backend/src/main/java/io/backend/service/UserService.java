@@ -1,5 +1,6 @@
 package io.backend.service;
 
+import io.backend.api.ResetPasswordDTO;
 import io.backend.api.UpdatePasswordDTO;
 import io.backend.api.UserUpdateDTO;
 import io.backend.model.UserEntity;
@@ -22,11 +23,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PasswordService passwordService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordService passwordService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.passwordService = passwordService;
     }
 
     public Optional<UserEntity> getUserByUserName(String userName) {
@@ -100,10 +103,6 @@ public class UserService {
         return userRepository.save(mappedUserEntity);
     }
 
-    public String EncodePassword(String password) {
-        return passwordEncoder.encode(password);
-    }
-
     public UserEntity UpdateUserPassword(UserEntity authUser, UpdatePasswordDTO updatePasswordDTO) {
         Optional<UserEntity> userEntity = getUserByUserName(authUser.getUserName());
 
@@ -112,6 +111,21 @@ public class UserService {
 
         userEntity.get().setPassword(hashedNewPasswordFrontend);
         return userRepository.save(userEntity.get());
+    }
+
+    public ResetPasswordDTO resetUserPassword(UserEntity authUser) {
+        Optional<UserEntity> userEntity = userRepository.findByUserName(authUser.getUserName());
+        if (userEntity.isEmpty()) {
+            throw new EntityNotFoundException("Entity not found! (custom)");
+        }
+        String createdPassword = passwordService.createNewPassword();
+
+        String hashedPassword = passwordEncoder.encode(createdPassword);
+        userEntity.get().setPassword(hashedPassword);
+
+        userRepository.save(userEntity.get());
+        return ResetPasswordDTO.builder()
+                .unhashedPasswordToUser(createdPassword).build();
     }
 
 
@@ -132,9 +146,5 @@ public class UserService {
 
 
 
-    /*
-            if (!userUpdateDTO.getPassword().equals(foundUserEntity.getPassword())) {
-        String updatedPassword = userUpdateDTO.getPassword();
-        passwordEncoder.encode(updatedPassword);
-     */
+
 }
