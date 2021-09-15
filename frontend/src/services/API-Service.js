@@ -6,9 +6,6 @@ export const getToken = credentials =>
         .then(response => response.data)
         .then(dto => dto.token)
 
-
-
-
 export const getUsers = () =>
     axios
         .get('api/getUsers')
@@ -17,6 +14,11 @@ export const getUsers = () =>
 export const getUser = () =>
     axios
         .get('api/getUser/user1')
+        .then(response => response.data)
+
+export const registerUser = () =>
+    axios
+        .post('api/registerUser')
         .then(response => response.data)
 
 /*

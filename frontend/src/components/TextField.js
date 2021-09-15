@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 import Label from './Label'
 
-export default function LoginTextField({
+export default function TextField({
     type = 'text',
     title,
     name,
@@ -12,8 +12,8 @@ export default function LoginTextField({
 
     return(
         <Label {...props}>
+            {title}
             <Input type={type}
-                   title={title}
                    name={name}
                    value={value}
                    onChange={onChange}
@@ -24,4 +24,7 @@ export default function LoginTextField({
 
 const Input = styled.input`
     width: 100%;
+    font-size: 1em;
+    margin-top: var(--size-s);
+    border-radius: var(--size-s);
 `

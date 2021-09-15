@@ -1,5 +1,5 @@
 import Main from '../components/Main'
-import LoginTextField from "../components/LoginTextField"
+import TextField from "../components/TextField"
 import { useAuth } from '../auth/AuthProvider'
 import { useState } from "react";
 import {Redirect} from "react-router-dom";
@@ -31,13 +31,13 @@ export default function Login() {
     return(
         <div>
             <Main as="form" onSubmit={submitHandler}>
-                <LoginTextField
+                <TextField
                     title="Username"
                     name="userName"
                     value={credentials.userName}
                     onChange={changeCredentialsHandler}
                 />
-                <LoginTextField
+                <TextField
                 title="Password"
                 name="password"
                 type="password"

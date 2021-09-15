@@ -63,7 +63,7 @@ public class UserController extends ControllerMapper {
         return ok(userBackendDTOList);
     }
 
-    @PostMapping("/reg")
+    @PostMapping("/registerUser")
     public ResponseEntity<UserRegisterDTO> createUser(@RequestBody UserRegisterDTO userRegisterDTO) {
 
         UserEntity userEntity = map(userRegisterDTO);
