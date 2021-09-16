@@ -35,7 +35,7 @@ public class MotoController extends ControllerMapper{
     public ResponseEntity<List<MotoBackendDTO>> getUserMotorcycles(@AuthenticationPrincipal UserEntity authUser) {
         List<MotoEntity> motoList = motoService.getAllMotosByUserID(authUser);
 
-        List<MotoBackendDTO> motoBackendDTO = mapMotos(motoList);
+        List<MotoBackendDTO> motoBackendDTO = mapAllUserMotos(motoList);
 
         return ok(motoBackendDTO);
     }
@@ -44,7 +44,7 @@ public class MotoController extends ControllerMapper{
     public ResponseEntity<MotoBackendDTO> getMotoByMotoID(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long motoID) {
         MotoEntity motoEntity = motoService.getMotoByMotoID(authUser, motoID);
 
-        MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+        MotoBackendDTO motoBackendDTO = mapMotoTo(motoEntity);
         return ok(motoBackendDTO);
     }
 
@@ -52,7 +52,7 @@ public class MotoController extends ControllerMapper{
     public ResponseEntity<MotoBackendDTO> deleteMotoByMotoID(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long motoID) {
         MotoEntity motoEntity = motoService.deleteMotoByID(authUser, motoID);
 
-        MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+        MotoBackendDTO motoBackendDTO = mapMotoTo(motoEntity);
         return ok(motoBackendDTO);
     }
 
@@ -60,7 +60,7 @@ public class MotoController extends ControllerMapper{
     public ResponseEntity<MotoBackendDTO> addMoto(@AuthenticationPrincipal UserEntity authUser, @RequestBody MotoRegisterDTO motoRegisterDTO) {
         MotoEntity motoEntity = motoService.createMoto(authUser, motoRegisterDTO);
 
-        MotoBackendDTO motoBackendDTO = mapMotoRegisterDTO(motoEntity);
+        MotoBackendDTO motoBackendDTO = mapMotoRegister(motoEntity);
 
         return ok(motoBackendDTO);
     }

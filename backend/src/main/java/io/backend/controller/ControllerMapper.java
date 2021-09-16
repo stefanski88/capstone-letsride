@@ -56,7 +56,7 @@ abstract class ControllerMapper {
         return userEntity;
     }
 
-    protected UserRegisterDTO mapFr(UserEntity userEntity) {
+    protected UserRegisterDTO mapUserRegister(UserEntity userEntity) {
         return UserRegisterDTO.builder()
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
@@ -91,7 +91,7 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    public List<UserBackendDTO> map(List<UserEntity> userEntityList) {
+    public List<UserBackendDTO> mapAllUsers(List<UserEntity> userEntityList) {
         List<UserBackendDTO> userBackendDTOList = new LinkedList<>();
         for (UserEntity userEntity: userEntityList) {
             UserBackendDTO userBackendDTO = map(userEntity);
@@ -100,7 +100,7 @@ abstract class ControllerMapper {
         return userBackendDTOList;
     }
 
-    protected MotoBackendDTO mapMotoToDTO(MotoEntity motoEntity) {
+    protected MotoBackendDTO mapMotoTo(MotoEntity motoEntity) {
         return MotoBackendDTO.builder()
                 .motoID(motoEntity.getMotoID())
                 .motoNickName(motoEntity.getMotoNickName())
@@ -110,7 +110,7 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected MotoBackendDTO mapMotoRegisterDTO(MotoEntity motoEntity) {
+    protected MotoBackendDTO mapMotoRegister(MotoEntity motoEntity) {
         return MotoBackendDTO.builder()
                 .motoNickName(motoEntity.getMotoNickName())
                 .manufacturer(motoEntity.getManufacturer())
@@ -127,10 +127,10 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected List<MotoBackendDTO> mapMotos(List<MotoEntity> motoEntityList) {
+    protected List<MotoBackendDTO> mapAllUserMotos(List<MotoEntity> motoEntityList) {
         List<MotoBackendDTO> motoBackendDTOList = new LinkedList<>();
         for (MotoEntity motoEntity: motoEntityList) {
-            MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+            MotoBackendDTO motoBackendDTO = mapMotoTo(motoEntity);
             motoBackendDTOList.add(motoBackendDTO);
         }
         return motoBackendDTOList;
