@@ -1,6 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.MotoBackendDTO;
+import io.backend.api.MotoRegisterDTO;
 import io.backend.model.MotoEntity;
 import io.backend.model.UserEntity;
 import io.backend.service.MotoService;
@@ -44,5 +45,20 @@ public class MotoController extends ControllerMapper{
 
         MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
         return ok(motoBackendDTO);
+    }
+
+    @DeleteMapping("/deleteMoto/{motoID}")
+    public ResponseEntity<MotoBackendDTO> deleteMotoByMotoID(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long motoID) {
+        MotoEntity motoEntity = motoService.deleteMotoByID(authUser, motoID);
+
+        MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+        return ok(motoBackendDTO);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<MotoBackendDTO> addMoto(@AuthenticationPrincipal UserEntity authUser, @RequestBody MotoRegisterDTO motoRegisterDTO) {
+
+
+        return null;
     }
 }

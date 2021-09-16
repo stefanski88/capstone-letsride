@@ -52,4 +52,12 @@ public class MotoService {
         }
         return motoEntity.get();
     }
+
+    public MotoEntity deleteMotoByID(UserEntity authUser, Long motoID) {
+        MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
+
+        motoRepository.delete(motoEntity);
+
+        return motoEntity;
+    }
 }
