@@ -9,10 +9,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,12 +29,20 @@ public class MotoController extends ControllerMapper{
         this.motoService = motoService;
     }
 
-    @GetMapping("/getmoto")
+    @GetMapping("/getAllMotos")
     public ResponseEntity<List<MotoBackendDTO>> getUserMotorcycles(@AuthenticationPrincipal UserEntity authUser) {
         List<MotoEntity> motoList = motoService.getAllMotosByUserID(authUser);
 
         List<MotoBackendDTO> motoBackendDTO = mapMotos(motoList);
 
+        return ok(motoBackendDTO);
+    }
+
+    @GetMapping("/getMotoByMotoID/{motoID}")
+    public ResponseEntity<MotoBackendDTO> getMotoByMotoID(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long motoID) {
+        MotoEntity motoEntity = motoService.getMotoByMotoID(authUser, motoID);
+
+        MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
         return ok(motoBackendDTO);
     }
 }

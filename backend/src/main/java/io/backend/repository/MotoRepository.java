@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface MotoRepository extends JpaRepository<MotoEntity, Long> {
 
     Optional<List<MotoEntity>> findAllByUserid(UserEntity userid);
+
+    Optional<MotoEntity> findByMotoID(Long motoid);
 }

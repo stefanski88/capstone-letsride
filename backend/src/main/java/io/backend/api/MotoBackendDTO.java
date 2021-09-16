@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MotoBackendDTO {
 
     private String userID;
-    private long motoID;
+    private Long motoID;
     private String motoNickName;
     private String manufacturer;
     private String model;
