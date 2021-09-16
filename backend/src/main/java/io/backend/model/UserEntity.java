@@ -17,6 +17,10 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "userid")
     private List<MotoEntity> motorcycles = new ArrayList<>();
 
+    public void addMoto(MotoEntity motoEntity) {
+        motorcycles.add(motoEntity);
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)

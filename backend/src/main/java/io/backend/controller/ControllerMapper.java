@@ -71,7 +71,7 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected UserUpdateDTO mapUpdate(UserEntity userEntity) {
+    protected UserUpdateDTO mapUpdatedUser(UserEntity userEntity) {
         return UserUpdateDTO.builder()
                 .userName(userEntity.getUserName())
                 .firstName(userEntity.getFirstName())
@@ -107,6 +107,23 @@ abstract class ControllerMapper {
                 .manufacturer(motoEntity.getManufacturer())
                 .model(motoEntity.getModel())
                 .constructionYear(motoEntity.getConstructionYear())
+                .build();
+    }
+
+    protected MotoBackendDTO mapMotoRegisterDTO(MotoEntity motoEntity) {
+        return MotoBackendDTO.builder()
+                .motoNickName(motoEntity.getMotoNickName())
+                .manufacturer(motoEntity.getManufacturer())
+                .model(motoEntity.getModel())
+                .constructionYear(motoEntity.getConstructionYear())
+                .build();
+    }
+
+    protected MotoUpdateDTO mapUpdatedMoto(MotoEntity motoEntity) {
+        return MotoUpdateDTO.builder()
+                .motoNickName(motoEntity.getMotoNickName())
+                .manufacturer(motoEntity.getManufacturer())
+                .model(motoEntity.getModel())
                 .build();
     }
 

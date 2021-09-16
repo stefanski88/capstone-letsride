@@ -89,7 +89,7 @@ public class UserController extends ControllerMapper {
     public ResponseEntity<UserUpdateDTO> updateUser(@AuthenticationPrincipal UserEntity authUser, @RequestBody UserUpdateDTO userUpdateDTO) {
         UserEntity userUpdateEntity = userService.updateUser(userUpdateDTO, authUser);
 
-        userUpdateDTO = mapUpdate(userUpdateEntity);
+        userUpdateDTO = mapUpdatedUser(userUpdateEntity);
 
         return ok(userUpdateDTO);
     }

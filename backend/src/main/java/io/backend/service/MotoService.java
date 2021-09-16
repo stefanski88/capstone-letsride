@@ -1,6 +1,7 @@
 package io.backend.service;
 
-import io.backend.api.MotoBackendDTO;
+import io.backend.api.MotoRegisterDTO;
+import io.backend.api.MotoUpdateDTO;
 import io.backend.model.MotoEntity;
 import io.backend.model.UserEntity;
 import io.backend.repository.MotoRepository;
@@ -56,8 +57,67 @@ public class MotoService {
     public MotoEntity deleteMotoByID(UserEntity authUser, Long motoID) {
         MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
 
-        motoRepository.delete(motoEntity);
+        motoRepository.deleteByMotoID(motoID);
 
+        return motoEntity;
+    }
+
+    public MotoEntity createMoto(UserEntity authUser, MotoRegisterDTO motoRegisterDTO) {
+        Optional<UserEntity> userEntityOPT = userService.getUserByUserName(authUser.getUserName());
+        if (userEntityOPT.isEmpty()) {
+            throw new EntityNotFoundException("Entity not found! (custom)");
+        }
+        UserEntity userEntity = userEntityOPT.get();
+        MotoEntity motoEntity = mapMotoRegisterDTO(motoRegisterDTO);
+
+        motoEntity.setUserid(userEntity);
+        userEntity.addMoto(motoEntity);
+
+        motoRepository.save(motoEntity);
+        return motoEntity;
+    }
+
+    public MotoEntity updateMoto(UserEntity authUser, MotoUpdateDTO motoUpdateDTO, Long motoID) {
+        MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
+
+        MotoEntity mappedMotoUpdateEntity = mapMotoUpdateDTO(motoUpdateDTO);
+
+        if (mappedMotoUpdateEntity.getUserid() == null) {
+            mappedMotoUpdateEntity.setUserid(motoEntity.getUserid());
+        }
+        if (mappedMotoUpdateEntity.getMotoID() == null) {
+            mappedMotoUpdateEntity.setMotoID(motoEntity.getMotoID());
+        }
+        if (mappedMotoUpdateEntity.getModel() == null) {
+            mappedMotoUpdateEntity.setModel(motoEntity.getModel());
+        }
+        if (mappedMotoUpdateEntity.getConstructionYear() == null) {
+            mappedMotoUpdateEntity.setConstructionYear(motoEntity.getConstructionYear());
+        }
+
+        if (motoEntity.equals(mappedMotoUpdateEntity)) {
+            throw new IllegalArgumentException("there is nothing to change ....)");
+        }
+        return motoRepository.save(mappedMotoUpdateEntity);
+    }
+
+
+
+    private MotoEntity mapMotoRegisterDTO(MotoRegisterDTO motoRegisterDTO) {
+        MotoEntity motoEntity = new MotoEntity();
+        motoEntity.setMotoNickName(motoRegisterDTO.getMotoNickName());
+        motoEntity.setManufacturer(motoRegisterDTO.getManufacturer());
+        motoEntity.setModel(motoRegisterDTO.getModel());
+        motoEntity.setConstructionYear(motoRegisterDTO.getConstructionYear());
+        return motoEntity;
+    }
+
+    private MotoEntity mapMotoUpdateDTO(MotoUpdateDTO motoUpdateDTO) {
+        MotoEntity motoEntity = new MotoEntity();
+        motoEntity.setMotoNickName(motoUpdateDTO.getMotoNickName());
+        motoEntity.setManufacturer(motoUpdateDTO.getManufacturer());
+        motoEntity.setModel(motoUpdateDTO.getModel());
+        motoEntity.setConstructionYear(motoUpdateDTO.getConstructionYear());
         return motoEntity;
     }
 }

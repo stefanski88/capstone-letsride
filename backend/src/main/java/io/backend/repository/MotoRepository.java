@@ -11,5 +11,7 @@ public interface MotoRepository extends JpaRepository<MotoEntity, Long> {
 
     Optional<List<MotoEntity>> findAllByUserid(UserEntity userid);
 
-    Optional<MotoEntity> findByMotoID(Long motoid);
+    Optional<MotoEntity> findByMotoID(Long motoID);
+
+    Optional<MotoEntity> deleteByMotoID(Long motoID);
 }
