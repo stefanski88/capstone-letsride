@@ -59,7 +59,7 @@ public class UserController extends ControllerMapper {
         if (userEntityList.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        List<UserBackendDTO> userBackendDTOList = map(userEntityList);
+        List<UserBackendDTO> userBackendDTOList = mapAllUsers(userEntityList);
         return ok(userBackendDTOList);
     }
 
@@ -69,7 +69,7 @@ public class UserController extends ControllerMapper {
         UserEntity userEntity = map(userRegisterDTO);
         UserEntity createdUserEntity = userService.createUser(userEntity);
 
-        UserRegisterDTO createdUser = mapFr(createdUserEntity);
+        UserRegisterDTO createdUser = mapUserRegister(createdUserEntity);
         createdUser.setPassword(createdUserEntity.getPassword());
         return ok(createdUser);
     }
@@ -89,7 +89,7 @@ public class UserController extends ControllerMapper {
     public ResponseEntity<UserUpdateDTO> updateUser(@AuthenticationPrincipal UserEntity authUser, @RequestBody UserUpdateDTO userUpdateDTO) {
         UserEntity userUpdateEntity = userService.updateUser(userUpdateDTO, authUser);
 
-        userUpdateDTO = mapUpdate(userUpdateEntity);
+        userUpdateDTO = mapUpdatedUser(userUpdateEntity);
 
         return ok(userUpdateDTO);
     }

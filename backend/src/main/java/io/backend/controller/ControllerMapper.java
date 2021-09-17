@@ -56,7 +56,7 @@ abstract class ControllerMapper {
         return userEntity;
     }
 
-    protected UserRegisterDTO mapFr(UserEntity userEntity) {
+    protected UserRegisterDTO mapUserRegister(UserEntity userEntity) {
         return UserRegisterDTO.builder()
                 .userName(userEntity.getUserName())
                 .password(userEntity.getPassword())
@@ -71,7 +71,7 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected UserUpdateDTO mapUpdate(UserEntity userEntity) {
+    protected UserUpdateDTO mapUpdatedUser(UserEntity userEntity) {
         return UserUpdateDTO.builder()
                 .userName(userEntity.getUserName())
                 .firstName(userEntity.getFirstName())
@@ -91,7 +91,7 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    public List<UserBackendDTO> map(List<UserEntity> userEntityList) {
+    public List<UserBackendDTO> mapAllUsers(List<UserEntity> userEntityList) {
         List<UserBackendDTO> userBackendDTOList = new LinkedList<>();
         for (UserEntity userEntity: userEntityList) {
             UserBackendDTO userBackendDTO = map(userEntity);
@@ -100,7 +100,7 @@ abstract class ControllerMapper {
         return userBackendDTOList;
     }
 
-    protected MotoBackendDTO mapMotoToDTO(MotoEntity motoEntity) {
+    protected MotoBackendDTO mapMotoTo(MotoEntity motoEntity) {
         return MotoBackendDTO.builder()
                 .motoID(motoEntity.getMotoID())
                 .motoNickName(motoEntity.getMotoNickName())
@@ -110,10 +110,27 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected List<MotoBackendDTO> mapMotos(List<MotoEntity> motoEntityList) {
+    protected MotoBackendDTO mapMotoRegister(MotoEntity motoEntity) {
+        return MotoBackendDTO.builder()
+                .motoNickName(motoEntity.getMotoNickName())
+                .manufacturer(motoEntity.getManufacturer())
+                .model(motoEntity.getModel())
+                .constructionYear(motoEntity.getConstructionYear())
+                .build();
+    }
+
+    protected MotoUpdateDTO mapUpdatedMoto(MotoEntity motoEntity) {
+        return MotoUpdateDTO.builder()
+                .motoNickName(motoEntity.getMotoNickName())
+                .manufacturer(motoEntity.getManufacturer())
+                .model(motoEntity.getModel())
+                .build();
+    }
+
+    protected List<MotoBackendDTO> mapAllUserMotos(List<MotoEntity> motoEntityList) {
         List<MotoBackendDTO> motoBackendDTOList = new LinkedList<>();
         for (MotoEntity motoEntity: motoEntityList) {
-            MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
+            MotoBackendDTO motoBackendDTO = mapMotoTo(motoEntity);
             motoBackendDTOList.add(motoBackendDTO);
         }
         return motoBackendDTOList;

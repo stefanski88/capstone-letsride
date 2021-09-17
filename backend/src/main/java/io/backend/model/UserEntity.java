@@ -17,6 +17,13 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "userid")
     private List<MotoEntity> motorcycles = new ArrayList<>();
 
+    //@OneToMany
+    //private List<MeetingEntity> meetings = new ArrayList<>();
+
+    public void addMoto(MotoEntity motoEntity) {
+        motorcycles.add(motoEntity);
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "user_id", nullable = false)
@@ -54,18 +61,6 @@ public class UserEntity {
 
     @Column(name = "about_me")
     private String aboutMe;
-
-
-
-    /*
-    public Set<MotoEntity> getMotorcycles() {
-        return Collections.unmodifiableSet(motorcycles);
-    }
-
-    public void addMotorcycle(Set<MotoEntity> motorcycleEntities) {
-        this.motorcycles.addAll(motorcycleEntities);
-    }
-     */
 
     @Override
     public boolean equals(Object o) {

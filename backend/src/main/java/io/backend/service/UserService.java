@@ -86,7 +86,7 @@ public class UserService {
         }
 
         UserEntity foundUserEntity = userEntityOPT.get();
-        UserEntity mappedUserEntity = mapUpdate(userUpdateDTO);
+        UserEntity mappedUserEntity = mapUserUpdateDTO(userUpdateDTO);
 
         if (mappedUserEntity.getUserID() == null) {
             mappedUserEntity.setUserID(foundUserEntity.getUserID());
@@ -130,7 +130,7 @@ public class UserService {
 
 
 
-    private UserEntity mapUpdate(UserUpdateDTO userUpdateDTO) {
+    private UserEntity mapUserUpdateDTO(UserUpdateDTO userUpdateDTO) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userUpdateDTO.getUserName());
         userEntity.setEmail(userUpdateDTO.getEmail());
