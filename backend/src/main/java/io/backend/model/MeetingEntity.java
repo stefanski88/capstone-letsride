@@ -22,11 +22,11 @@ public class MeetingEntity {
 
     @ManyToOne
     @JoinColumn(name = "from_user")
-    private UserEntity fromUserID;
+    private UserEntity fromUser;
 
     @ManyToOne
     @JoinColumn(name = "to_user")
-    private UserEntity toUserID;
+    private UserEntity toUser;
 
     //status pending
     @Column(name = "status")
@@ -40,11 +40,11 @@ public class MeetingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MeetingEntity that = (MeetingEntity) o;
-        return Objects.equals(inviteID, that.inviteID) && Objects.equals(fromUserID, that.fromUserID) && Objects.equals(toUserID, that.toUserID) && Objects.equals(status, that.status) && Objects.equals(date, that.date);
+        return Objects.equals(inviteID, that.inviteID) && Objects.equals(fromUser, that.fromUser) && Objects.equals(toUser, that.toUser) && Objects.equals(status, that.status) && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inviteID, fromUserID, toUserID, status, date);
+        return Objects.hash(inviteID, fromUser, toUser, status, date);
     }
 }

@@ -29,7 +29,6 @@ public class MotoService {
     public MotoService(MotoRepository motoRepository, UserService userService) {
         this.motoRepository = motoRepository;
         this.userService = userService;
-
     }
 
     public List<MotoEntity> getAllMotosByUserID(UserEntity authUser) {
