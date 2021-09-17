@@ -9,10 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -28,8 +31,9 @@ public class MotoService {
         this.userService = userService;
 
     }
+
     public List<MotoEntity> getAllMotosByUserID(UserEntity authUser) {
-        Optional<UserEntity> userEntity =  userService.getUserByUserName(authUser.getUserName());
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         Optional<List<MotoEntity>> userAllMotorcyclesOPT = motoRepository.findAllByUserid(userEntity.get());
 
         if (userAllMotorcyclesOPT.isEmpty()) {
@@ -54,12 +58,15 @@ public class MotoService {
         return motoEntity.get();
     }
 
+    @Transactional
     public MotoEntity deleteMotoByID(UserEntity authUser, Long motoID) {
+        var user = userService.getUserByUserName(authUser.getUserName()).get();
         MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
 
-        motoRepository.deleteByMotoID(motoID);
+        user.getMotorcycles().remove(motoEntity);
+        //motoRepository.deleteByMotoID(motoID);
 
-        return motoEntity;
+        return new MotoEntity();
     }
 
     public MotoEntity createMoto(UserEntity authUser, MotoRegisterDTO motoRegisterDTO) {
@@ -100,7 +107,6 @@ public class MotoService {
         }
         return motoRepository.save(mappedMotoUpdateEntity);
     }
-
 
 
     private MotoEntity mapMotoRegisterDTO(MotoRegisterDTO motoRegisterDTO) {

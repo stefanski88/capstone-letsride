@@ -1,6 +1,6 @@
 package io.backend.controller;
 
-import io.backend.service.InviteService;
+import io.backend.service.MeetingService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/invite")
-public class InviteController extends ControllerMapper{
+public class MeetingController extends ControllerMapper{
 
-    private final InviteService inviteService;
+    private final MeetingService meetingService;
 
     @Autowired
-    public InviteController(InviteService inviteService) {
-        this.inviteService = inviteService;
+    public MeetingController(MeetingService meetingService) {
+        this.meetingService = meetingService;
     }
 }
