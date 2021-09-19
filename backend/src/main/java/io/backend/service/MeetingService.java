@@ -26,23 +26,55 @@ public class MeetingService {
         this.userService = userService;
     }
 
-    public List<MeetingEntity> getAllMeetings(UserEntity authUser) {
+    public List<MeetingEntity> getAllReceivedInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<List<MeetingEntity>> allUserMeetings = meetingRepository.findAllByFromUser(userEntity.get());
+        Optional<List<MeetingEntity>> allReceivedMeetings = meetingRepository.findAllByReceivedInvite(userEntity.get());
 
-        if (allUserMeetings.isEmpty()) {
+        if (allReceivedMeetings.isEmpty()) {
             throw new EntityNotFoundException(("no meetings found! (custom)"));
         }
-        return allUserMeetings.get();
+        return allReceivedMeetings.get();
     }
 
-    public MeetingEntity getMeeting(UserEntity authUser) {
+    public List<MeetingEntity> getAllSentInvites(UserEntity authUser) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        Optional<List<MeetingEntity>> allSentMeetings = meetingRepository.findAllBySentInvite(userEntity.get());
 
-        return null;
+        if (allSentMeetings.isEmpty()) {
+            throw new EntityNotFoundException(("no meetings found! (custom)"));
+        }
+        return allSentMeetings.get();
     }
 
-    public MeetingEntity createMeeting() {
 
-        return null;
+
+/*
+    public MeetingEntity getMeeting(UserEntity authUser, Long meetingID) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        if (userEntity.isEmpty()) {
+            throw new EntityNotFoundException("user doesn't exist! (custom)");
+        }
+
+        Optional<MeetingEntity> receivedMeeting = meetingRepository.findByReceivedInvite(userEntity.get());
+        if (receivedMeeting.isEmpty()) {
+            throw new EntityNotFoundException("you didn't receive any meetings! (custom");
+        }
+
+        Optional<MeetingEntity> sentMeeting = meetingRepository.findByReceivedInvite(userEntity.get());
+        if (sentMeeting.isEmpty()) {
+            throw new EntityNotFoundException("you didn't send any meetings! (custom");
+        }
+
+        MeetingEntity meetingEntity;
+
+        if (receivedMeeting.get().getReceivedInvite().getUserID().equals(meetingID)) {
+            return meetingEntity = receivedMeeting.get();
+        } else {
+            meetingEntity = receivedMeeting.get();
+        }
+
+        return receivedMeeting.get();
     }
+
+ */
 }

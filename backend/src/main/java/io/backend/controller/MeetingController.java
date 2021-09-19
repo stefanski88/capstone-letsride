@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -29,25 +30,25 @@ public class MeetingController extends ControllerMapper{
         this.meetingService = meetingService;
     }
 
-    @GetMapping("/getMeetingFromUser/{fromUserID}")
-    public ResponseEntity<List<MeetingDTO>> getAllUserMeetings(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long fromUserID) {
-        List<MeetingEntity> meetingEntityList = meetingService.getAllMeetings(authUser);
+    @GetMapping("/getAllReceivedInvites")
+    public ResponseEntity<List<MeetingDTO>> getAllUserReceivedInvites(@AuthenticationPrincipal UserEntity authUser) {
+        List<MeetingEntity> meetingEntityList = meetingService.getAllReceivedInvites(authUser);
 
         List<MeetingDTO> meetingListDTO = mapAllMeetings(meetingEntityList);
         return ok(meetingListDTO);
     }
 
-    @GetMapping("/getMeeting")
-    public ResponseEntity<MeetingDTO> getMeeting(@AuthenticationPrincipal UserEntity authUser) {
-        MeetingEntity meetingEntity = meetingService.getMeeting(authUser);
+    @GetMapping("/getAllSentInvites")
+    public ResponseEntity<List<MeetingDTO>> getAllUserSentInvites(@AuthenticationPrincipal UserEntity authUser) {
+        List<MeetingEntity> meetingEntityList = meetingService.getAllSentInvites(authUser);
 
-        return null;
+        List<MeetingDTO> meetingListDTO = mapAllMeetings(meetingEntityList);
+        return ok(meetingListDTO);
     }
 
-    @PostMapping("/createMeeting")
-    public ResponseEntity<MeetingDTO> createMeeting(@AuthenticationPrincipal UserEntity authUser) {
-        MeetingEntity meetingEntity = meetingService.createMeeting();
 
-        return null;
-    }
+
+
+
+
 }

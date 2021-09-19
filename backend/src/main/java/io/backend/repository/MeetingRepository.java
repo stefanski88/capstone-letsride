@@ -9,6 +9,11 @@ import java.util.Optional;
 
 public interface MeetingRepository extends JpaRepository<MeetingEntity, Long> {
 
-    Optional<List<MeetingEntity>> findAllByFromUser(UserEntity fromUser);
+    Optional<MeetingEntity> findByReceivedInvite(UserEntity receivedInvite);
+    Optional<MeetingEntity> findBySentInvite(UserEntity sentInvite);
 
+
+
+    Optional<List<MeetingEntity>> findAllByReceivedInvite(UserEntity receivedInvite);
+    Optional<List<MeetingEntity>> findAllBySentInvite(UserEntity sentInvite);
 }

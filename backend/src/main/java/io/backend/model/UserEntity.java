@@ -20,7 +20,7 @@ public class UserEntity {
         motorcycles.add(motoEntity);
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "fromUser")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "receivedInvite")
     private List<MeetingEntity> meetingsFromUser = new ArrayList<>();
 
     @Id
