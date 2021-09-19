@@ -62,7 +62,6 @@ public class MotoService {
         MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
 
         user.getMotorcycles().remove(motoEntity);
-        //motoRepository.deleteByMotoID(motoID);
 
         return new MotoEntity();
     }

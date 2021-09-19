@@ -1,7 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.*;
-import io.backend.model.MeetingEntity;
+import io.backend.model.InviteEntity;
 import io.backend.model.MotoEntity;
 import io.backend.model.UserEntity;
 
@@ -111,10 +111,13 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected MeetingDTO mapMeetingToDTO(MeetingEntity meetingEntity) {
-        return MeetingDTO.builder()
-                .status(meetingEntity.getStatus())
-                .timeStamp(meetingEntity.getTimeStamp())
+    protected InviteDTO mapInviteToDTO(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .inviteID(inviteEntity.getInviteID())
+                .receiver(inviteEntity.getReceivedInvite().getUserName())
+                .sender(inviteEntity.getSentInvite().getUserName())
+                .status(inviteEntity.getStatus())
+                .timeStamp(inviteEntity.getTimeStamp())
                 .build();
     }
 
@@ -147,19 +150,19 @@ abstract class ControllerMapper {
 
 
 
-    protected List<MeetingDTO> mapAllMeetings(List<MeetingEntity> meetingEntityList) {
-        List<MeetingDTO> meetingDTOList = new LinkedList<>();
-        for (MeetingEntity meetingEntity: meetingEntityList) {
-            MeetingDTO meetingDTO = mapMeetingToDTO(meetingEntity);
-            meetingDTOList.add(meetingDTO);
+    protected List<InviteDTO> mapAllInvites(List<InviteEntity> inviteEntityList) {
+        List<InviteDTO> inviteDTOList = new LinkedList<>();
+        for (InviteEntity inviteEntity : inviteEntityList) {
+            InviteDTO inviteDTO = mapInviteToDTO(inviteEntity);
+            inviteDTOList.add(inviteDTO);
         }
-        return meetingDTOList;
+        return inviteDTOList;
     }
 
-    protected MeetingDTO mapCreatedMeeting(MeetingEntity meetingEntity) {
-        return MeetingDTO.builder()
-                .status(meetingEntity.getStatus())
-                .timeStamp(meetingEntity.getTimeStamp())
+    protected InviteDTO mapCreatedInvite(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .status(inviteEntity.getStatus())
+                .timeStamp(inviteEntity.getTimeStamp())
                 .build();
     }
 }

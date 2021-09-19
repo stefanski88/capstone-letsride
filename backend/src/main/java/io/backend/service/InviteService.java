@@ -1,10 +1,9 @@
 package io.backend.service;
 
-import io.backend.api.MeetingDTO;
-import io.backend.api.UserBackendDTO;
-import io.backend.model.MeetingEntity;
+import io.backend.api.InviteDTO;
+import io.backend.model.InviteEntity;
 import io.backend.model.UserEntity;
-import io.backend.repository.MeetingRepository;
+import io.backend.repository.InviteRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +16,14 @@ import java.util.Optional;
 @Getter
 @Setter
 @Service
-public class MeetingService {
+public class InviteService {
 
-    private final MeetingRepository meetingRepository;
+    private final InviteRepository inviteRepository;
     private final UserService userService;
 
     @Autowired
-    public MeetingService(MeetingRepository meetingRepository, UserService userService) {
-        this.meetingRepository = meetingRepository;
+    public InviteService(InviteRepository inviteRepository, UserService userService) {
+        this.inviteRepository = inviteRepository;
         this.userService = userService;
     }
 
@@ -33,12 +32,12 @@ public class MeetingService {
         if (userEntityOPT.isEmpty()) {
             throw new EntityNotFoundException("User not found! (custom)");
         }
-        return userEntityOPT;
+        return null;
     }
 
-    public List<MeetingEntity> getAllReceivedInvites(UserEntity authUser) {
+    public List<InviteEntity> getAllReceivedInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<List<MeetingEntity>> allReceivedMeetings = meetingRepository.findAllByReceivedInvite(userEntity.get());
+        Optional<List<InviteEntity>> allReceivedMeetings = inviteRepository.findAllByReceivedInvite(userEntity.get());
 
         if (allReceivedMeetings.isEmpty()) {
             throw new EntityNotFoundException(("no meetings found! (custom)"));
@@ -46,9 +45,9 @@ public class MeetingService {
         return allReceivedMeetings.get();
     }
 
-    public List<MeetingEntity> getAllSentInvites(UserEntity authUser) {
+    public List<InviteEntity> getAllSentInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<List<MeetingEntity>> allSentMeetings = meetingRepository.findAllBySentInvite(userEntity.get());
+        Optional<List<InviteEntity>> allSentMeetings = inviteRepository.findAllBySentInvite(userEntity.get());
 
         if (allSentMeetings.isEmpty()) {
             throw new EntityNotFoundException(("no meetings found! (custom)"));
@@ -56,30 +55,59 @@ public class MeetingService {
         return allSentMeetings.get();
     }
 
-
-    public MeetingEntity createInvite(UserEntity authUser, MeetingDTO meetingDTO) {
+    public InviteEntity createInvite(UserEntity authUser, InviteDTO inviteDTO) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<UserEntity> receiverEntity = userService.getUserByUserName(meetingDTO.getReceivedInvite());
+        Optional<UserEntity> receiverEntity = userService.getUserByUserName(inviteDTO.getReceiver());
 
         if (userEntity.isEmpty() || receiverEntity.isEmpty()) {
             throw new EntityNotFoundException("Entity not found! (custom)");
         }
-        MeetingEntity meetingEntity = new MeetingEntity();
+        InviteEntity inviteEntity = new InviteEntity();
 
-        meetingEntity.setSentInvite(userEntity.get());
-        meetingEntity.setReceivedInvite(receiverEntity.get());
+        inviteEntity.setSentInvite(userEntity.get());
+        inviteEntity.setReceivedInvite(receiverEntity.get());
 
-        meetingRepository.save(meetingEntity);
-        return meetingEntity;
+        inviteRepository.save(inviteEntity);
+        return inviteEntity;
+    }
+
+    public InviteEntity getInvite(UserEntity authUser, Long inviteID) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
+
+        if (userEntity.isEmpty() || inviteEntity.isEmpty()) {
+            throw new EntityNotFoundException("Entity not found! (custom)");
+        }
+
+        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSentInvite().getUserID())) {
+            throw new EntityNotFoundException("Invite not found..");
+        }
+
+        return inviteEntity.get();
+    }
+
+    public InviteEntity deleteInvite(UserEntity authUser, Long inviteID) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
+
+        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSentInvite().getUserID())) {
+            throw new EntityNotFoundException("Invite not found..");
+        }
+        inviteRepository.delete(inviteEntity.get());
+
+        return inviteEntity.get();
     }
 
 
 
-    private MeetingEntity mapMeetingDTO(MeetingDTO meetingDTO) {
-        MeetingEntity meetingEntity = new MeetingEntity();
-        meetingEntity.setTimeStamp(meetingDTO.getTimeStamp());
-        meetingEntity.setStatus(meetingDTO.getStatus());
-        return meetingEntity;
+
+
+
+        private InviteEntity mapMeetingDTO(InviteDTO inviteDTO) {
+        InviteEntity inviteEntity = new InviteEntity();
+        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
+        inviteEntity.setStatus(inviteDTO.getStatus());
+        return inviteEntity;
     }
 
 

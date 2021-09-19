@@ -11,11 +11,11 @@ import java.util.Date;
 @Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MeetingDTO {
+public class InviteDTO {
 
-    private String inviteID;
-    private String receivedInvite;
-    private String sentInvite;
+    private Long inviteID;
+    private String receiver;
+    private String sender;
     private String status;
     private Date timeStamp;
 }

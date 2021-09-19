@@ -11,13 +11,13 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "meetingTable")
-@Table(name = "meeting_table")
-public class MeetingEntity {
+@Entity(name = "inviteTable")
+@Table(name = "invite_table")
+public class InviteEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "meeting_id", nullable = false)
+    @Column(name = "invite_id", nullable = false)
     private Long inviteID;
 
     @ManyToOne
@@ -38,7 +38,7 @@ public class MeetingEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MeetingEntity that = (MeetingEntity) o;
+        InviteEntity that = (InviteEntity) o;
         return Objects.equals(inviteID, that.inviteID) && Objects.equals(receivedInvite, that.receivedInvite) && Objects.equals(sentInvite, that.sentInvite) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp);
     }
 
