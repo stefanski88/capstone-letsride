@@ -111,17 +111,6 @@ abstract class ControllerMapper {
                 .build();
     }
 
-    protected InviteDTO mapInviteToDTO(InviteEntity inviteEntity) {
-        return InviteDTO.builder()
-                .inviteID(inviteEntity.getInviteID())
-                .receiver(inviteEntity.getReceivedInvite().getUserName())
-                .sender(inviteEntity.getSentInvite().getUserName())
-                .status(inviteEntity.getStatus())
-                .timeStamp(inviteEntity.getTimeStamp())
-                .build();
-    }
-
-
     protected MotoBackendDTO mapMotoRegister(MotoEntity motoEntity) {
         return MotoBackendDTO.builder()
                 .motoNickName(motoEntity.getMotoNickName())
@@ -163,6 +152,22 @@ abstract class ControllerMapper {
         return InviteDTO.builder()
                 .status(inviteEntity.getStatus())
                 .timeStamp(inviteEntity.getTimeStamp())
+                .build();
+    }
+
+    protected InviteDTO mapInviteToDTO(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .inviteID(inviteEntity.getInviteID())
+                .receiver(inviteEntity.getReceiver().getUserName())
+                .sender(inviteEntity.getSender().getUserName())
+                .status(inviteEntity.getStatus())
+                .timeStamp(inviteEntity.getTimeStamp())
+                .build();
+    }
+
+    protected InviteDTO mapInviteUpdateDTO(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .status(inviteEntity.getStatus())
                 .build();
     }
 }

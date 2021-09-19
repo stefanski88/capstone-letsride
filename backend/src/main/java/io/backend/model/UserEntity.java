@@ -20,7 +20,7 @@ public class UserEntity {
         motorcycles.add(motoEntity);
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receivedInvite")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receiver")
     private List<InviteEntity> invites = new ArrayList<>();
 
     @Id

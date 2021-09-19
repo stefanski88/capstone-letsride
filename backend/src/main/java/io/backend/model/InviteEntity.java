@@ -21,12 +21,12 @@ public class InviteEntity {
     private Long inviteID;
 
     @ManyToOne
-    @JoinColumn(name = "received_invite")
-    private UserEntity receivedInvite;
+    @JoinColumn(name = "receiver")
+    private UserEntity receiver;
 
     @ManyToOne
-    @JoinColumn(name = "sent_invite")
-    private UserEntity sentInvite;
+    @JoinColumn(name = "sender")
+    private UserEntity sender;
 
     @Column(name = "status", nullable = false)
     private String status = "pending";
@@ -39,11 +39,11 @@ public class InviteEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InviteEntity that = (InviteEntity) o;
-        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receivedInvite, that.receivedInvite) && Objects.equals(sentInvite, that.sentInvite) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp);
+        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receiver, that.receiver) && Objects.equals(sender, that.sender) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inviteID, receivedInvite, sentInvite, status, timeStamp);
+        return Objects.hash(inviteID, receiver, sender, status, timeStamp);
     }
 }

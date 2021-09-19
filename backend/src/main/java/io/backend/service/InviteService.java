@@ -1,6 +1,7 @@
 package io.backend.service;
 
 import io.backend.api.InviteDTO;
+import io.backend.api.InviteUpdateDTO;
 import io.backend.model.InviteEntity;
 import io.backend.model.UserEntity;
 import io.backend.repository.InviteRepository;
@@ -37,7 +38,7 @@ public class InviteService {
 
     public List<InviteEntity> getAllReceivedInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<List<InviteEntity>> allReceivedMeetings = inviteRepository.findAllByReceivedInvite(userEntity.get());
+        Optional<List<InviteEntity>> allReceivedMeetings = inviteRepository.findAllByReceiver(userEntity.get());
 
         if (allReceivedMeetings.isEmpty()) {
             throw new EntityNotFoundException(("no meetings found! (custom)"));
@@ -47,7 +48,7 @@ public class InviteService {
 
     public List<InviteEntity> getAllSentInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<List<InviteEntity>> allSentMeetings = inviteRepository.findAllBySentInvite(userEntity.get());
+        Optional<List<InviteEntity>> allSentMeetings = inviteRepository.findAllBySender(userEntity.get());
 
         if (allSentMeetings.isEmpty()) {
             throw new EntityNotFoundException(("no meetings found! (custom)"));
@@ -64,8 +65,8 @@ public class InviteService {
         }
         InviteEntity inviteEntity = new InviteEntity();
 
-        inviteEntity.setSentInvite(userEntity.get());
-        inviteEntity.setReceivedInvite(receiverEntity.get());
+        inviteEntity.setSender(userEntity.get());
+        inviteEntity.setReceiver(receiverEntity.get());
 
         inviteRepository.save(inviteEntity);
         return inviteEntity;
@@ -79,7 +80,7 @@ public class InviteService {
             throw new EntityNotFoundException("Entity not found! (custom)");
         }
 
-        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSentInvite().getUserID())) {
+        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSender().getUserID())) {
             throw new EntityNotFoundException("Invite not found..");
         }
 
@@ -90,12 +91,33 @@ public class InviteService {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
 
-        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSentInvite().getUserID())) {
+        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSender().getUserID())) {
             throw new EntityNotFoundException("Invite not found..");
         }
         inviteRepository.delete(inviteEntity.get());
 
         return inviteEntity.get();
+    }
+
+    public InviteEntity updateInvite(UserEntity authUser, InviteUpdateDTO inviteUpdateDTO, Long inviteID) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        InviteEntity inviteEntity = getInvite(authUser, inviteID);
+
+        if (!userEntity.get().getUserID().equals(inviteEntity.getSender().getUserID())) {
+            throw new EntityNotFoundException("Invite not found..");
+        }
+        if (!inviteEntity.getInviteID().equals(inviteID)) {
+            throw new EntityNotFoundException("Invite not found..");
+        }
+        if (inviteEntity.getStatus().equals("pending")) {
+            if (inviteUpdateDTO.getStatus().equals("accept")) {
+                inviteEntity.setStatus("accept");
+            } else {
+                inviteEntity.setStatus("reject");
+            }
+        }
+        inviteRepository.save(inviteEntity);
+        return inviteEntity;
     }
 
 

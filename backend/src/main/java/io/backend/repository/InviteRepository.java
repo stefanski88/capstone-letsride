@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface InviteRepository extends JpaRepository<InviteEntity, Long> {
 
-    Optional<List<InviteEntity>> findAllByReceivedInvite(UserEntity receivedInvite);
-    Optional<List<InviteEntity>> findAllBySentInvite(UserEntity sentInvite);
+    Optional<List<InviteEntity>> findAllByReceiver(UserEntity receiver);
+    Optional<List<InviteEntity>> findAllBySender(UserEntity sender);
     Optional<InviteEntity> findByInviteID(Long inviteID);
 }

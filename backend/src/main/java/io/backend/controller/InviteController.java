@@ -1,6 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.InviteDTO;
+import io.backend.api.InviteUpdateDTO;
 import io.backend.model.InviteEntity;
 import io.backend.model.UserEntity;
 import io.backend.service.InviteService;
@@ -50,7 +51,6 @@ public class InviteController extends ControllerMapper{
         InviteEntity createdInviteEntity = inviteService.createInvite(authUser, inviteDTO);
 
         InviteDTO createdInviteDTO = mapCreatedInvite(createdInviteEntity);
-
         return ok(createdInviteDTO);
     }
 
@@ -66,11 +66,15 @@ public class InviteController extends ControllerMapper{
     public ResponseEntity<InviteDTO> deleteInvite(@AuthenticationPrincipal UserEntity authUser, @PathVariable Long inviteID) {
         InviteEntity inviteEntity = inviteService.deleteInvite(authUser, inviteID);
 
-        InviteDTO meeting = mapInviteToDTO(inviteEntity);
-        return ok(meeting);
+        InviteDTO inviteDTO = mapInviteToDTO(inviteEntity);
+        return ok(inviteDTO);
     }
 
+    @PutMapping("/updateInvite/{inviteID}")
+    public ResponseEntity<InviteDTO> updateInvite(@AuthenticationPrincipal UserEntity authUser, @RequestBody InviteUpdateDTO inviteUpdateDTO, @PathVariable Long inviteID) {
+        InviteEntity inviteEntity = inviteService.updateInvite(authUser, inviteUpdateDTO, inviteID);
 
-
-
+        InviteDTO inviteDTO = mapInviteToDTO(inviteEntity);
+        return ok(inviteDTO);
+    }
 }
