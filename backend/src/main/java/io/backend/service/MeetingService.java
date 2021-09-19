@@ -1,5 +1,7 @@
 package io.backend.service;
 
+import io.backend.api.MeetingDTO;
+import io.backend.api.UserBackendDTO;
 import io.backend.model.MeetingEntity;
 import io.backend.model.UserEntity;
 import io.backend.repository.MeetingRepository;
@@ -26,6 +28,14 @@ public class MeetingService {
         this.userService = userService;
     }
 
+    public Optional<UserEntity> getUser(UserEntity authUser) {
+        Optional<UserEntity> userEntityOPT = userService.getUserByUserName(authUser.getUserName());
+        if (userEntityOPT.isEmpty()) {
+            throw new EntityNotFoundException("User not found! (custom)");
+        }
+        return userEntityOPT;
+    }
+
     public List<MeetingEntity> getAllReceivedInvites(UserEntity authUser) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         Optional<List<MeetingEntity>> allReceivedMeetings = meetingRepository.findAllByReceivedInvite(userEntity.get());
@@ -45,6 +55,34 @@ public class MeetingService {
         }
         return allSentMeetings.get();
     }
+
+
+    public MeetingEntity createInvite(UserEntity authUser, MeetingDTO meetingDTO) {
+        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
+        Optional<UserEntity> receiverEntity = userService.getUserByUserName(meetingDTO.getReceivedInvite());
+
+        if (userEntity.isEmpty() || receiverEntity.isEmpty()) {
+            throw new EntityNotFoundException("Entity not found! (custom)");
+        }
+        MeetingEntity meetingEntity = new MeetingEntity();
+
+        meetingEntity.setSentInvite(userEntity.get());
+        meetingEntity.setReceivedInvite(receiverEntity.get());
+
+        meetingRepository.save(meetingEntity);
+        return meetingEntity;
+    }
+
+
+
+    private MeetingEntity mapMeetingDTO(MeetingDTO meetingDTO) {
+        MeetingEntity meetingEntity = new MeetingEntity();
+        meetingEntity.setTimeStamp(meetingDTO.getTimeStamp());
+        meetingEntity.setStatus(meetingDTO.getStatus());
+        return meetingEntity;
+    }
+
+
 
 
 

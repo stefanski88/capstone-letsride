@@ -28,23 +28,22 @@ public class MeetingEntity {
     @JoinColumn(name = "sent_invite")
     private UserEntity sentInvite;
 
-    //status pending
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", nullable = false)
+    private String status = "pending";
 
     @Column(name = "date")
-    private Date date;
+    private Date timeStamp;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MeetingEntity that = (MeetingEntity) o;
-        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receivedInvite, that.receivedInvite) && Objects.equals(sentInvite, that.sentInvite) && Objects.equals(status, that.status) && Objects.equals(date, that.date);
+        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receivedInvite, that.receivedInvite) && Objects.equals(sentInvite, that.sentInvite) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inviteID, receivedInvite, sentInvite, status, date);
+        return Objects.hash(inviteID, receivedInvite, sentInvite, status, timeStamp);
     }
 }

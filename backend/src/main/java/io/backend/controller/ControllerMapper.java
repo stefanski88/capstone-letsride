@@ -114,7 +114,7 @@ abstract class ControllerMapper {
     protected MeetingDTO mapMeetingToDTO(MeetingEntity meetingEntity) {
         return MeetingDTO.builder()
                 .status(meetingEntity.getStatus())
-                .date(meetingEntity.getDate())
+                .timeStamp(meetingEntity.getTimeStamp())
                 .build();
     }
 
@@ -154,5 +154,12 @@ abstract class ControllerMapper {
             meetingDTOList.add(meetingDTO);
         }
         return meetingDTOList;
+    }
+
+    protected MeetingDTO mapCreatedMeeting(MeetingEntity meetingEntity) {
+        return MeetingDTO.builder()
+                .status(meetingEntity.getStatus())
+                .timeStamp(meetingEntity.getTimeStamp())
+                .build();
     }
 }

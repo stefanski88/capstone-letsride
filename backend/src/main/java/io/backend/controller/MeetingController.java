@@ -1,6 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.MeetingDTO;
+import io.backend.api.UserBackendDTO;
 import io.backend.model.MeetingEntity;
 import io.backend.model.UserEntity;
 import io.backend.service.MeetingService;
@@ -46,7 +47,14 @@ public class MeetingController extends ControllerMapper{
         return ok(meetingListDTO);
     }
 
+    @PostMapping("/createInvite")
+    public ResponseEntity<MeetingDTO> createInvite(@AuthenticationPrincipal UserEntity authUser, @RequestBody MeetingDTO meetingDTO) {
+        MeetingEntity createdMeetingEntity = meetingService.createInvite(authUser, meetingDTO);
 
+        MeetingDTO createdMeetingDTO = mapCreatedMeeting(createdMeetingEntity);
+
+        return ok(createdMeetingDTO);
+    }
 
 
 

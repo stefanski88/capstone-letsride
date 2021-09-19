@@ -13,9 +13,9 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MeetingDTO {
 
-    private String meetingID;
-    private String fromUser;
-    private String toUser;
+    private String inviteID;
+    private String receivedInvite;
+    private String sentInvite;
     private String status;
-    private Date date;
+    private Date timeStamp;
 }
