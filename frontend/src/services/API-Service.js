@@ -6,6 +6,12 @@ export const getToken = credentials =>
         .then(response => response.data)
         .then(dto => dto.token)
 
+const headers = token => ({
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+})
+
 export const getUsers = () =>
     axios
         .get('api/getUsers')
@@ -21,13 +27,10 @@ export const createUser = newUser =>
         .post('api/registerUser', newUser)
         .then(response => response.data)
 
+export const deleteUser = (token) =>
+    axios
+        .delete('api/deleteUser', headers(token))
+        .then(response => response.data)
 
 
-/*
-const headers = token => ({
-    headers: {
-        Authorization: `Bearer ${token}`,
-    },
-})
- */
 

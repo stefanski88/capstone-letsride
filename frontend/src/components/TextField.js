@@ -7,6 +7,7 @@ export default function TextField({
     name,
     value,
     onChange,
+    placeholder,
     ...props
 }) {
     return(
@@ -16,6 +17,7 @@ export default function TextField({
                    name={name}
                    value={value}
                    onChange={onChange}
+                   placeholder={placeholder}
             />
         </Label>
     );

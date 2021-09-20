@@ -34,6 +34,7 @@ export default function Login() {
                 <TextField
                     title="Username"
                     name="userName"
+                    placeholder="required"
                     value={credentials.userName}
                     onChange={changeCredentialsHandler}
                 />
@@ -41,6 +42,7 @@ export default function Login() {
                 title="Password"
                 name="password"
                 type="password"
+                placeholder="required"
                 value={credentials.password}
                 onChange={changeCredentialsHandler}
                 />

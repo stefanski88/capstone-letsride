@@ -21,10 +21,10 @@ export default function Registration() {
     } )
     const [error, setError] = useState()
 
-    const changeRegistrationHandler = event =>
+    const handleRegistration = event =>
         setRegisterUser({ ...registerUser, [event.target.name]: event.target.value })
 
-    const submitHandler = event => {
+    const handleSubmit = event => {
         event.preventDefault()
         createUser(registerUser)
             .then(registerUser => setRegisterUser(registerUser))
@@ -33,74 +33,79 @@ export default function Registration() {
     }
 
     return(
-        <Main as="form" onSubmit={submitHandler}>
+        <Main as="form" onSubmit={handleSubmit}>
             <TextField
                 title="Username: "
                 name="userName"
+                placeholder="*required"
                 value={registerUser.userName}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
                 />
             <TextField
                 title="Password :"
                 name="password"
                 type="password"
+                placeholder="*required"
                 value={registerUser.password}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
                 />
             <TextField
                 title="E-Mail :"
                 name="email"
                 type="email"
+                placeholder="*required"
                 value={registerUser.email}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="First name :"
                 name="firstName"
                 value={registerUser.firstName}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="Last name:"
                 name="lastName"
                 value={registerUser.lastName}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="Age :"
                 name="age"
                 type="number"
+                placeholder="*required"
                 value={registerUser.age}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="Location :"
                 name="location"
                 value={registerUser.location}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="Driving Experience: "
                 name="drivingExp"
+                placeholder="*required"
                 value={registerUser.drivingExp}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="Driving Style :"
                 name="drivingStyle"
+                placeholder="*required"
                 value={registerUser.drivingStyle}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             <TextField
                 title="About me :"
                 name="aboutMe"
                 value={registerUser.aboutMe}
-                onChange={changeRegistrationHandler}
+                onChange={handleRegistration}
             />
             { (registerUser.userName !== "" && registerUser.password !== "" && registerUser.email !== "" &&
             registerUser.age !== "" && registerUser.drivingExp !== "" && registerUser.drivingStyle !== "") ?
                 <button>Register!</button> : <Error>Please fill in all fields..</Error> }
-
         </Main>
     );
 }
