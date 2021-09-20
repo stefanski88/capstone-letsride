@@ -16,13 +16,12 @@ public class UserEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "userid")
     private List<MotoEntity> motorcycles = new ArrayList<>();
-
-    //@OneToMany
-    //private List<MeetingEntity> meetings = new ArrayList<>();
-
     public void addMoto(MotoEntity motoEntity) {
         motorcycles.add(motoEntity);
     }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receiver")
+    private List<InviteEntity> invites = new ArrayList<>();
 
     @Id
     @GeneratedValue

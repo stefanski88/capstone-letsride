@@ -1,6 +1,7 @@
 package io.backend.controller;
 
 import io.backend.api.*;
+import io.backend.model.InviteEntity;
 import io.backend.model.MotoEntity;
 import io.backend.model.UserEntity;
 
@@ -100,7 +101,7 @@ abstract class ControllerMapper {
         return userBackendDTOList;
     }
 
-    protected MotoBackendDTO mapMotoTo(MotoEntity motoEntity) {
+    protected MotoBackendDTO mapMotoToDTO(MotoEntity motoEntity) {
         return MotoBackendDTO.builder()
                 .motoID(motoEntity.getMotoID())
                 .motoNickName(motoEntity.getMotoNickName())
@@ -130,9 +131,43 @@ abstract class ControllerMapper {
     protected List<MotoBackendDTO> mapAllUserMotos(List<MotoEntity> motoEntityList) {
         List<MotoBackendDTO> motoBackendDTOList = new LinkedList<>();
         for (MotoEntity motoEntity: motoEntityList) {
-            MotoBackendDTO motoBackendDTO = mapMotoTo(motoEntity);
+            MotoBackendDTO motoBackendDTO = mapMotoToDTO(motoEntity);
             motoBackendDTOList.add(motoBackendDTO);
         }
         return motoBackendDTOList;
+    }
+
+
+
+    protected List<InviteDTO> mapAllInvites(List<InviteEntity> inviteEntityList) {
+        List<InviteDTO> inviteDTOList = new LinkedList<>();
+        for (InviteEntity inviteEntity : inviteEntityList) {
+            InviteDTO inviteDTO = mapInviteToDTO(inviteEntity);
+            inviteDTOList.add(inviteDTO);
+        }
+        return inviteDTOList;
+    }
+
+    protected InviteDTO mapCreatedInvite(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .status(inviteEntity.getStatus())
+                .timeStamp(inviteEntity.getTimeStamp())
+                .build();
+    }
+
+    protected InviteDTO mapInviteToDTO(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .inviteID(inviteEntity.getInviteID())
+                .receiver(inviteEntity.getReceiver().getUserName())
+                .sender(inviteEntity.getSender().getUserName())
+                .status(inviteEntity.getStatus())
+                .timeStamp(inviteEntity.getTimeStamp())
+                .build();
+    }
+
+    protected InviteDTO mapInviteUpdateDTO(InviteEntity inviteEntity) {
+        return InviteDTO.builder()
+                .status(inviteEntity.getStatus())
+                .build();
     }
 }

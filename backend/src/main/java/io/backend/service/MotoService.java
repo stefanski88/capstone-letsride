@@ -15,7 +15,6 @@ import javax.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Getter
 @Setter
@@ -29,7 +28,6 @@ public class MotoService {
     public MotoService(MotoRepository motoRepository, UserService userService) {
         this.motoRepository = motoRepository;
         this.userService = userService;
-
     }
 
     public List<MotoEntity> getAllMotosByUserID(UserEntity authUser) {
@@ -64,7 +62,6 @@ public class MotoService {
         MotoEntity motoEntity = getMotoByMotoID(authUser, motoID);
 
         user.getMotorcycles().remove(motoEntity);
-        //motoRepository.deleteByMotoID(motoID);
 
         return new MotoEntity();
     }
