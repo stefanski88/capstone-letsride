@@ -1,65 +1,106 @@
 import TextField from "../components/TextField";
 import Main from "../components/Main";
+import {useState} from "react";
+import {createUser} from "../services/API-Service";
+import Error from "../components/Error";
 
 
 export default function Registration() {
 
+    const [registerUser, setRegisterUser] = useState( {
+        userName: "",
+        password: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        age: "",
+        location: "",
+        drivingExp: "",
+        drivingStyle: "",
+        aboutMe: "",
+    } )
+    const [error, setError] = useState()
+
+    const changeRegistrationHandler = event =>
+        setRegisterUser({ ...registerUser, [event.target.name]: event.target.value })
+
+    const submitHandler = event => {
+        event.preventDefault()
+        createUser(registerUser)
+            .then(registerUser => setRegisterUser(registerUser))
+            .catch(error => setError(error))
+            .finally(() => setRegisterUser(registerUser))
+    }
+
     return(
-        <Main>
-                <TextField
-                    title={"Username"}
-                name="username"
-                value={null}
-                onChange={null}
-                />
-                <TextField
-                    title="Password :"
-                    name="password"
-                    value={null}
-                    onChange={null}
-                />
-                <TextField
-                    title="E-Mail :"
-                    name="eMail"
-                    value={null}
-                    onChange={null}
+        <Main as="form" onSubmit={submitHandler}>
+            <TextField
+                title="Username: "
+                name="userName"
+                value={registerUser.userName}
+                onChange={changeRegistrationHandler}
                 />
             <TextField
+                title="Password :"
+                name="password"
+                type="password"
+                value={registerUser.password}
+                onChange={changeRegistrationHandler}
+                />
+            <TextField
+                title="E-Mail :"
+                name="email"
+                type="email"
+                value={registerUser.email}
+                onChange={changeRegistrationHandler}
+            />
+            <TextField
                 title="First name :"
-                name="firstname"
-                value={null}
-                onChange={null}
+                name="firstName"
+                value={registerUser.firstName}
+                onChange={changeRegistrationHandler}
             />
             <TextField
                 title="Last name:"
-                name="lastname"
-                value={null}
-                onChange={null}
+                name="lastName"
+                value={registerUser.lastName}
+                onChange={changeRegistrationHandler}
             />
             <TextField
                 title="Age :"
                 name="age"
-                value={null}
-                onChange={null}
+                type="number"
+                value={registerUser.age}
+                onChange={changeRegistrationHandler}
             />
             <TextField
                 title="Location :"
                 name="location"
-                value={null}
-                onChange={null}
+                value={registerUser.location}
+                onChange={changeRegistrationHandler}
             />
             <TextField
                 title="Driving Experience: "
-                name="drivingexperience"
-                value={null}
-                onChange={null}
+                name="drivingExp"
+                value={registerUser.drivingExp}
+                onChange={changeRegistrationHandler}
             />
             <TextField
                 title="Driving Style :"
-                name="drivingstyle"
-                value={null}
-                onChange={null}
+                name="drivingStyle"
+                value={registerUser.drivingStyle}
+                onChange={changeRegistrationHandler}
             />
+            <TextField
+                title="About me :"
+                name="aboutMe"
+                value={registerUser.aboutMe}
+                onChange={changeRegistrationHandler}
+            />
+            { (registerUser.userName !== "" && registerUser.password !== "" && registerUser.email !== "" &&
+            registerUser.age !== "" && registerUser.drivingExp !== "" && registerUser.drivingStyle !== "") ?
+                <button>Register!</button> : <Error>Please fill in all fields..</Error> }
+
         </Main>
     );
 }
