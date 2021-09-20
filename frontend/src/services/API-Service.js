@@ -16,10 +16,12 @@ export const getUser = () =>
         .get('api/getUser/user1')
         .then(response => response.data)
 
-export const registerUser = () =>
+export const createUser = newUser =>
     axios
-        .post('api/registerUser')
+        .post('api/registerUser', newUser)
         .then(response => response.data)
+
+
 
 /*
 const headers = token => ({
