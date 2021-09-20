@@ -104,7 +104,7 @@ public class InviteService {
         InviteEntity inviteEntity = getInvite(authUser, inviteID);
 
         if (!userEntity.get().getUserID().equals(inviteEntity.getSender().getUserID())) {
-            throw new EntityNotFoundException("Invite not found..");
+            throw new EntityNotFoundException("you can't send a invite to yourself..");
         }
         if (!inviteEntity.getInviteID().equals(inviteID)) {
             throw new EntityNotFoundException("Invite not found..");
