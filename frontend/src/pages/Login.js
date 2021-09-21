@@ -3,6 +3,7 @@ import TextField from "../components/TextField"
 import { useAuth } from '../auth/AuthProvider'
 import { useState } from "react";
 import {Redirect} from "react-router-dom";
+import Header from "../components/Header";
 
 
 const defaultState = {
@@ -29,25 +30,23 @@ export default function Login() {
     }
 
     return(
-        <div>
-            <Main as="form" onSubmit={submitHandler}>
-                <TextField
-                    title="Username"
-                    name="userName"
-                    placeholder="required"
-                    value={credentials.userName}
-                    onChange={changeCredentialsHandler}
-                />
-                <TextField
+        <Main as="form" onSubmit={submitHandler}>
+            <Header />
+            <TextField
+                title="Username"
+                name="userName"
+                placeholder="required"
+                value={credentials.userName}
+                onChange={changeCredentialsHandler}
+            />
+            <TextField
                 title="Password"
                 name="password"
                 type="password"
                 placeholder="required"
                 value={credentials.password}
-                onChange={changeCredentialsHandler}
-                />
-                <button>login</button>
-            </Main>
-        </div>
+                onChange={changeCredentialsHandler}/>
+            <button>login</button>
+        </Main>
     );
 }

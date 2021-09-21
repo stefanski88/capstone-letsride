@@ -3,6 +3,7 @@ import Main from "../components/Main";
 import {useState} from "react";
 import {createUser} from "../services/API-Service";
 import Error from "../components/Error";
+import Header from "../components/Header";
 
 
 export default function Registration() {
@@ -34,6 +35,7 @@ export default function Registration() {
 
     return(
         <Main as="form" onSubmit={handleSubmit}>
+            <Header />
             <TextField
                 title="Username: "
                 name="userName"

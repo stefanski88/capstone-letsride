@@ -1,11 +1,12 @@
 import {useAuth} from "./AuthProvider";
-import {Redirect} from "react-router-dom";
-import {getToken} from "../services/API-Service";
+import {Redirect, Route} from "react-router-dom";
 
-export default function ProtectedRoute() {
+export default function ProtectedRoute( {...props} ) {
     const { user } = useAuth()
 
     if (!user) {
         return <Redirect to = "/login" />
     }
+
+    return <Route { ...props }/>
 }

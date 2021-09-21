@@ -32,5 +32,11 @@ export const deleteUser = (token) =>
         .delete('api/deleteUser', headers(token))
         .then(response => response.data)
 
+export const updateUser = (token, updateUser) =>
+    axios
+        .put('api/updateUser', updateUser, headers(token))
+        .then(response => response.data)
+        .then(response => console.log(response))
+
 
 
