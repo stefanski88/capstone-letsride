@@ -2,25 +2,21 @@ import {useState} from "react";
 import Main from "../components/Main";
 import {useAuth} from "../auth/AuthProvider";
 import { Redirect } from "react-router-dom";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import PaperComponent from "../components/PaperComponent";
 import {deleteUser} from "../services/API-Service";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 
 export default function DeleteAccount() {
 
     const { user, logout, token } = useAuth()
-    const [deletion, setDeletion] = useState()
+    const [setDeletion] = useState()
     const [error, setError] = useState()
     const [open, setOpen] = useState(false)
 
     if(!user) {
         <Redirect to ="/login" />
-    }
-
-    const handleClickOpen = () => {
-        setOpen(true)
     }
 
     const handleConfirmation = () => {
@@ -29,6 +25,14 @@ export default function DeleteAccount() {
             .then(data => setDeletion(data))
             .then(logout)
             .catch(error => setError(error))
+    }
+
+    const handleClickOpen = () => {
+        setOpen(true)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
     }
 
     return(
@@ -55,7 +59,7 @@ export default function DeleteAccount() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleConfirmation}>Cancel</Button>
+                    <Button autoFocus onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleConfirmation}>Confirm</Button>
                 </DialogActions>
             </Dialog>

@@ -17,9 +17,6 @@ export default function AuthProvider({ children }) {
     const login = credentials => getToken(credentials).then(setToken)
 
     const logout = () => setToken()
-    // const deleteUser = (token) => deleteAPI(token) wasn dat?
-
-
 
     return(
       <AuthContext.Provider value={{ token, user, login, logout }}>

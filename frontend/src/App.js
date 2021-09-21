@@ -6,6 +6,7 @@ import Registration from "./pages/Registration";
 import DeleteAccount from "./pages/DeleteAccount";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import EditAccount from "./pages/EditAccount";
+import Logout from "./pages/Logout";
 
 function App() {
 
@@ -16,8 +17,9 @@ function App() {
                   <Route exact path="/landing" component={Landing} />
                   <Route path="/login" component={Login} />
                   <Route path="/registration" component={Registration} />
-                  <ProtectedRoute path="/deleteAccount" component={DeleteAccount} />
-                  <Route path="editAccount" component={EditAccount}  />
+                  <Route path="/deleteAccount" component={DeleteAccount} />
+                  <Route path="/editAccount" component={EditAccount}  />
+                  <Route path="/logout" component={Logout} />
               </Switch>
           </Router>
       </AuthProvider>

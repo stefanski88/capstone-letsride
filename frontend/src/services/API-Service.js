@@ -17,9 +17,9 @@ export const getUsers = () =>
         .get('api/getUsers')
         .then(response => response.data)
 
-export const getUser = () =>
+export const getUser = (token, userName) =>
     axios
-        .get('api/getUser/user1')
+        .get('api/getUser/' + userName, headers(token))
         .then(response => response.data)
 
 export const createUser = newUser =>
@@ -36,7 +36,7 @@ export const updateUser = (token, updateUser) =>
     axios
         .put('api/updateUser', updateUser, headers(token))
         .then(response => response.data)
-        .then(response => console.log(response))
+
 
 
 

@@ -4,7 +4,7 @@ import {useState} from "react";
 import {createUser} from "../services/API-Service";
 import Error from "../components/Error";
 import Header from "../components/Header";
-
+import {Redirect} from "react-router-dom";
 
 export default function Registration() {
 
@@ -31,7 +31,13 @@ export default function Registration() {
             .then(registerUser => setRegisterUser(registerUser))
             .catch(error => setError(error))
             .finally(() => setRegisterUser(registerUser))
+
+        if (registerUser) {
+            return <Redirect to="/landing" />
+        }
     }
+
+
 
     return(
         <Main as="form" onSubmit={handleSubmit}>
@@ -99,15 +105,9 @@ export default function Registration() {
                 value={registerUser.drivingStyle}
                 onChange={handleRegistration}
             />
-            <TextField
-                title="About me :"
-                name="aboutMe"
-                value={registerUser.aboutMe}
-                onChange={handleRegistration}
-            />
             { (registerUser.userName !== "" && registerUser.password !== "" && registerUser.email !== "" &&
             registerUser.age !== "" && registerUser.drivingExp !== "" && registerUser.drivingStyle !== "") ?
-                <button>Register!</button> : <Error>Please fill in all fields..</Error> }
+            <button>Register!</button> : <Error>Please fill all required fields..</Error> }
         </Main>
     );
 }
