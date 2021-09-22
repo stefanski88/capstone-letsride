@@ -9,6 +9,8 @@ import EditAccount from "./pages/EditAccount";
 import Logout from "./pages/Logout";
 import MyMotorcycles from "./pages/MyMotorcycles";
 import MyMotorcycle from "./pages/MyMotorcycle";
+import ReceivedInvites from "./pages/ReceivedInvites";
+import CreateMotorcycle from "./pages/CreateMotorcycle";
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
                   <Route path="/logout" component={Logout} />
                   <Route path="/myMotorcycle/:id" component={MyMotorcycle}  />
                   <Route path="/myMotorcycles" component={MyMotorcycles} />
+                  <Route path="/createMotorcycle" component={CreateMotorcycle} />
+                  <Route path="/receivedInvites" component={ReceivedInvites} />
               </Switch>
           </Router>
       </AuthProvider>

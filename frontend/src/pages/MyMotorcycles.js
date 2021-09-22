@@ -3,10 +3,8 @@ import Header from "../components/Header";
 import NavBar from "../components/NavBar";
 import {useEffect, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
-import {getMyMotorcycle, getMyMotorcycles} from "../services/API-Service";
+import {getMyMotorcycles} from "../services/API-Service";
 import MotoCard from "../components/MotoCard";
-import MyMotorcycle from "./MyMotorcycle";
-import {NavLink, Redirect} from "react-router-dom";
 
 export default function MyMotorcycles() {
 
@@ -18,10 +16,6 @@ export default function MyMotorcycles() {
             .then(motorcycles => setMotorcycles(motorcycles))
     }, [])
     console.log(motorcycles)
-
-    const editMoto = () => {
-        return <NavLink to="/myMotorcycle" />
-    }
 
     return(
         <Main>

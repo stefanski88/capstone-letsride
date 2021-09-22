@@ -8,6 +8,7 @@ import {Redirect} from "react-router-dom";
 
 export default function Registration() {
 
+    const [error, setError] = useState()
     const [registerUser, setRegisterUser] = useState( {
         userName: "",
         password: "",
@@ -20,7 +21,6 @@ export default function Registration() {
         drivingStyle: "",
         aboutMe: "",
     } )
-    const [error, setError] = useState()
 
     const handleRegistration = event =>
         setRegisterUser({ ...registerUser, [event.target.name]: event.target.value })
