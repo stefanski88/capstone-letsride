@@ -23,6 +23,5 @@ export default function Landing() {
             <button onClick={handleClick}>load riders</button>
             <NavBar />
         </Main>
-
     );
 }

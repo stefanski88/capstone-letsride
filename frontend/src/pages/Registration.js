@@ -37,8 +37,6 @@ export default function Registration() {
         }
     }
 
-
-
     return(
         <Main as="form" onSubmit={handleSubmit}>
             <Header />

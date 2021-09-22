@@ -6,13 +6,11 @@ import {useEffect, useState} from "react";
 import TextField from "../components/TextField";
 import {useAuth} from "../auth/AuthProvider";
 
-
 export default function EditAccount() {
 
     const { token, user } = useAuth()
     const [error, setError] = useState()
     const [update, setUpdate] = useState({})
-    const [success, setSuccess] = useState()
 
     useEffect(() => {
         getUser(token, user.username)

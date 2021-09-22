@@ -1,5 +1,5 @@
 
-export default function RiderCard( {rider} ) {
+export default function RiderCard( { rider } ) {
 
     return(
         <section>

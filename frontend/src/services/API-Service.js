@@ -37,6 +37,24 @@ export const updateUser = (token, updateUser) =>
         .put('api/updateUser', updateUser, headers(token))
         .then(response => response.data)
 
+export const getMyMotorcycle = (token, motoID) =>
+    axios
+        .get(`api/moto/getMotoByMotoID/${motoID}`, headers(token))
+        .then(response => response.data)
+
+export const updateMotorcycle = (token, motorcycle, motoID ) =>
+    axios
+        .get(`api/moto/updateMoto/${motoID}`, headers(token))
+        .then(response => response.data)
+
+export const getMyMotorcycles = (token) =>
+    axios
+        .get('api/moto/getAllMotos', headers(token))
+        .then(response => response.data)
+
+
+
+
 
 
 

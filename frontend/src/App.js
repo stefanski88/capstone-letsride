@@ -7,6 +7,8 @@ import DeleteAccount from "./pages/DeleteAccount";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import EditAccount from "./pages/EditAccount";
 import Logout from "./pages/Logout";
+import MyMotorcycles from "./pages/MyMotorcycles";
+import MyMotorcycle from "./pages/MyMotorcycle";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
                   <Route path="/deleteAccount" component={DeleteAccount} />
                   <Route path="/editAccount" component={EditAccount}  />
                   <Route path="/logout" component={Logout} />
+                  <Route path="/myMotorcycle/:id" component={MyMotorcycle}  />
+                  <Route path="/myMotorcycles" component={MyMotorcycles} />
               </Switch>
           </Router>
       </AuthProvider>

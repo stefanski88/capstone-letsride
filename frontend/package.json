@@ -48,6 +48,7 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
+    "@mui/material": "^5.0.0",
     "prop-types": "^15.7.2"
   }
 }

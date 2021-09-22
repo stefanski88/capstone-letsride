@@ -5,6 +5,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports'
 import styled from "styled-components/macro";
 
 export default function NavBar() {
@@ -34,6 +35,20 @@ export default function NavBar() {
                 icon={<AccountCircleIcon />}
                 component={Link}
                 to="/editAccount"
+            />
+            <BottomNavigationAction
+                label="My Motorcycle"
+                value="/myMotorcycle"
+                icon={<SportsMotorsportsIcon />}
+                component={Link}
+                to="/myMotorcycle"
+            />
+            <BottomNavigationAction
+                label="My Motorcycles"
+                value="/myMotorcycles"
+                icon={<SportsMotorsportsIcon />}
+                component={Link}
+                to="/myMotorcycles"
             />
             <BottomNavigationAction
                 label="DeleteAccount"
