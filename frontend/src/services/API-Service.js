@@ -12,14 +12,14 @@ const headers = token => ({
     },
 })
 
+export const getUser = (token, userName) =>
+    axios
+        .get(`api/getUser/${userName}`, headers(token))
+        .then(response => response.data)
+
 export const getUsers = () =>
     axios
         .get('api/getUsers')
-        .then(response => response.data)
-
-export const getUser = (token, userName) =>
-    axios
-        .get('api/getUser/' + userName, headers(token))
         .then(response => response.data)
 
 export const createUser = newUser =>

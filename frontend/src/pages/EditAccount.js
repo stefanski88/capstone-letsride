@@ -4,31 +4,27 @@ import Header from "../components/Header";
 import {getUser, updateUser} from "../services/API-Service";
 import {useEffect, useState} from "react";
 import TextField from "../components/TextField";
+import {useAuth} from "../auth/AuthProvider";
 
 
 export default function EditAccount() {
 
+    const { token, user } = useAuth()
     const [error, setError] = useState()
-    const [update, setUpdate] = useState({
+    const [update, setUpdate] = useState({})
+    const [success, setSuccess] = useState()
 
-            password: "",
-            firstName: "",
-            lastName: "",
-            age: "",
-            location: "",
-            drivingExp: "",
-            drivingStyle: "",
-            aboutMe: "",
-        }
-    )
+    useEffect(() => {
+        getUser(token, user.username)
+            .then(data => setUpdate(data))
+    }, [])
 
     const handleUpdate = event =>
         setUpdate({ ...update, [event.target.name]: event.target.value })
 
-
     const handleSubmit = event => {
         event.preventDefault()
-        updateUser(update)
+        updateUser(token, update)
             .then(update => setUpdate(update))
             .catch(error => setError(error))
             .finally(() => setUpdate(update))
@@ -81,6 +77,7 @@ export default function EditAccount() {
                 value={update.drivingStyle}
                 onChange={handleUpdate}
             />
+            <button>Update!</button>
             <NavBar />
         </Main>
 
