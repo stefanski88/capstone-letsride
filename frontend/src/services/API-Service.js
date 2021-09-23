@@ -51,13 +51,17 @@ export const getMyMotorcycles = (token) =>
 
 export const updateMotorcycle = (token, motorcycle, motoID) =>
     axios
-        .put(`api/moto/updateMoto/${motoID}`, headers(token))
+        .put(`api/moto/updateMoto/${motoID}`, headers(token), motorcycle)
+        .then(response => response.data)
+        .then(dto => dto.motorcycle)
+
+
+export const createMotorcycle = ( newMotorcycle, token) =>
+    axios
+        .post('api/moto/createMoto', newMotorcycle, headers(token))
         .then(response => response.data)
 
-export const createMotorcycle = (token, newMotorcycle) =>
-    axios
-        .post('api/moto/createMoto', headers(token), newMotorcycle)
-        .then(response => response.data)
+
 
 //INVITE API
 export const getAllReceivedInvites = (token) =>
