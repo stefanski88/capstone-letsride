@@ -8,6 +8,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports'
 import AddIcon from '@mui/icons-material/Add'
 import styled from "styled-components/macro";
+import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox'
+import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 
 export default function NavBar() {
 
@@ -71,6 +74,27 @@ export default function NavBar() {
                 icon={<LogoutIcon />}
                 component={Link}
                 to="/logout"
+            />
+            <BottomNavigationAction
+                label="Received Invites"
+                value="/receivedInvites"
+                icon={<MarkunreadMailboxIcon />}
+                component={Link}
+                to="/receivedInvites"
+            />
+            <BottomNavigationAction
+                label="Sent Invites"
+                value="/sentInvites"
+                icon={<ForwardToInboxIcon />}
+                component={Link}
+                to="/sentInvites"
+            />
+            <BottomNavigationAction
+                label="Search Riders"
+                value="/search"
+                icon={<ManageSearchIcon />}
+                component={Link}
+                to="/search"
             />
         </BottomNavigation>
         </Wrapper>

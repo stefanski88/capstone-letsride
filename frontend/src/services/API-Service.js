@@ -13,7 +13,7 @@ const headers = token => ({
 })
 
 // USER API
-export const getUser = (token, userName) =>
+export const getUser = (userName, token) =>
     axios
         .get(`api/getUser/${userName}`, headers(token))
         .then(response => response.data)
@@ -39,7 +39,7 @@ export const updateUser = (token, updateUser) =>
         .then(response => response.data)
 
 // MOTORCYCLE API
-export const getMyMotorcycle = (token, motoID) =>
+export const getMyMotorcycle = (motoID, token) =>
     axios
         .get(`api/moto/getMotoByMotoID/${motoID}`, headers(token))
         .then(response => response.data)
@@ -49,24 +49,33 @@ export const getMyMotorcycles = (token) =>
         .get('api/moto/getAllMotos', headers(token))
         .then(response => response.data)
 
-export const updateMotorcycle = (token, motorcycle, motoID) =>
+
+export const updateMotorcycle = (motoID, motorcycle, token) =>
     axios
-        .put(`api/moto/updateMoto/${motoID}`, headers(token), motorcycle)
+        .put(`api/moto/updateMoto/${motoID}`, motorcycle, headers(token))
         .then(response => response.data)
-        .then(dto => dto.motorcycle)
 
 
-export const createMotorcycle = ( newMotorcycle, token) =>
+export const createMotorcycle = (newMotorcycle, token) =>
     axios
         .post('api/moto/createMoto', newMotorcycle, headers(token))
         .then(response => response.data)
-
 
 
 //INVITE API
 export const getAllReceivedInvites = (token) =>
     axios
         .get('api/invite/getAllReceivedInvites', headers(token))
+        .then(response => response.data)
+
+export const getAllSentInvites = (token) =>
+    axios
+        .get('api/invite/getAllSentInvites', headers(token))
+        .then(response => response.data)
+
+export const createInvite = (newInvite, token) =>
+    axios
+        .post('api/invite/createInvite', newInvite, headers(token))
         .then(response => response.data)
 
 

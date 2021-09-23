@@ -3,7 +3,7 @@ export default function MotoCard( { moto } ) {
 
     const history = useHistory();
 
-    function selectMoto(id){
+    function selectMoto(id) {
         history.push(`myMotorcycle/${id}`)
     }
     return(
