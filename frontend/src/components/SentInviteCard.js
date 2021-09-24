@@ -1,4 +1,5 @@
 import {useHistory} from "react-router-dom";
+import {StyledSection} from "./StyledSection";
 
 
 export default function SentInviteCard( {sentInv} ) {
@@ -10,8 +11,8 @@ export default function SentInviteCard( {sentInv} ) {
     }
 
     return(
-        <section onClick={()=>{selectSentInvite(sentInv.id)}}>
+        <StyledSection onClick={()=>{selectSentInvite(sentInv.id)}}>
             <p>Sent Invite: {sentInv.status}</p>
-        </section>
+        </StyledSection>
     );
 }

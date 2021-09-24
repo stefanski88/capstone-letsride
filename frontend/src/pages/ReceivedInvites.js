@@ -5,6 +5,7 @@ import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {getAllReceivedInvites} from "../services/API-Service";
 import ReceivedInviteCard from "../components/ReceivedInviteCard";
+import Page from "../components/Page";
 
 
 export default function ReceivedInvites() {
@@ -17,15 +18,17 @@ export default function ReceivedInvites() {
             .then(invites => setInvites(invites))
     }, [])
 
-    return(
-      <Main>
-          <Header />
-          <div>
-              {invites.map(recInv => (
-                  <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
-              ))}
-          </div>
-          <NavBar />
-      </Main>
+    return (
+        <Page>
+            <Header/>
+            <Main>
+                <div>
+                    {invites.map(recInv => (
+                        <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
+                    ))}
+                </div>
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }

@@ -5,8 +5,8 @@ export default function RiderCard( { rider } ) {
 
     return(
         <StyledSection>
-            <h4>Username: {rider.userName}</h4>
-            <StyledImg src="https://thispersondoesnotexist.com/image" alt="rider profile picture"/>
+            <StyledH>{rider.userName}</StyledH>
+            <StyledImg src="https://thiscatdoesnotexist.com/?ref=producthunt" alt="rider profile picture"/>
             <StyledP>Firstname: {rider.firstName}</StyledP>
             <StyledP>Lastname: {rider.lastName}</StyledP>
             <StyledP>Age: {rider.age}</StyledP>
@@ -23,5 +23,7 @@ const StyledImg = styled.img`
 `
 const StyledP = styled.p`
   margin: 0.5rem 0;
-
+`
+const StyledH = styled.h4`
+  text-align: center;
 `

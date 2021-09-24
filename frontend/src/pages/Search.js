@@ -7,6 +7,7 @@ import {getUsers} from "../services/API-Service";
 import Select from "../components/Select";
 import {drivingStyleOptions, drivingExpOptions} from '../services/FilterOptions'
 import RiderCard from "../components/RiderCard";
+import Page from "../components/Page";
 
 export default function Search() {
 
@@ -39,29 +40,30 @@ export default function Search() {
     }
 
     return (
-        <Main as="form">
+        <Page>
             <Header/>
-            <label>Choose Driving Style</label>
-            <Select
-                name="drivingExp"
-                value={drivingExp}
-                options={drivingExpOptions}
-                onChange={handleChangeDrivingExp}
-                title="Driving Experience: "
-            />
-            <Select
-                name="drivingStyle"
-                value={drivingStyle}
-                options={drivingStyleOptions}
-                onChange={handleChangeDrivingStyle}
-                title="Driving Style: "
-            />
             <button onClick={handleSearch}>Search Riders!</button>
+            <Main as="form">
+                <Select
+                    name="drivingExp"
+                    value={drivingExp}
+                    options={drivingExpOptions}
+                    onChange={handleChangeDrivingExp}
+                    title="Driving Experience: "
+                />
+                <Select
+                    name="drivingStyle"
+                    value={drivingStyle}
+                    options={drivingStyleOptions}
+                    onChange={handleChangeDrivingStyle}
+                    title="Driving Style: "
+                />
+            </Main>
             {filteredRiders.length === 0 && <p>No Riders found 🤷‍️</p>}
             {filteredRiders.map(filteredRider => (
-                <RiderCard key={filteredRider.id} rider={filteredRider} />
-                ))}
+                <RiderCard key={filteredRider.id} rider={filteredRider}/>
+            ))}
             <NavBar/>
-        </Main>
+        </Page>
     );
 }

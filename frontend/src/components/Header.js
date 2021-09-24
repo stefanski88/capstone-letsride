@@ -2,21 +2,35 @@ import styled from 'styled-components/macro'
 
 export default function Header() {
 
-    const title = "lets Ride"
+    const title = "let's Ride!"
     const image = "letsRideImage.PNG"
     const quote = "enjoy riding motorcycle - together!"
 
     return(
-        <Wrapper>
-            <img src={image} alt="lets ride - logo"/>
+        <StyledHeader>
+            <StyledHeaderImg src={image} alt="lets ride - logo"/>
             <h1>{title}</h1>
-            <blockquote>{quote}</blockquote>
-        </Wrapper>
+            <div>
+            <StyledBlockquote>{quote}</StyledBlockquote>
+            </div>
+        </StyledHeader>
     );
 }
 
-const Wrapper = styled.header`
-  width: 100%;
-  text-align: center;
-  // image and background color
+const StyledHeader = styled.header`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+`
+const StyledHeaderImg = styled.img`
+  width : 50%;
+  margin: 0 1rem;
+
+`
+const StyledBlockquote = styled.blockquote`
+  font-size: 1.2rem;
+
+
+
 `

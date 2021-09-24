@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import {getMyMotorcycles} from "../services/API-Service";
 import MotoCard from "../components/MotoCard";
+import Page from "../components/Page";
 
 export default function MyMotorcycles() {
 
@@ -17,15 +18,19 @@ export default function MyMotorcycles() {
     }, [])
     console.log(motorcycles)
 
-    return(
-        <Main>
-            <Header />
-            <div>
-            {motorcycles.map(moto => (
-                <MotoCard key={moto.motoID} moto={moto}/>
-            ))}
-            </div>
-            <NavBar />
-        </Main>
+    return (
+        <Page>
+            <Header/>
+
+            <Main>
+                <div>
+                    {motorcycles.map(moto => (
+                        <MotoCard key={moto.motoID} moto={moto}/>
+                    ))}
+                </div>
+
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }

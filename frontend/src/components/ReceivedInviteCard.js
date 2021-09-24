@@ -1,4 +1,5 @@
 import {useHistory} from "react-router-dom";
+import {StyledSection} from "./StyledSection";
 
 
 export default function ReceivedInviteCard( {recInv} ) {
@@ -10,8 +11,8 @@ export default function ReceivedInviteCard( {recInv} ) {
     }
 
     return(
-        <section onClick={()=>{selectReceivedInvite(recInv.id)}}>
+        <StyledSection onClick={()=>{selectReceivedInvite(recInv.id)}}>
             <p>Received Invite: {recInv.status}</p>
-        </section>
+        </StyledSection>
     );
 }

@@ -5,6 +5,7 @@ import {useAuth} from "../auth/AuthProvider";
 import TextField from "../components/TextField";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
+import Page from "../components/Page";
 
 
 export default function CreateMotorcycle() {
@@ -21,44 +22,47 @@ export default function CreateMotorcycle() {
     })
 
     const handleChange = event =>
-        setNewMotorcycle({...newMotorcycle, [event.target.name]: event.target.value })
+        setNewMotorcycle({...newMotorcycle, [event.target.name]: event.target.value})
 
     const handleSubmit = event => {
         event.preventDefault()
-    createMotorcycle(newMotorcycle, token)
-        .catch(error => setError(error))
-        .finally(() => setNewMotorcycle(newMotorcycle))
+        createMotorcycle(newMotorcycle, token)
+            .catch(error => setError(error))
+            .finally(() => setNewMotorcycle(newMotorcycle))
     }
 
-    return(
-        <Main as="form" onSubmit={handleSubmit}>
-            <Header />
-            <TextField
-                title="Motorcycle Nickname: "
-                name="motoNickName"
-                value={newMotorcycle.motoNickName}
-                onChange={handleChange}
-            />
-            <TextField
-            title="manufacturer: "
-            name="manufacturer"
-            value={newMotorcycle.manufacturer}
-            onChange={handleChange}
-        />
-            <TextField
-            title="Model: "
-            name="model"
-            value={newMotorcycle.model}
-            onChange={handleChange}
-        />
-            <TextField
-            title="Construction Year: "
-            name="constructionYear"
-            value={newMotorcycle.constructionYear}
-            onChange={handleChange}
-        />
-            <button>create moto!!!!</button>
-            <NavBar />
-        </Main>
+    return (
+        <Page>
+            <Header/>
+            <Main as="form" onSubmit={handleSubmit}>
+
+                <TextField
+                    title="Motorcycle Nickname: "
+                    name="motoNickName"
+                    value={newMotorcycle.motoNickName}
+                    onChange={handleChange}
+                />
+                <TextField
+                    title="manufacturer: "
+                    name="manufacturer"
+                    value={newMotorcycle.manufacturer}
+                    onChange={handleChange}
+                />
+                <TextField
+                    title="Model: "
+                    name="model"
+                    value={newMotorcycle.model}
+                    onChange={handleChange}
+                />
+                <TextField
+                    title="Construction Year: "
+                    name="constructionYear"
+                    value={newMotorcycle.constructionYear}
+                    onChange={handleChange}
+                />
+                <button>create moto!!!!</button>
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }

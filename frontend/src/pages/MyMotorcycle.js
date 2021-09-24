@@ -6,6 +6,7 @@ import NavBar from "../components/NavBar";
 import {getMyMotorcycle, updateMotorcycle} from "../services/API-Service";
 import Main from "../components/Main";
 import Header from "../components/Header";
+import Page from "../components/Page";
 
 const defaultState = {
     motoNickName: '',
@@ -46,36 +47,39 @@ export default function MyMotorcycle() {
     if (redirectToHome) {
         return <Redirect to="/landing"/>
     }
+
     return (
-        <Main as="form" onSubmit={handleSubmit}>
+        <Page>
             <Header/>
-            <TextField
-                title="Moto Nickname :"
-                name="motoNickName"
-                value={uupdateMotorcycle.motoNickName}
-                onChange={handleUpdateChange}
-            />
-            <TextField
-                title="Manufacturer :"
-                name="manufacturer"
-                value={uupdateMotorcycle.manufacturer}
-                onChange={handleUpdateChange}
-            />
-            <TextField
-                title="Model :"
-                name="numberOfHookahHeads"
-                value={uupdateMotorcycle.model}
-                onChange={handleUpdateChange}
-            />
-            <TextField
-                title="Construction year:"
-                name="favHookah"
-                value={uupdateMotorcycle.constructionYear}
-                onChange={handleUpdateChange}
-            />
-            <button>speichern</button>
-            <button onClick={handleCancel}>cancel</button>
+            <Main as="form" onSubmit={handleSubmit}>
+                <TextField
+                    title="Moto Nickname :"
+                    name="motoNickName"
+                    value={uupdateMotorcycle.motoNickName}
+                    onChange={handleUpdateChange}
+                />
+                <TextField
+                    title="Manufacturer :"
+                    name="manufacturer"
+                    value={uupdateMotorcycle.manufacturer}
+                    onChange={handleUpdateChange}
+                />
+                <TextField
+                    title="Model :"
+                    name="numberOfHookahHeads"
+                    value={uupdateMotorcycle.model}
+                    onChange={handleUpdateChange}
+                />
+                <TextField
+                    title="Construction year:"
+                    name="favHookah"
+                    value={uupdateMotorcycle.constructionYear}
+                    onChange={handleUpdateChange}
+                />
+                <button>speichern</button>
+                <button onClick={handleCancel}>cancel</button>
+            </Main>
             <NavBar/>
-        </Main>
+        </Page>
     )
 }

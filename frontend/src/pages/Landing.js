@@ -4,6 +4,7 @@ import {getUsers} from "../services/API-Service";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 import Main from "../components/Main";
+import Page from "../components/Page";
 
 export default function Landing() {
 
@@ -13,14 +14,16 @@ export default function Landing() {
         getUsers().then(setRiders)
     }
 
-    return(
-        <Main>
-            <Header />
-            {riders.map(rider => (
-                <RiderCard key={rider.id} rider={rider}/>
-            ))}
+    return (
+        <Page>
+            <Header/>
             <button onClick={handleClick}>load riders</button>
-            <NavBar />
-        </Main>
+            <Main>
+                {riders.map(rider => (
+                    <RiderCard key={rider.id} rider={rider}/>
+                ))}
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }
