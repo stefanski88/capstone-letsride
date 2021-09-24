@@ -6,6 +6,13 @@ import {useEffect, useState} from "react";
 import TextField from "../components/TextField";
 import {useAuth} from "../auth/AuthProvider";
 
+const drivingStyleOptions = [
+    "---",
+    "comfortable",
+    "sporty",
+    "knee slider",
+]
+
 export default function EditAccount() {
 
     const { token, user } = useAuth()

@@ -11,7 +11,7 @@ import MyMotorcycle from "./pages/MyMotorcycle";
 import ReceivedInvites from "./pages/ReceivedInvites";
 import CreateMotorcycle from "./pages/CreateMotorcycle";
 import SentInvites from "./pages/SentInvites";
-import CreateInvite from "./components/CreateInvite";
+import CreateInvite from "./pages/CreateInvite";
 import Search from "./pages/Search";
 
 function App() {

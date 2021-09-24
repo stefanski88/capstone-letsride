@@ -102,11 +102,11 @@ export default function NavBar() {
 }
 
 const Wrapper = styled.nav`
-  border-top: 1px solid var(--neutral-dark);
-  width: 100%;
-  padding: var(--size-m);
   display: flex;
   overflow-y: scroll;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  position: fixed;
   a {
     flex-grow: 1;
     margin: 0 var(--size-l);

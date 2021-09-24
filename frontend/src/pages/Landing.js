@@ -5,7 +5,6 @@ import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 import Main from "../components/Main";
 
-
 export default function Landing() {
 
     const [riders, setRiders] = useState([])

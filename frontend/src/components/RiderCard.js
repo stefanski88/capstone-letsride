@@ -1,17 +1,27 @@
+import styled from "styled-components/macro";
+import {StyledSection} from "./StyledSection";
 
 export default function RiderCard( { rider } ) {
 
     return(
-        <section>
+        <StyledSection>
             <h4>Username: {rider.userName}</h4>
-            <img src="" alt="rider profile picture"/>
-            <p>Firstname: {rider.firstName}</p>
-            <p>Lastname: {rider.lastName}</p>
-            <p>Age: {rider.age}</p>
-            <p>Location: {rider.location}</p>
-            <p>Driving Experience: {rider.drivingExp}</p>
-            <p>Driving Style: {rider.drivingStyle}</p>
-            <p>About: {rider.about}</p>
-        </section>
+            <StyledImg src="https://thispersondoesnotexist.com/image" alt="rider profile picture"/>
+            <StyledP>Firstname: {rider.firstName}</StyledP>
+            <StyledP>Lastname: {rider.lastName}</StyledP>
+            <StyledP>Age: {rider.age}</StyledP>
+            <StyledP>Location: {rider.location}</StyledP>
+            <StyledP>Driving Experience: {rider.drivingExp}</StyledP>
+            <StyledP>Driving Style: {rider.drivingStyle}</StyledP>
+            <StyledP>About: {rider.about}</StyledP>
+        </StyledSection>
     );
 }
+
+const StyledImg = styled.img`
+  width  : 10rem;
+`
+const StyledP = styled.p`
+  margin: 0.5rem 0;
+
+`
