@@ -6,7 +6,7 @@ import {useState} from "react";
 import {getUsers} from "../services/API-Service";
 import Select from "../components/Select";
 import {drivingStyleOptions, drivingExpOptions} from '../services/FilterOptions'
-import RiderCard from "../components/RiderCard";
+import RiderCard from "../components/cards/RiderCard";
 import Page from "../components/Page";
 
 export default function Search() {

@@ -1,12 +1,11 @@
-import {useAuth} from "../auth/AuthProvider";
+import {useAuth} from "../../auth/AuthProvider";
 import {useEffect, useState} from "react";
-import {getAllSentInvites} from "../services/API-Service";
-import Main from "../components/Main";
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
-import SentInviteCard from "../components/SentInviteCard";
-import Page from "../components/Page";
-
+import {getAllSentInvites} from "../../services/API-Service";
+import Main from "../../components/Main";
+import Header from "../../components/Header";
+import NavBar from "../../components/NavBar";
+import SentInviteCard from "../../components/cards/SentInviteCard";
+import Page from "../../components/Page";
 
 export default function SentInvites() {
 

@@ -1,11 +1,11 @@
-import Main from "../components/Main";
+import Main from "../../components/Main";
 import {useState} from "react";
-import {createMotorcycle} from "../services/API-Service";
-import {useAuth} from "../auth/AuthProvider";
-import TextField from "../components/TextField";
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
-import Page from "../components/Page";
+import {createMotorcycle} from "../../services/API-Service";
+import {useAuth} from "../../auth/AuthProvider";
+import TextField from "../../components/TextField";
+import Header from "../../components/Header";
+import NavBar from "../../components/NavBar";
+import Page from "../../components/Page";
 
 
 export default function CreateMotorcycle() {
@@ -35,7 +35,6 @@ export default function CreateMotorcycle() {
         <Page>
             <Header/>
             <Main as="form" onSubmit={handleSubmit}>
-
                 <TextField
                     title="Motorcycle Nickname: "
                     name="motoNickName"

@@ -1,13 +1,13 @@
 import {useState} from "react";
-import Main from "../components/Main";
-import {useAuth} from "../auth/AuthProvider";
+import Main from "../../components/Main";
+import {useAuth} from "../../auth/AuthProvider";
 import {Link, Redirect} from "react-router-dom";
-import PaperComponent from "../components/PaperComponent";
-import {deleteUser} from "../services/API-Service";
-import NavBar from "../components/NavBar";
-import Header from "../components/Header";
+import PaperComponent from "../../components/PaperComponent";
+import {deleteUser} from "../../services/API-Service";
+import NavBar from "../../components/NavBar";
+import Header from "../../components/Header";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
-import Page from "../components/Page";
+import Page from "../../components/Page";
 
 export default function DeleteAccount() {
 

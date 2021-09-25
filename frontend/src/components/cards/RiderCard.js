@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import {StyledSection} from "./StyledSection";
+import {StyledSection} from "../StyledSection";
 
 export default function RiderCard( { rider } ) {
 

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import RiderCard from "../components/RiderCard";
+import RiderCard from "../components/cards/RiderCard";
 import {getUsers} from "../services/API-Service";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";

@@ -1,11 +1,11 @@
-import TextField from "../components/TextField";
-import Main from "../components/Main";
+import TextField from "../../components/TextField";
+import Main from "../../components/Main";
 import {useState} from "react";
-import {createUser} from "../services/API-Service";
-import Error from "../components/Error";
-import Header from "../components/Header";
+import {createUser} from "../../services/API-Service";
+import Error from "../../components/Error";
+import Header from "../../components/Header";
 import {Redirect} from "react-router-dom";
-import Page from "../components/Page";
+import Page from "../../components/Page";
 
 export default function Registration() {
 

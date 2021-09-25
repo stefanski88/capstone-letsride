@@ -1,11 +1,11 @@
-import Main from "../components/Main";
-import NavBar from "../components/NavBar";
-import Header from "../components/Header";
-import {getUser, updateUser} from "../services/API-Service";
+import Main from "../../components/Main";
+import NavBar from "../../components/NavBar";
+import Header from "../../components/Header";
+import {getUser, updateUser} from "../../services/API-Service";
 import {useEffect, useState} from "react";
-import TextField from "../components/TextField";
-import {useAuth} from "../auth/AuthProvider";
-import Page from "../components/Page";
+import TextField from "../../components/TextField";
+import {useAuth} from "../../auth/AuthProvider";
+import Page from "../../components/Page";
 
 const drivingStyleOptions = [
     "---",

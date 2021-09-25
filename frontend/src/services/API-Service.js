@@ -31,6 +31,7 @@ export const createUser = newUser =>
 export const deleteUser = (token) =>
     axios
         .delete('api/deleteUser', headers(token))
+        .then(response => response.data)
 
 export const updateUser = (token, updateUser) =>
     axios
@@ -40,8 +41,8 @@ export const updateUser = (token, updateUser) =>
 // MOTORCYCLE API
 export const getMyMotorcycle = (motoID, token) =>
     axios
-        .get(`api/moto/getMotoByMotoID/${motoID}`, headers(token))
-        .then(response => response.data)
+        .get('api/moto/getMotoByMotoID/'+motoID, headers(token))
+        //.then(response => response.data)
 
 export const getMyMotorcycles = (token) =>
     axios

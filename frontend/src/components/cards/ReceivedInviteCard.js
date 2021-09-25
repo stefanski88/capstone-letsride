@@ -1,6 +1,5 @@
 import {useHistory} from "react-router-dom";
-import {StyledSection} from "./StyledSection";
-
+import {StyledSection} from "../StyledSection";
 
 export default function ReceivedInviteCard( {recInv} ) {
 
