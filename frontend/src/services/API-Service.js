@@ -31,7 +31,6 @@ export const createUser = newUser =>
 export const deleteUser = (token) =>
     axios
         .delete('api/deleteUser', headers(token))
-        .then(response => response.data)
 
 export const updateUser = (token, updateUser) =>
     axios

@@ -1,8 +1,10 @@
 package io.backend.controller;
 
 import io.backend.api.*;
+import io.backend.model.InviteEntity;
 import io.backend.model.UserEntity;
 import io.backend.repository.UserRepository;
+import io.backend.service.InviteService;
 import io.backend.service.PasswordService;
 import io.backend.service.UserService;
 import lombok.Getter;
@@ -33,13 +35,15 @@ public class UserController extends ControllerMapper {
     private final PasswordService passwordService;
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+    private final InviteService inviteService;
 
     @Autowired
-    public UserController(UserService userService, PasswordService passwordService, AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public UserController(UserService userService, PasswordService passwordService, AuthenticationManager authenticationManager, UserRepository userRepository, InviteService inviteService) {
         this.userService = userService;
         this.passwordService = passwordService;
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.inviteService = inviteService;
     }
     
     @GetMapping("/getUser/{userName}")
@@ -80,6 +84,7 @@ public class UserController extends ControllerMapper {
             throw new IllegalArgumentException("admins and gods cannot die");
         }
         Optional<UserEntity> userEntityToDelete = userService.deleteUser(authUser);
+        inviteService.deleteAllUserSentAndReceivedInvites(authUser);
         UserEntity userEntity = userEntityToDelete.get();
         UserBackendDTO userBackendDTO = map(userEntity);
         return ok(userBackendDTO);

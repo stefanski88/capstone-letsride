@@ -13,6 +13,7 @@ import CreateMotorcycle from "./pages/CreateMotorcycle";
 import SentInvites from "./pages/SentInvites";
 import CreateInvite from "./pages/CreateInvite";
 import Search from "./pages/Search";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
 
@@ -22,17 +23,17 @@ function App() {
               <Switch>
                   <Route exact path="/landing" component={Landing} />
                   <Route path="/login" component={Login} />
-                  <Route path="/registration" component={Registration} />
-                  <Route path="/deleteAccount" component={DeleteAccount} />
-                  <Route path="/editAccount" component={EditAccount}  />
-                  <Route path="/logout" component={Logout} />
-                  <Route path="/myMotorcycle/:id" component={MyMotorcycle}  />
-                  <Route path="/myMotorcycles" component={MyMotorcycles} />
-                  <Route path="/createMotorcycle" component={CreateMotorcycle} />
-                  <Route path="/receivedInvites" component={ReceivedInvites} />
-                  <Route path="/sentInvites" component={SentInvites} />
-                  <Route path="/createInvite" component={CreateInvite} />
-                  <Route path="/search" component={Search} />
+                  <ProtectedRoute path="/registration" component={Registration} />
+                  <ProtectedRoute path="/deleteAccount" component={DeleteAccount} />
+                  <ProtectedRoute path="/editAccount" component={EditAccount}  />
+                  <ProtectedRoute path="/logout" component={Logout} />
+                  <ProtectedRoute path="/myMotorcycle/:id" component={MyMotorcycle}  />
+                  <ProtectedRoute path="/myMotorcycles" component={MyMotorcycles} />
+                  <ProtectedRoute path="/createMotorcycle" component={CreateMotorcycle} />
+                  <ProtectedRoute path="/receivedInvites" component={ReceivedInvites} />
+                  <ProtectedRoute path="/sentInvites" component={SentInvites} />
+                  <ProtectedRoute path="/createInvite" component={CreateInvite} />
+                  <ProtectedRoute path="/search" component={Search} />
               </Switch>
           </Router>
       </AuthProvider>

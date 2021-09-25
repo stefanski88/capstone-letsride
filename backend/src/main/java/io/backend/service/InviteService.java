@@ -8,9 +8,11 @@ import io.backend.repository.InviteRepository;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +101,38 @@ public class InviteService {
         return inviteEntity.get();
     }
 
+    public List<InviteEntity> deleteAllUserSentAndReceivedInvites(UserEntity authUser) {
+        List<InviteEntity> allReceivedInvitesOfAuthUser = getAllReceivedInvites(authUser);
+        List<InviteEntity> allSentInvitesOfAuthUser = getAllSentInvites(authUser);
+        //List<InviteEntity> allInvites = new ArrayList<InviteEntity>(allReceivedInvitesOfAuthUser);
+        //allInvites.addAll(allSentInvitesOfAuthUser);
+
+        List<InviteEntity> inviteEntitiesToDelete = new ArrayList<>();
+
+        for (InviteEntity inviteEntity: allReceivedInvitesOfAuthUser) {
+            InviteEntity receivedInviteToDelete = new InviteEntity();
+
+            if (authUser.getUserName().equals(inviteEntity.getReceiver().getUserName())) {
+                inviteEntitiesToDelete.add(receivedInviteToDelete);
+            }
+        }
+
+        for (InviteEntity inviteEntity: allSentInvitesOfAuthUser) {
+            InviteEntity sentInviteToDelete = new InviteEntity();
+
+            if (authUser.getUserName().equals(inviteEntity.getSender().getUserName())) {
+                inviteEntitiesToDelete.add(sentInviteToDelete);
+            }
+        }
+
+        for (InviteEntity inviteEntity: inviteEntitiesToDelete) {
+            inviteRepository.delete(inviteEntity);
+        }
+
+        return inviteEntitiesToDelete;
+    }
+
+
     public InviteEntity updateInvite(UserEntity authUser, InviteUpdateDTO inviteUpdateDTO, Long inviteID) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         InviteEntity inviteEntity = getInvite(authUser, inviteID);
@@ -119,9 +153,6 @@ public class InviteService {
         inviteRepository.save(inviteEntity);
         return inviteEntity;
     }
-
-
-
 
 
 

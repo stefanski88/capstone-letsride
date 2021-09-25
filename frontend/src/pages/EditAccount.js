@@ -5,6 +5,7 @@ import {getUser, updateUser} from "../services/API-Service";
 import {useEffect, useState} from "react";
 import TextField from "../components/TextField";
 import {useAuth} from "../auth/AuthProvider";
+import Page from "../components/Page";
 
 const drivingStyleOptions = [
     "---",
@@ -15,7 +16,7 @@ const drivingStyleOptions = [
 
 export default function EditAccount() {
 
-    const { token, user } = useAuth()
+    const {token, user} = useAuth()
     const [error, setError] = useState()
     const [update, setUpdate] = useState({})
 
@@ -25,7 +26,7 @@ export default function EditAccount() {
     }, [])
 
     const handleUpdate = event =>
-        setUpdate({ ...update, [event.target.name]: event.target.value })
+        setUpdate({...update, [event.target.name]: event.target.value})
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -35,56 +36,57 @@ export default function EditAccount() {
             .finally(() => setUpdate(update))
     }
 
-    return(
-        <Main as="form" onSubmit={handleSubmit}>
-            <Header />
-            <TextField
-                title="Password :"
-                name="password"
-                type="password"
-                value={update.password}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="First name :"
-                name="firstName"
-                value={update.firstName}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="Last name:"
-                name="lastName"
-                value={update.lastName}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="Age :"
-                name="age"
-                type="number"
-                value={update.age}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="Location :"
-                name="location"
-                value={update.location}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="Driving Experience: "
-                name="drivingExp"
-                value={update.drivingExp}
-                onChange={handleUpdate}
-            />
-            <TextField
-                title="Driving Style :"
-                name="drivingStyle"
-                value={update.drivingStyle}
-                onChange={handleUpdate}
-            />
-            <button>Update!</button>
-            <NavBar />
-        </Main>
-
+    return (
+        <Page>
+            <Header/>
+            <Main as="form" onSubmit={handleSubmit}>
+                <TextField
+                    title="Password :"
+                    name="password"
+                    type="password"
+                    value={update.password}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="First name :"
+                    name="firstName"
+                    value={update.firstName}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="Last name:"
+                    name="lastName"
+                    value={update.lastName}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="Age :"
+                    name="age"
+                    type="number"
+                    value={update.age}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="Location :"
+                    name="location"
+                    value={update.location}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="Driving Experience: "
+                    name="drivingExp"
+                    value={update.drivingExp}
+                    onChange={handleUpdate}
+                />
+                <TextField
+                    title="Driving Style :"
+                    name="drivingStyle"
+                    value={update.drivingStyle}
+                    onChange={handleUpdate}
+                />
+                <button>Update!</button>
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }
