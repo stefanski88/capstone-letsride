@@ -10,8 +10,9 @@ export default function ReceivedInviteCard( {recInv} ) {
     }
 
     return(
-        <StyledSection onClick={()=>{selectReceivedInvite(recInv.id)}}>
-            <p>Received Invite: {recInv.status}</p>
+        <StyledSection onClick={()=>{selectReceivedInvite(recInv.inviteID)}}>
+            <p>Invite from: {recInv.sender}</p>
+            <p>Status: {recInv.status}</p>
         </StyledSection>
     );
 }

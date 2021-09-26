@@ -1,10 +1,18 @@
 import styled from "styled-components/macro";
 import {StyledSection} from "../StyledSection";
+import {useHistory} from "react-router-dom";
 
 export default function RiderCard( { rider } ) {
 
+    const history = useHistory()
+
+    function selectRiderCard(user) {
+        history.push(`foundRider/${user}`)
+    }
+
+
     return(
-        <StyledSection>
+        <StyledSection onClick={()=>selectRiderCard(rider.userName)}>
             <StyledH>{rider.userName}</StyledH>
             <StyledImg src="https://thiscatdoesnotexist.com/?ref=producthunt" alt="rider profile picture"/>
             <StyledP>Firstname: {rider.firstName}</StyledP>

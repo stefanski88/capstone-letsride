@@ -15,6 +15,8 @@ import CreateInvite from "./pages/invitePages/CreateInvite";
 import Search from "./pages/Search";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import SentInvite from "./pages/invitePages/SentInvite";
+import ReceivedInvite from "./pages/invitePages/ReceivedInvite";
+import FoundRider from "./pages/userPages/FoundRider";
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
                   <Route exact path="/landing" component={Landing} />
                   <Route path="/login" component={Login} />
                   <Route path="/myMotorcycle/:id" component={MyMotorcycle} />
+                  <Route path="/foundRider/:user" component={FoundRider} />
                   <ProtectedRoute path="/registration" component={Registration} />
                   <ProtectedRoute path="/logout" component={Logout} />
                   <ProtectedRoute path="/deleteAccount" component={DeleteAccount} />
@@ -32,15 +35,14 @@ function App() {
                   <ProtectedRoute path="/myMotorcycles" component={MyMotorcycles} />
                   <ProtectedRoute path="/createMotorcycle" component={CreateMotorcycle} />
                   <ProtectedRoute path="/receivedInvites" component={ReceivedInvites} />
+                  <Route path="/receivedInvite/:id" component={ReceivedInvite} />
                   <ProtectedRoute path="/sentInvites" component={SentInvites} />
-                  <ProtectedRoute path="/sentInvite/:id" component={SentInvite} />
+                  <Route path="/sentInvite/:id" component={SentInvite} />
                   <ProtectedRoute path="/createInvite" component={CreateInvite} />
                   <ProtectedRoute path="/search" component={Search} />
-¥
               </Switch>
           </Router>
       </AuthProvider>
   );
 }
-
 export default App;

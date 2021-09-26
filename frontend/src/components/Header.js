@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export default function Header() {
 
     const title = "let's Ride!"
-    const image = "letsRideImage.PNG"
+    const image = `${process.env.PUBLIC_URL}/letsRideImage.PNG`
     const quote = "enjoy riding motorcycle - together!"
 
     return(

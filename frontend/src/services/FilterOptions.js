@@ -9,3 +9,8 @@ export const drivingExpOptions = [
     'experienced',
     'expert',
 ]
+
+export const inviteAnswer = {
+    accept: 'accept',
+    reject: 'reject',
+}
