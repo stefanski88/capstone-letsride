@@ -10,7 +10,6 @@ export default function RiderCard( { rider } ) {
         history.push(`foundRider/${user}`)
     }
 
-
     return(
         <StyledSection onClick={()=>selectRiderCard(rider.userName)}>
             <StyledH>{rider.userName}</StyledH>

@@ -20,7 +20,7 @@ export default function Landing() {
             <button onClick={handleClick}>load riders</button>
             <Main>
                 {riders.map(rider => (
-                    <RiderCard key={rider.id} rider={rider}/>
+                    <RiderCard key={rider.userName} rider={rider}/>
                 ))}
             </Main>
             <NavBar/>

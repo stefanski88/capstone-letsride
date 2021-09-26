@@ -12,16 +12,32 @@ const headers = token => {return{
     },
 }}
 
-// USER API
-export const getUser = (userName, token) =>
-    axios
-        .get(`/api/getUser/${userName}`, headers(token))
-        .then(response => response.data)
+// --- USER API ---
+export const getUser = async (userName, token) => {
+    try {
+        const request = await axios
+            .get(`/api/getUser/${userName}`, headers(token))
+        return request.data
+    }
+    catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
 
-export const getUsers = () =>
-    axios
-        .get('/api/getUsers')
-        .then(response => response.data)
+export const getUsers = async () => {
+    try {
+        const request = await axios
+            .get('/api/getUsers')
+        return request.data
+    }
+    catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
+
+
 
 export const createUser = newUser =>
     axios
@@ -38,7 +54,7 @@ export const updateUser = (token, updateUser) =>
         .put('/api/updateUser', updateUser, headers(token))
         .then(response => response.data)
 
-// MOTORCYCLE API
+// --- MOTORCYCLE API ---
 export const getMyMotorcycle = (motoID, token) =>
     axios
         .get('/api/moto/getMotoByMotoID/'+motoID, headers(token))
@@ -62,7 +78,7 @@ export const createMotorcycle = (newMotorcycle, token) =>
         .then(response => response.data)
 
 
-//INVITE API
+// --- INVITE API ---
 export const getAllReceivedInvites = (token) =>
     axios
         .get('/api/invite/getAllReceivedInvites', headers(token))

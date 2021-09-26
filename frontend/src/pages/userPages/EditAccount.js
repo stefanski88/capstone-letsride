@@ -21,7 +21,7 @@ export default function EditAccount() {
     const [update, setUpdate] = useState({})
 
     useEffect(() => {
-        getUser(user.username, token)
+        getUser(user.username)
             .then(data => setUpdate(data))
     }, [])
 

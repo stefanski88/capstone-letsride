@@ -28,7 +28,7 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/myMotorcycle/:id" component={MyMotorcycle} />
                   <Route path="/foundRider/:user" component={FoundRider} />
-                  <ProtectedRoute path="/registration" component={Registration} />
+                  <Route path="/registration" component={Registration} />
                   <ProtectedRoute path="/logout" component={Logout} />
                   <ProtectedRoute path="/deleteAccount" component={DeleteAccount} />
                   <ProtectedRoute path="/editAccount" component={EditAccount} />

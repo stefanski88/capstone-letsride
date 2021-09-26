@@ -16,7 +16,6 @@ export default function SentInvite() {
 
     const [loading, setLoading] = useState(false)
 
-
     const handleDeletion = async (event) => {
         event.preventDefault();
         setLoading(true)
