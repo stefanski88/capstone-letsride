@@ -138,7 +138,19 @@ export const createInvite = async (newInvite, token) => {
     try {
         const request = await axios
             .post('/api/invite/createInvite', newInvite, headersJson(token))
-        return request.data
+        return request.data;
+    }
+    catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
+
+export const getInvite = async (inviteID, token) => {
+    try {
+        const request = await axios
+            .get(`/api/invite/getInvite${inviteID}`, headers())
+        return request.data;
     }
     catch (error) {
         console.warn(error)

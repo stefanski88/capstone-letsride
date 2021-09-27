@@ -19,6 +19,7 @@ export default function ReceivedInvite() {
 
     const [deletion, setDeletion] = useState({})
 
+
     //JSX ausbessern!!
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject')

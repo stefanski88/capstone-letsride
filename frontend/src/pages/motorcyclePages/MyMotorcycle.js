@@ -24,8 +24,6 @@ export default function MyMotorcycle() {
     const [loading, setLoading] = useState(false)
     const [motorcycle, setMotorcycle] = useState({})
 
-
-
     const handleSubmit = event => {
         event.preventDefault()
         updateMotorcycle(id, motorcycle, token)
