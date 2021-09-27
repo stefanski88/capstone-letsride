@@ -1,7 +1,7 @@
-import {updateMotorcycle} from "../../services/API-Service";
-import {useParams} from "react-router-dom";
+import {deleteMotorcycle, getMyMotorcycle, updateMotorcycle} from "../../services/API-Service";
+import {useHistory, useParams} from "react-router-dom";
 import {useAuth} from "../../auth/AuthProvider";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Page from "../../components/Page";
 import Header from "../../components/Header";
 import Main from "../../components/Main";
@@ -11,13 +11,20 @@ import NavBar from "../../components/NavBar";
 export default function MyMotorcycle() {
 
     const {id} = useParams()
+    const history = useHistory()
     const {token} = useAuth()
-    const [motorcycle, setMotorcycle] = useState({
-        motoNickName: "",
-        manufacturer: "",
-        model: "",
-        constructionYear: "",
-    })
+    console.log(id)
+    console.log(token)
+
+    useEffect(() => {
+        getMyMotorcycle(id, token)
+            .then(motorcycle => setMotorcycle(motorcycle))
+    },[])
+
+    const [loading, setLoading] = useState(false)
+    const [motorcycle, setMotorcycle] = useState({})
+
+
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -59,9 +66,9 @@ export default function MyMotorcycle() {
                     onChange={handleUpdateChange}
                 />
                 <button>save!</button>
-                <button onSubmit={null}>delete</button>
-                <button onSubmit={null}>cancel</button>
             </Main>
+            <button onClick={history.goBack}>back</button>
+
             <NavBar/>
         </Page>
     );

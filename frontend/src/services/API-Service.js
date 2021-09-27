@@ -12,6 +12,13 @@ const headers = token => {return{
     },
 }}
 
+const headersJson = token => {return{
+    headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    },
+}}
+
 // --- USER API ---
 export const getUser = async (userName, token) => {
     try {
@@ -58,7 +65,7 @@ export const updateUser = (token, updateUser) =>
 export const getMyMotorcycle = (motoID, token) =>
     axios
         .get('/api/moto/getMotoByMotoID/'+motoID, headers(token))
-        //.then(response => response.data)
+        .then(response => response.data)
 
 export const getMyMotorcycles = (token) =>
     axios
@@ -78,6 +85,19 @@ export const createMotorcycle = (newMotorcycle, token) =>
         .then(response => response.data)
 
 
+export const deleteMotorcycle = async (motoID, token) => {
+    try {
+        const request = await axios
+            .delete(`/api/moto/deleteMoto/${motoID}`, headers(token))
+        return request.data;
+    }
+    catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
+
+
 // --- INVITE API ---
 export const getAllReceivedInvites = (token) =>
     axios
@@ -89,7 +109,8 @@ export const getAllSentInvites = (token) =>
         .get('/api/invite/getAllSentInvites', headers(token))
         .then(response => response.data)
 
-export const deleteInvite = async (inviteID, token) =>{
+
+export const deleteInvite = async (inviteID, token) => {
     try{
         const request = await axios
             .delete(`/api/invite/deleteInvite/${inviteID}`, headers(token))
@@ -101,10 +122,10 @@ export const deleteInvite = async (inviteID, token) =>{
     }
 }
 
-export const updateInvite = async (inviteID, token) => {
+export const updateInvite = async (inviteID, updatedInvite, token) => {
     try {
         const request = await axios
-            .put(`/api/invite/updateInvite/${inviteID}`, headers(token))
+            .put(`/api/invite/updateInvite/${inviteID}`, updatedInvite, headers(token))
         return request.data;
     }
     catch (error) {
@@ -116,7 +137,7 @@ export const updateInvite = async (inviteID, token) => {
 export const createInvite = async (newInvite, token) => {
     try {
         const request = await axios
-            .post('/api/invite/createInvite', newInvite, headers(token))
+            .post('/api/invite/createInvite', newInvite, headersJson(token))
         return request.data
     }
     catch (error) {
@@ -124,6 +145,7 @@ export const createInvite = async (newInvite, token) => {
         return false;
     }
 }
+
 
 
 

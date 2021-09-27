@@ -10,7 +10,7 @@ export default function MotoCard( { moto } ) {
     }
     return(
         <StyledSection onClick={()=>{selectMotorcycle(moto.motoID)}}>
-            <h4>Username: {moto.motoNickName}</h4>
+            <h4>Motorcycle Nickname: {moto.motoNickName}</h4>
             <p>Manufacturer: {moto.manufacturer}</p>
             <p>Lastname: {moto.model}</p>
             <p>Age: {moto.constructionYear}</p>

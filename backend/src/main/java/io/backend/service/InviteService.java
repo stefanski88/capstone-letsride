@@ -146,7 +146,7 @@ public class InviteService {
         }
         if (inviteEntity.getStatus().equals("pending")) {
             if (inviteUpdateDTO.getStatus().equals("accept")) {
-                inviteEntity.setStatus("accept");
+                inviteEntity.setStatus("accepted");
             } else {
                 inviteEntity.setStatus("reject");
             }

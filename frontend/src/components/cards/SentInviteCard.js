@@ -12,7 +12,7 @@ export default function SentInviteCard( { sentInv } ) {
 
     return(
         <StyledSection onClick={()=>{selectSentInvite(sentInv.inviteID)}}>
-            <p>Invite sent to: {sentInv.sender}</p>
+            <p>Invite sent to: {sentInv.receiver}</p>
             <p>Status: {sentInv.status}</p>
         </StyledSection>
     );

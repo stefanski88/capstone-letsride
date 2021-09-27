@@ -8,11 +8,11 @@ import {createInvite, getUser} from "../../services/API-Service";
 import {useParams} from "react-router-dom";
 import RiderCard from "../../components/cards/RiderCard";
 
+
 export default function FoundRider() {
 
     const {token} = useAuth()
     const {user} = useParams()
-    console.log("user:", user)
 
     const [rider, setRider] = useState({})
     const [loading, setLoading] = useState(false)
@@ -21,17 +21,14 @@ export default function FoundRider() {
         getUser(user)
             .then(data => setRider(data))
     },[])
-    console.log("found rider", rider)
 
-
-
-    const handleCreateInvite = async (event) => {
-        event.preventDefault();                             
+    const handleCreateInvite = async () => {
         setLoading(true)
-        const createRequest = await createInvite(rider.receiver, token);
+        const createRequest = await createInvite({receiver: rider.userName}, token);
         setLoading(false)
         if (createRequest) {
-            alert(`The invite ${createRequest.rider.receiver} has been sent`)
+            //BUG
+            alert(`The invite to ${createRequest.receiver} has been sent`)
         } else {
             console.error('An Error happened while creating')
         }
