@@ -16,8 +16,10 @@ export default function AuthProvider({ children }) {
 
     const login = credentials => getToken(credentials).then(setToken)
 
+    const logout = () => setToken()
+
     return(
-      <AuthContext.Provider value={{ token, user, login }}>
+      <AuthContext.Provider value={{ token, user, login, logout }}>
           { children }
       </AuthContext.Provider>
     );

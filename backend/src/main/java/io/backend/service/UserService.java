@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -64,10 +65,13 @@ public class UserService {
         return savedUser.toBuilder().password(password).build();
     }
 
+    @Transactional
     public Optional<UserEntity> deleteUser(UserEntity authUser) {
         Optional<UserEntity> userEntityOPT = userRepository.findByUserName(authUser.getUserName());
         if (userEntityOPT.isPresent()) {
             UserEntity userEntity = userEntityOPT.get();
+            //deleteAllUserSentAndReceivedInvites
+
             userRepository.delete(userEntity);
         }
         if (userEntityOPT.isEmpty())
