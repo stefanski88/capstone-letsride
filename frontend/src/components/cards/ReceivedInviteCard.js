@@ -1,7 +1,7 @@
 import {useHistory} from "react-router-dom";
 import {StyledSection} from "../StyledSection";
 
-export default function ReceivedInviteCard( {recInv} ) {
+export default function ReceivedInviteCard({recInv}) {
 
     const history = useHistory()
 
@@ -9,13 +9,11 @@ export default function ReceivedInviteCard( {recInv} ) {
         history.push(`ReceivedInvite/${id}`)
     }
 
-
-    return(
-        <StyledSection onClick={()=>{selectReceivedInvite(recInv.inviteID)}}>
+    return (
+        <StyledSection onClick={() => {selectReceivedInvite(recInv.inviteID)}}>
             <p>Invite from: {recInv.sender}</p>
             <p>Status: {recInv.status}</p>
             <p>Date / Time: {recInv.timeStamp}</p>
-
         </StyledSection>
     );
-}//const dateTime = new Date(recInv.timeStamp).toLocaleTimeString(de-DE)}
+}

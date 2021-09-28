@@ -18,12 +18,9 @@ import {useHistory, useParams} from "react-router-dom";
 export default function ReceivedInvites() {
 
     const {token} = useAuth()
-    console.log(token)
     const [invites, setInvites] = useState([])
+    const [getID, setID] = useState('')
     const history = useHistory()
-
-    const {id} = useParams()
-    console.log(id)
 
     useEffect(() => {
         getAllReceivedInvites(token)
@@ -33,7 +30,7 @@ export default function ReceivedInvites() {
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject')
         {
-            const deleteRequest = await deleteInvite(id, token);
+            const deleteRequest = await deleteInvite(getID, token);
             if (deleteRequest) {
                 alert(`The invite ${deleteRequest.inviteID} has been rejected and deleted`)
             } else {
@@ -42,7 +39,7 @@ export default function ReceivedInvites() {
         }
         if (selectValue === 'accept')
         {
-            const updateRequest = await updateInvite(id, {status: "accept"}, token)
+            const updateRequest = await updateInvite(getID, {status: "accepted"}, token)
             if (updateRequest) {
                 alert(`invite ${updateRequest.inviteID} has been accepted.`)
             } else {
@@ -53,7 +50,7 @@ export default function ReceivedInvites() {
 
     const reloadPage = () => {
         getAllReceivedInvites(token)
-            .then(invites =>{ setInvites(invites)})
+            .then(invites => (setInvites(invites)))
     }
 
     return (
@@ -62,8 +59,7 @@ export default function ReceivedInvites() {
             <Main>
                 {invites && <div>
                     {invites.map(recInv => (
-
-                        <section >
+                        <section onClick={setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                             <select onChange={(event) => {
                                 handleSelect(event.target.value).then(reloadPage)
