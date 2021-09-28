@@ -69,6 +69,7 @@ public class InviteService {
 
         inviteEntity.setSender(userEntity.get());
         inviteEntity.setReceiver(receiverEntity.get());
+        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
 
         inviteRepository.save(inviteEntity);
         return inviteEntity;
@@ -93,7 +94,7 @@ public class InviteService {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
 
-        if (!userEntity.get().getUserID().equals(inviteEntity.get().getSender().getUserID())) {
+        if (!inviteEntity.get().getInviteID().equals(inviteID)) {
             throw new EntityNotFoundException("Invite not found..");
         }
         inviteRepository.delete(inviteEntity.get());

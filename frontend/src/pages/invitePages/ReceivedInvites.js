@@ -33,7 +33,7 @@ export default function ReceivedInvites() {
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject')
         {
-            const deleteRequest = await deleteInvite("id", token);
+            const deleteRequest = await deleteInvite(id, token);
             if (deleteRequest) {
                 alert(`The invite ${deleteRequest.inviteID} has been rejected and deleted`)
             } else {
@@ -42,7 +42,7 @@ export default function ReceivedInvites() {
         }
         if (selectValue === 'accept')
         {
-            const updateRequest = await updateInvite("recInv.inviteID", {status: "accept"}, token)
+            const updateRequest = await updateInvite(id, {status: "accept"}, token)
             if (updateRequest) {
                 alert(`invite ${updateRequest.inviteID} has been accepted.`)
             } else {
@@ -53,15 +53,16 @@ export default function ReceivedInvites() {
 
     const reloadPage = () => {
         getAllReceivedInvites(token)
-            .then(invites => setInvites(invites))
+            .then(invites =>{ setInvites(invites)})
     }
 
     return (
         <Page>
             <Header/>
             <Main>
-                <div>
+                {invites && <div>
                     {invites.map(recInv => (
+
                         <section >
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                             <select onChange={(event) => {
@@ -73,7 +74,7 @@ export default function ReceivedInvites() {
                             </select>
                         </section>
                     ))}
-                </div>
+                </div>}
                 <button onClick={history.goBack}>back</button>
             </Main>
             <NavBar/>

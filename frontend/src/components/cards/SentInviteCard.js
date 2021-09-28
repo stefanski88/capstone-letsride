@@ -14,6 +14,7 @@ export default function SentInviteCard( { sentInv } ) {
         <StyledSection onClick={()=>{selectSentInvite(sentInv.inviteID)}}>
             <p>Invite sent to: {sentInv.receiver}</p>
             <p>Status: {sentInv.status}</p>
+            <p>Sent on: {sentInv.timeStamp}</p>
         </StyledSection>
     );
 }

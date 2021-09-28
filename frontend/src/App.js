@@ -39,7 +39,7 @@ function App() {
                   <ProtectedRoute path="/sentInvites" component={SentInvites} />
                   <Route path="/sentInvite/:id" component={SentInvite} />
                   <ProtectedRoute path="/createInvite" component={CreateInvite} />
-                  <ProtectedRoute path="/search" component={Search} />
+                  <Route path="/search" component={Search} />
               </Switch>
           </Router>
       </AuthProvider>

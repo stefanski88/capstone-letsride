@@ -7,6 +7,8 @@ import {useAuth} from "../../auth/AuthProvider";
 import {createInvite, getUser} from "../../services/API-Service";
 import {useParams} from "react-router-dom";
 import RiderCard from "../../components/cards/RiderCard";
+import Datetime from 'react-datetime';
+import moment from 'moment';
 
 
 export default function FoundRider() {
@@ -16,15 +18,35 @@ export default function FoundRider() {
 
     const [rider, setRider] = useState({})
     const [loading, setLoading] = useState(false)
+    const [value, onChange] = useState(new Date())
 
     useEffect(() => {
         getUser(user)
             .then(data => setRider(data))
-    },[])
+    }, [])
+
+    const formattedDateTime = moment(value).format('lll').toString()
+
+    useEffect(() => {
+        onChange(value)
+    },[value])
+
+
+
+
 
     const handleCreateInvite = async () => {
+        if (!value) {
+            alert('please select a date')
+            return
+        }
         setLoading(true)
-        const createRequest = await createInvite({receiver: rider.userName}, token);
+
+        const createRequest = await createInvite({
+            receiver: rider.userName,
+            timeStamp: formattedDateTime},
+            token);
+
         setLoading(false)
         if (createRequest) {
             //BUG
@@ -34,15 +56,23 @@ export default function FoundRider() {
         }
     }
 
+
+
     return (
-        <Page>
-            <Header />
-            <Main>
-                <RiderCard rider={rider}/>
-                <button onClick={handleCreateInvite}>invite rider!</button>
-                <button>go back</button>
-            </Main>
-            <NavBar />
-        </Page>
+        <div>
+            <Datetime locale="de"
+                value={value}
+                onChange={onChange}/>;
+            <Page>
+                <Header/>
+                <Main>
+                    <RiderCard rider={rider}/>
+                    <button onClick={handleCreateInvite}>invite rider!</button>
+                    <button>go back</button>
+                </Main>
+                <NavBar/>
+            </Page>
+
+        </div>
     );
 }

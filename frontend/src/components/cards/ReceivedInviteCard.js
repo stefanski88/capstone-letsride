@@ -9,10 +9,13 @@ export default function ReceivedInviteCard( {recInv} ) {
         history.push(`ReceivedInvite/${id}`)
     }
 
+
     return(
         <StyledSection onClick={()=>{selectReceivedInvite(recInv.inviteID)}}>
             <p>Invite from: {recInv.sender}</p>
             <p>Status: {recInv.status}</p>
+            <p>Date / Time: {recInv.timeStamp}</p>
+
         </StyledSection>
     );
-}
+}//const dateTime = new Date(recInv.timeStamp).toLocaleTimeString(de-DE)}

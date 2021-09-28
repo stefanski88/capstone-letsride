@@ -14,3 +14,9 @@ export const inviteAnswer = {
     accept: 'accept',
     reject: 'reject',
 }
+
+export const locations = [
+    'Koeln',
+    'Dortmund',
+    'Duesseldorf',
+]

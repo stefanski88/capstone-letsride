@@ -159,6 +159,19 @@ export const getInvite = async (inviteID, token) => {
 }
 
 
+export const getCitiesFromGeoNames = async () => {
+    try {
+        const request = await axios
+            .get('https://api.geonames.org/searchJSON?country=DE&maxrows=2&username=alternative2k')
+        return request.data
+
+    }
+    catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
+
 
 
 

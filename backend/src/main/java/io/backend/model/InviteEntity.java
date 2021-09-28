@@ -32,7 +32,7 @@ public class InviteEntity {
     private String status = "pending";
 
     @Column(name = "date")
-    private Date timeStamp;
+    private String timeStamp;
 
     @Override
     public boolean equals(Object o) {
