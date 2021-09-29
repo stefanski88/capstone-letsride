@@ -14,28 +14,21 @@ export default function Search() {
     const {token} = useAuth()
     console.log(token)
 
-    const [riders, setRiders] = useState([])
-    const [error, setError] = useState()
-    const [location, setLocation] = useState('')
-    /*
-    const [locationsAPI, setLocationsAPI] = useState(
-        getCitiesFromGeoNames()
-            .then(data => setLocationsAPI(data))
-    )
-    console.log("locationsAPI: ",locationsAPI)
-
-
-     */
-
-/*
-    useEffect(() => {
-        getCities().then(request => setLocationsAPI(request))
-    },[])
- */
-
-
     const [drivingStyle, setDrivingStyle] = useState('')
     const [drivingExp, setDrivingExp] = useState('')
+    const [riders, setRiders] = useState([])
+
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState()
+
+    const [location, setLocation] = useState('')
+    const [locationsAPI, setLocationsAPI] = useState([])
+    console.log("locationsAPI: ",locationsAPI)
+
+    useEffect(() => {
+        getCitiesFromGeoNames().then(request => setLocationsAPI(request))
+    },[])
+
 
     const handleSearch = event => {
         event.preventDefault()
@@ -60,6 +53,18 @@ export default function Search() {
     rider.drivingStyle === (drivingStyle) &&
     rider.drivingExp === (drivingExp) &&
     rider.location === (location))
+
+
+    const filteredLocationsByPlaceName = locationsAPI.map(singleLocation => {
+        return singleLocation.placeName;
+    })
+    console.log("filteredLocations by placeName: ",filteredLocationsByPlaceName)
+
+    const filteredLocationsByPostalCode = locationsAPI.map(singleLocation => {
+        return singleLocation.postalCode;
+    })
+    console.log("filteredLocations by postalCode: ",filteredLocationsByPostalCode)
+
 
     return (
         <Page>

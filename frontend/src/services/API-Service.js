@@ -158,13 +158,12 @@ export const getInvite = async (inviteID, token) => {
     }
 }
 
-
+// EXTERNAL API
 export const getCitiesFromGeoNames = async () => {
     try {
         const request = await axios
-            .get('https://api.geonames.org/searchJSON?country=DE&maxrows=2&username=alternative2k')
-        return request.data
-
+            .get('http://api.geonames.org/postalCodeSearchJSON?formatted=true&country=DE&postalcode=*&maxRows=100&username=alternative2k&style=full')
+        return request.data.postalCodes
     }
     catch (error) {
         console.warn(error)

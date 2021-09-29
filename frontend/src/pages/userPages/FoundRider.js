@@ -56,8 +56,6 @@ export default function FoundRider() {
         }
     }
 
-
-
     return (
         <div>
             <Datetime locale="de"
