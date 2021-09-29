@@ -21,10 +21,10 @@ export default function ReceivedInvites() {
     const [invites, setInvites] = useState([])
     const [getID, setID] = useState('')
     const history = useHistory()
-
+    console.log("Test")
     useEffect(() => {
         getAllReceivedInvites(token)
-            .then(invites => setInvites(invites))
+                .then(invites => setInvites(invites))
     }, [])
 
     const handleSelect = async (selectValue) => {
@@ -59,10 +59,10 @@ export default function ReceivedInvites() {
             <Main>
                 {invites && <div>
                     {invites.map(recInv => (
-                        <section onClick={setID(recInv.inviteID)}>
+                        <section onClick={()=>setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                             <select onChange={(event) => {
-                                handleSelect(event.target.value).then(reloadPage)
+                                handleSelect(event.target.value)
                             }}>
                                 <option value="">Please select..</option>
                                 <option value="accept">accept</option>

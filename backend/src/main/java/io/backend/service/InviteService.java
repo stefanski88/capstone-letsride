@@ -67,6 +67,7 @@ public class InviteService {
         }
         InviteEntity inviteEntity = new InviteEntity();
 
+        inviteEntity.setStatus("pending");
         inviteEntity.setSender(userEntity.get());
         inviteEntity.setReceiver(receiverEntity.get());
         inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
@@ -137,65 +138,14 @@ public class InviteService {
     public InviteEntity updateInvite(UserEntity authUser, InviteUpdateDTO inviteUpdateDTO, Long inviteID) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         InviteEntity inviteEntity = getInvite(authUser, inviteID);
-/*
-        if (!userEntity.get().getUserID().equals(inviteEntity.getSender().getUserID())) {
-            throw new EntityNotFoundException("you can't send a invite to yourself..");
-        }
- */
+
         if (!inviteEntity.getInviteID().equals(inviteID)) {
             throw new EntityNotFoundException("Invite not found..");
         }
-        if (inviteEntity.getStatus().equals("pending")) {
-            if (inviteUpdateDTO.getStatus().equals("accept")) {
-                inviteEntity.setStatus("accepted");
-            } else {
-                inviteEntity.setStatus("reject");
-            }
+        if (inviteUpdateDTO.getStatus().equals("accepted")) {
+            inviteEntity.setStatus("accepted");
         }
         inviteRepository.save(inviteEntity);
         return inviteEntity;
     }
-
-
-
-        private InviteEntity mapMeetingDTO(InviteDTO inviteDTO) {
-        InviteEntity inviteEntity = new InviteEntity();
-        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
-        inviteEntity.setStatus(inviteDTO.getStatus());
-        return inviteEntity;
-    }
-
-
-
-
-
-/*
-    public MeetingEntity getMeeting(UserEntity authUser, Long meetingID) {
-        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        if (userEntity.isEmpty()) {
-            throw new EntityNotFoundException("user doesn't exist! (custom)");
-        }
-
-        Optional<MeetingEntity> receivedMeeting = meetingRepository.findByReceivedInvite(userEntity.get());
-        if (receivedMeeting.isEmpty()) {
-            throw new EntityNotFoundException("you didn't receive any meetings! (custom");
-        }
-
-        Optional<MeetingEntity> sentMeeting = meetingRepository.findByReceivedInvite(userEntity.get());
-        if (sentMeeting.isEmpty()) {
-            throw new EntityNotFoundException("you didn't send any meetings! (custom");
-        }
-
-        MeetingEntity meetingEntity;
-
-        if (receivedMeeting.get().getReceivedInvite().getUserID().equals(meetingID)) {
-            return meetingEntity = receivedMeeting.get();
-        } else {
-            meetingEntity = receivedMeeting.get();
-        }
-
-        return receivedMeeting.get();
-    }
-
- */
 }
