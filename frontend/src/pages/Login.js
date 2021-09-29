@@ -5,6 +5,7 @@ import {useState} from "react";
 import {Redirect} from "react-router-dom";
 import Header from "../components/Header";
 import Page from "../components/Page";
+import NavBar from "../components/NavBar";
 
 
 const defaultState = {
@@ -27,7 +28,7 @@ export default function Login() {
     }
 
     if (user) {
-        return <Redirect to="/landing"/>
+        return <Redirect to="/"/>
     }
 
     return (
@@ -50,6 +51,7 @@ export default function Login() {
                     onChange={changeCredentialsHandler}/>
                 <button>login</button>
             </Main>
+            <NavBar/>
         </Page>
     );
 }

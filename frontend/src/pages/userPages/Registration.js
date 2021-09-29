@@ -6,6 +6,7 @@ import Error from "../../components/Error";
 import Header from "../../components/Header";
 import {Redirect} from "react-router-dom";
 import Page from "../../components/Page";
+import NavBar from "../../components/NavBar";
 
 export default function Registration() {
 
@@ -34,7 +35,7 @@ export default function Registration() {
             .finally(() => setRegisterUser(registerUser))
 
         if (registerUser) {
-            return <Redirect to="/landing"/>
+            return <Redirect to="/"/>
         }
     }
 
@@ -109,6 +110,7 @@ export default function Registration() {
                     registerUser.age !== "" && registerUser.drivingExp !== "" && registerUser.drivingStyle !== "") ?
                     <button>Register!</button> : <Error>Please fill all required fields..</Error>}
             </Main>
+            <NavBar/>
         </Page>
     );
 }

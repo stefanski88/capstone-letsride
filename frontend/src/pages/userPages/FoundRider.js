@@ -30,7 +30,7 @@ export default function FoundRider() {
     useEffect(() => {
         setDateTime(dateTime)
         console.log(dateTime)
-    },[])
+    }, [])
 
     const handleCreateInvite = async () => {
         if (!dateTime) {
@@ -40,16 +40,15 @@ export default function FoundRider() {
         setLoading(true)
 
         const createRequest = await createInvite({
-            receiver: rider.userName,
-            timeStamp: formattedDateTime,
-            location: inputLocation,
+                receiver: rider.userName,
+                timeStamp: formattedDateTime,
+                location: inputLocation,
             },
             token);
 
         setLoading(false)
         if (createRequest) {
-            //BUG
-            alert(`The invite to ${createRequest.receiver} has been sent`)
+            alert(`The invite to ${rider.userName} has been sent`)
         } else {
             console.error('An Error happened while creating')
         }
@@ -62,15 +61,15 @@ export default function FoundRider() {
     return (
         <div>
             <Datetime locale="de"
-                value={dateTime}
-                onChange={setDateTime}/>
+                      value={dateTime}
+                      onChange={setDateTime}/>
             <Page>
                 <Header/>
                 <Main>
                     <RiderCard rider={rider}/>
                     <button onClick={handleCreateInvite}>invite rider!</button>
                     <button>go back</button>
-                    <h5>Where do you want to meet?</h5>
+                    <h5>Suggest a meeting location that is easy to reach.</h5>
                     <input
                         type="text"
                         value={inputLocation}

@@ -34,16 +34,19 @@ public class InviteEntity {
     @Column(name = "date")
     private String timeStamp;
 
+    @Column(name = "location")
+    private String location;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InviteEntity that = (InviteEntity) o;
-        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receiver, that.receiver) && Objects.equals(sender, that.sender) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp);
+        return Objects.equals(inviteID, that.inviteID) && Objects.equals(receiver, that.receiver) && Objects.equals(sender, that.sender) && Objects.equals(status, that.status) && Objects.equals(timeStamp, that.timeStamp) && Objects.equals(location, that.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(inviteID, receiver, sender, status, timeStamp);
+        return Objects.hash(inviteID, receiver, sender, status, timeStamp, location);
     }
 }

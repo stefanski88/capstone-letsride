@@ -11,101 +11,123 @@ import styled from "styled-components/macro";
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox'
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch'
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import {useAuth} from "../auth/AuthProvider";
 
 export default function NavBar() {
 
     const location = useLocation()
+    const { user } = useAuth()
 
     return (
         <BottomNavi>
             <BottomNavigation value={location.pathname}>
+
                 <BottomNavigationAction
                     label="Landing Page"
-                    value="/landing"
+                    value="/"
                     icon={<HomeIcon/>}
                     component={Link}
-                    to="/landing"
+                    to="/"
                 />
-                <BottomNavigationAction
-                    label="Login"
-                    value="/login"
-                    icon={<LoginIcon/>}
-                    component={Link}
-                    to="/login"
-                />
-                <BottomNavigationAction
-                    label="EditAccount"
-                    value="/editAccount"
-                    icon={<AccountCircleIcon/>}
-                    component={Link}
-                    to="/editAccount"
-                />
-                <BottomNavigationAction
-                    label="My Motorcycle"
-                    value="/myMotorcycle"
-                    icon={<SportsMotorsportsIcon/>}
-                    component={Link}
-                    to="/myMotorcycle"
-                />
-                <BottomNavigationAction
-                    label="Add Motorycle"
-                    value="/createMotorcycle"
-                    icon={<AddIcon/>}
-                    component={Link}
-                    to="/createMotorcycle"
-                />
-                <BottomNavigationAction
-                    label="My Motorcycles"
-                    value="/myMotorcycles"
-                    icon={<SportsMotorsportsIcon/>}
-                    component={Link}
-                    to="/myMotorcycles"
-                />
-                <BottomNavigationAction
-                    label="DeleteAccount"
-                    value="/registration"
-                    icon={<DeleteForeverIcon/>}
-                    component={Link}
-                    to="/deleteAccount"
-                />
-                <BottomNavigationAction
-                    label="Logout"
-                    value="/logout"
-                    icon={<LogoutIcon/>}
-                    component={Link}
-                    to="/logout"
-                />
-                <BottomNavigationAction
-                    label="Received Invites"
-                    value="/receivedInvites"
-                    icon={<MarkunreadMailboxIcon/>}
-                    component={Link}
-                    to="/receivedInvites"
-                />
-                <BottomNavigationAction
-                    label="Sent Invites"
-                    value="/sentInvites"
-                    icon={<ForwardToInboxIcon/>}
-                    component={Link}
-                    to="/sentInvites"
-                />
-                <BottomNavigationAction
-                    label="Search Riders"
-                    value="/search"
-                    icon={<ManageSearchIcon/>}
-                    component={Link}
-                    to="/search"
-                />
+                {!user && (
+                    <BottomNavigationAction
+                        label="Registration"
+                        value="/registration"
+                        icon={<AppRegistrationIcon/>}
+                        component={Link}
+                        to="/registration"
+                    />
+                )}
+                {!user && (
+                    <BottomNavigationAction
+                        label="Login"
+                        value="/login"
+                        icon={<LoginIcon/>}
+                        component={Link}
+                        to="/login"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="Edit Account"
+                        value="/editAccount"
+                        icon={<AccountCircleIcon/>}
+                        component={Link}
+                        to="/editAccount"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="My Motorcycles"
+                        value="/myMotorcycles"
+                        icon={<SportsMotorsportsIcon/>}
+                        component={Link}
+                        to="/myMotorcycles"
+                    />
+                )}
+                {location.pathname === "/myMotorcycles" && (
+                    <BottomNavigationAction
+                        label="Add Motorcycle"
+                        value="/createMotorcycle"
+                        icon={<AddIcon/>}
+                        component={Link}
+                        to="/createMotorcycle"
+                    />
+                )}
+                {location.pathname === "/editAccount" && (
+                    <BottomNavigationAction
+                        label="DeleteAccount"
+                        value="/registration"
+                        icon={<DeleteForeverIcon/>}
+                        component={Link}
+                        to="/deleteAccount"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="Received Invites"
+                        value="/receivedInvites"
+                        icon={<MarkunreadMailboxIcon/>}
+                        component={Link}
+                        to="/receivedInvites"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="Sent Invites"
+                        value="/sentInvites"
+                        icon={<ForwardToInboxIcon/>}
+                        component={Link}
+                        to="/sentInvites"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="Search Riders"
+                        value="/search"
+                        icon={<ManageSearchIcon/>}
+                        component={Link}
+                        to="/search"
+                    />
+                )}
+                {user && (
+                    <BottomNavigationAction
+                        label="Logout"
+                        value="/logout"
+                        icon={<LogoutIcon/>}
+                        component={Link}
+                        to="/logout"
+                    />
+                )}
             </BottomNavigation>
         </BottomNavi>
     );
 }
 
 const BottomNavi = styled.nav`
-  overflow-y: scroll;
   bottom: 0;
   position: fixed;
-  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
 

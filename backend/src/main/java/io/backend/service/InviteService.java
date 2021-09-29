@@ -68,9 +68,10 @@ public class InviteService {
         InviteEntity inviteEntity = new InviteEntity();
 
         inviteEntity.setStatus("pending");
+        inviteEntity.setLocation(inviteDTO.getLocation());
+        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
         inviteEntity.setSender(userEntity.get());
         inviteEntity.setReceiver(receiverEntity.get());
-        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
 
         inviteRepository.save(inviteEntity);
         return inviteEntity;
