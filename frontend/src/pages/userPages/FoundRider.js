@@ -10,7 +10,6 @@ import RiderCard from "../../components/cards/RiderCard";
 import Datetime from 'react-datetime';
 import moment from 'moment';
 
-
 export default function FoundRider() {
 
     const {token} = useAuth()
@@ -18,25 +17,23 @@ export default function FoundRider() {
 
     const [rider, setRider] = useState({})
     const [loading, setLoading] = useState(false)
-    const [value, onChange] = useState(new Date())
+    const [dateTime, setDateTime] = useState(new Date())
+    const [inputLocation, setInputLocation] = useState('')
 
     useEffect(() => {
         getUser(user)
             .then(data => setRider(data))
     }, [])
 
-    const formattedDateTime = moment(value).format('lll').toString()
+    const formattedDateTime = moment(dateTime).format('lll').toString()
 
     useEffect(() => {
-        onChange(value)
-    },[value])
-
-
-
-
+        setDateTime(dateTime)
+        console.log(dateTime)
+    },[])
 
     const handleCreateInvite = async () => {
-        if (!value) {
+        if (!dateTime) {
             alert('please select a date')
             return
         }
@@ -44,7 +41,9 @@ export default function FoundRider() {
 
         const createRequest = await createInvite({
             receiver: rider.userName,
-            timeStamp: formattedDateTime},
+            timeStamp: formattedDateTime,
+            location: inputLocation,
+            },
             token);
 
         setLoading(false)
@@ -56,21 +55,30 @@ export default function FoundRider() {
         }
     }
 
+    const handleInputChange = event => {
+        setInputLocation(event.target.value)
+    }
+
     return (
         <div>
             <Datetime locale="de"
-                value={value}
-                onChange={onChange}/>;
+                value={dateTime}
+                onChange={setDateTime}/>
             <Page>
                 <Header/>
                 <Main>
                     <RiderCard rider={rider}/>
                     <button onClick={handleCreateInvite}>invite rider!</button>
                     <button>go back</button>
+                    <h5>Where do you want to meet?</h5>
+                    <input
+                        type="text"
+                        value={inputLocation}
+                        onChange={handleInputChange}
+                    />
                 </Main>
                 <NavBar/>
             </Page>
-
         </div>
     );
 }

@@ -16,7 +16,13 @@ export const inviteAnswer = {
 }
 
 export const locations = [
-    'Koeln',
-    'Dortmund',
-    'Duesseldorf',
+    {
+        place: "Köln",
+    },
+    {
+        place: "Düsseldorf",
+    },
+    {
+        place: "Dortmund",
+    },
 ]
