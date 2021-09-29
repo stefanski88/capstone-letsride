@@ -66,7 +66,7 @@ export default function NavBar() {
                         to="/myMotorcycles"
                     />
                 )}
-                {location.pathname === "/myMotorcycles" && (
+                {((location.pathname === "/myMotorcycles" || location.pathname === "/createMotorcycle") && (
                     <BottomNavigationAction
                         label="Add Motorcycle"
                         value="/createMotorcycle"
@@ -74,7 +74,7 @@ export default function NavBar() {
                         component={Link}
                         to="/createMotorcycle"
                     />
-                )}
+                ))}
                 {location.pathname === "/editAccount" && (
                     <BottomNavigationAction
                         label="DeleteAccount"

@@ -66,7 +66,6 @@ export default function MyMotorcycle() {
                 <button>save!</button>
             </Main>
             <button onClick={history.goBack}>back</button>
-
             <NavBar/>
         </Page>
     );

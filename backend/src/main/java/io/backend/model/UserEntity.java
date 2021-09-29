@@ -47,7 +47,7 @@ public class UserEntity {
     private String lastName;
 
     @Column(name = "age", nullable = false)
-    private int age;
+    private String age;
 
     @Column(name = "location")
     private String location;

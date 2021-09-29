@@ -36,7 +36,7 @@ export default function DeleteAccount() {
     }
 
     if (!user) {
-        return <Redirect to="/login" />
+        return <Redirect to="/login"/>
     }
 
     return (

@@ -1,11 +1,11 @@
-import Main from '../components/Main'
-import TextField from "../components/TextField"
-import {useAuth} from '../auth/AuthProvider'
+import Main from '../../components/Main'
+import TextField from "../../components/TextField"
+import {useAuth} from '../../auth/AuthProvider'
 import {useState} from "react";
 import {Redirect} from "react-router-dom";
-import Header from "../components/Header";
-import Page from "../components/Page";
-import NavBar from "../components/NavBar";
+import Header from "../../components/Header";
+import Page from "../../components/Page";
+import NavBar from "../../components/NavBar";
 
 
 const defaultState = {

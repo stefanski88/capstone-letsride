@@ -6,13 +6,11 @@ import {useAuth} from "../../auth/AuthProvider";
 import {deleteMotorcycle, getMyMotorcycles} from "../../services/API-Service";
 import MotoCard from "../../components/cards/MotoCard";
 import Page from "../../components/Page";
-import {useHistory} from "react-router-dom";
 
 export default function MyMotorcycles() {
 
     const {token} = useAuth()
     const [motorcycles, setMotorcycles] = useState([])
-    const history = useHistory()
 
     useEffect(() => {
         getMyMotorcycles(token)
@@ -36,7 +34,7 @@ export default function MyMotorcycles() {
                         </button>
                     </section>
                 ))}
-                <button onClick={history.goBack}>back</button>
+
             </Main>
             <NavBar/>
         </Page>

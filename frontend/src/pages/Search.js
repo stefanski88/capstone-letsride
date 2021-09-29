@@ -99,7 +99,7 @@ export default function Search() {
                     placeholder="Search by location.."
                 />
             </Main>
-            {filteredRiders.length === 0 && <p>No Riders found 🤷‍️</p>}
+            {filteredRiders.length === 0 && <p>No Riders found yet! Change the driving style, experience, or location.</p>}
             {filteredRiders.map(filteredRider => (
                 <RiderCard key={filteredRider.userName} rider={filteredRider}/>
             ))}

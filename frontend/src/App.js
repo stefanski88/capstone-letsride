@@ -1,10 +1,10 @@
-import Login from "./pages/Login";
+import Login from "./pages/userPages/Login";
 import AuthProvider from "./auth/AuthProvider";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Registration from "./pages/userPages/Registration";
 import DeleteAccount from "./pages/userPages/DeleteAccount";
 import EditAccount from "./pages/userPages/EditAccount";
-import Logout from "./pages/Logout";
+import Logout from "./pages/userPages/Logout";
 import MyMotorcycles from "./pages/motorcyclePages/MyMotorcycles";
 import MyMotorcycle from "./pages/motorcyclePages/MyMotorcycle";
 import ReceivedInvites from "./pages/invitePages/ReceivedInvites";

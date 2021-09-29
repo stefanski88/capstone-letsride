@@ -24,12 +24,11 @@ export default function ReceivedInvites() {
     console.log("Test")
     useEffect(() => {
         getAllReceivedInvites(token)
-                .then(invites => setInvites(invites))
+            .then(invites => setInvites(invites))
     }, [])
 
     const handleSelect = async (selectValue) => {
-        if (selectValue === 'reject')
-        {
+        if (selectValue === 'reject') {
             const deleteRequest = await deleteInvite(getID, token);
             if (deleteRequest) {
                 alert(`The invite ${deleteRequest.inviteID} has been rejected and deleted`)
@@ -37,8 +36,7 @@ export default function ReceivedInvites() {
                 console.error('error in invite deletion')
             }
         }
-        if (selectValue === 'accept')
-        {
+        if (selectValue === 'accept') {
             const updateRequest = await updateInvite(getID, {status: "accepted"}, token)
             if (updateRequest) {
                 alert(`invite ${updateRequest.inviteID} has been accepted.`)
@@ -59,7 +57,7 @@ export default function ReceivedInvites() {
             <Main>
                 {invites && <div>
                     {invites.map(recInv => (
-                        <section onClick={()=>setID(recInv.inviteID)}>
+                        <section onClick={() => setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                             <select onChange={(event) => {
                                 handleSelect(event.target.value)

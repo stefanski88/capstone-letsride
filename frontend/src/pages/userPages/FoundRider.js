@@ -38,14 +38,12 @@ export default function FoundRider() {
             return
         }
         setLoading(true)
-
         const createRequest = await createInvite({
                 receiver: rider.userName,
                 timeStamp: formattedDateTime,
                 location: inputLocation,
             },
             token);
-
         setLoading(false)
         if (createRequest) {
             alert(`The invite to ${rider.userName} has been sent`)

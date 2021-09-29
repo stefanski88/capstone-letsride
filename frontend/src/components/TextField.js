@@ -6,6 +6,7 @@ export default function TextField({
     title,
     name,
     value,
+    options,
     onChange,
     placeholder,
     ...props
@@ -16,6 +17,7 @@ export default function TextField({
             <Input type={type}
                    name={name}
                    value={value}
+                   options={options}
                    onChange={onChange}
                    placeholder={placeholder}
             />
@@ -24,8 +26,8 @@ export default function TextField({
 }
 
 const Input = styled.input`
-    width: 100%;
+    width: 10rem;
     font-size: 1em;
     margin-top: var(--size-s);
-    border-radius: var(--size-s);
+    border-radius: var(--size-xs);
 `

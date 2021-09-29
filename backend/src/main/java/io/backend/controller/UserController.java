@@ -69,7 +69,6 @@ public class UserController extends ControllerMapper {
 
     @PostMapping("/registerUser")
     public ResponseEntity<UserRegisterDTO> createUser(@RequestBody UserRegisterDTO userRegisterDTO) {
-
         UserEntity userEntity = map(userRegisterDTO);
         UserEntity createdUserEntity = userService.createUser(userEntity);
 
