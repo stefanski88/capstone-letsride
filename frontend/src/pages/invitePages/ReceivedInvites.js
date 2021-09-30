@@ -13,6 +13,7 @@ import {
 import ReceivedInviteCard from "../../components/cards/ReceivedInviteCard";
 import Page from "../../components/Page";
 import {useHistory, useParams} from "react-router-dom";
+import {StyledSection} from "../../components/StyledSection";
 
 
 export default function ReceivedInvites() {
@@ -57,7 +58,7 @@ export default function ReceivedInvites() {
             <Main>
                 {invites && <div>
                     {invites.map(recInv => (
-                        <section onClick={() => setID(recInv.inviteID)}>
+                        <StyledSection onClick={() => setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                             <select onChange={(event) => {
                                 handleSelect(event.target.value)
@@ -66,7 +67,7 @@ export default function ReceivedInvites() {
                                 <option value="accept">accept</option>
                                 <option value="reject">reject</option>
                             </select>
-                        </section>
+                        </StyledSection>
                     ))}
                 </div>}
                 <button onClick={history.goBack}>back</button>

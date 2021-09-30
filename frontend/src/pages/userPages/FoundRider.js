@@ -57,25 +57,25 @@ export default function FoundRider() {
     }
 
     return (
-        <div>
-            <Datetime locale="de"
-                      value={dateTime}
-                      onChange={setDateTime}/>
-            <Page>
-                <Header/>
-                <Main>
+        <Page>
+            <Header/>
+            <Main>
+                <section>
                     <RiderCard rider={rider}/>
+                    <Datetime locale="de"
+                              value={dateTime}
+                              onChange={setDateTime}/>
                     <button onClick={handleCreateInvite}>invite rider!</button>
-                    <button>go back</button>
                     <h5>Suggest a meeting location that is easy to reach.</h5>
                     <input
                         type="text"
                         value={inputLocation}
                         onChange={handleInputChange}
                     />
-                </Main>
-                <NavBar/>
-            </Page>
-        </div>
+                </section>
+                <button>go back</button>
+            </Main>
+            <NavBar/>
+        </Page>
     );
 }

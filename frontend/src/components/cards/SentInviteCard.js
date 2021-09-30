@@ -1,8 +1,8 @@
 import {useHistory} from "react-router-dom";
-import {StyledSection} from "../StyledSection";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 
 
-export default function SentInviteCard( { sentInv } ) {
+export default function SentInviteCard({sentInv}) {
 
     const history = useHistory()
 
@@ -10,11 +10,26 @@ export default function SentInviteCard( { sentInv } ) {
         history.push(`sentInvite/${id}`)
     }
 
-    return(
-        <StyledSection onClick={()=>{selectSentInvite(sentInv.inviteID)}}>
-            <p>Invite sent to: {sentInv.receiver}</p>
-            <p>Status: {sentInv.status}</p>
-            <p>Sent on: {sentInv.timeStamp}</p>
-        </StyledSection>
+    return (
+            <TableContainer component={Paper} onClick={() => {
+                selectSentInvite(sentInv.inviteID)
+            }}>
+                <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
+                    <TableBody>
+                        <TableRow>
+                            <TableCell align="left">Sent to:</TableCell>
+                            <TableCell align="left">{sentInv.receiver}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell align="left">Invite Status:</TableCell>
+                            <TableCell align="left">{sentInv.status}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell align="left">Sent on:</TableCell>
+                            <TableCell align="left">{sentInv.timeStamp}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
     );
 }

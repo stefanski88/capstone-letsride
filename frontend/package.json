@@ -50,7 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@mui/material": "^5.0.0",
+    "@mui/material": "^5.0.2",
     "axios": "^0.21.4",
     "prop-types": "^15.7.2"
   },
