@@ -62,16 +62,17 @@ export default function FoundRider() {
             <Main>
                 <section>
                     <RiderCard rider={rider}/>
-                    <Datetime locale="de"
-                              value={dateTime}
-                              onChange={setDateTime}/>
-                    <button onClick={handleCreateInvite}>invite rider!</button>
-                    <h5>Suggest a meeting location that is easy to reach.</h5>
                     <input
                         type="text"
                         value={inputLocation}
                         onChange={handleInputChange}
                     />
+                    <Datetime locale="de"
+                              value={dateTime}
+                              onChange={setDateTime}/>
+                    <button onClick={handleCreateInvite}>invite rider!</button>
+                    <h5>Suggest a meeting location that is easy to reach.</h5>
+
                 </section>
                 <button>go back</button>
             </Main>

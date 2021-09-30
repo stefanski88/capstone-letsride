@@ -7,7 +7,8 @@ import {deleteMotorcycle, getMyMotorcycles} from "../../services/API-Service";
 import MotoCard from "../../components/cards/MotoCard";
 import Page from "../../components/Page";
 import {StyledSection} from "../../components/StyledSection";
-import {Button} from "@material-ui/core";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 export default function MyMotorcycles() {
 
@@ -32,7 +33,7 @@ export default function MyMotorcycles() {
                     {motorcycles.map(moto => (
                         <section>
                             <MotoCard key={moto.motoID} moto={moto}/>
-                            <Button onClick={() =>
+                            <Button variant="outlined" size="small" startIcon={<DeleteIcon />} onClick={() =>
                                 deleteMotorcycle(moto.motoID, token).then(reloadPage)}>Delete Motorcycle
                             </Button>
                         </section>

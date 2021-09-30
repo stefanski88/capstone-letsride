@@ -6,14 +6,15 @@ import {useEffect, useState} from "react";
 import {
     deleteInvite,
     getAllReceivedInvites,
-    getAllSentInvites,
-    getInvite,
     updateInvite
 } from "../../services/API-Service";
 import ReceivedInviteCard from "../../components/cards/ReceivedInviteCard";
 import Page from "../../components/Page";
-import {useHistory, useParams} from "react-router-dom";
 import {StyledSection} from "../../components/StyledSection";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 
 export default function ReceivedInvites() {
@@ -21,12 +22,12 @@ export default function ReceivedInvites() {
     const {token} = useAuth()
     const [invites, setInvites] = useState([])
     const [getID, setID] = useState('')
-    const history = useHistory()
-    console.log("Test")
+
     useEffect(() => {
         getAllReceivedInvites(token)
             .then(invites => setInvites(invites))
     }, [])
+
 
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject') {
@@ -52,6 +53,16 @@ export default function ReceivedInvites() {
             .then(invites => (setInvites(invites)))
     }
 
+    /*
+    <select onChange={(event) => {
+                                handleSelect(event.target.value)
+                            }}>
+                                <option value="">Please select..</option>
+                                <option value="accept">accept</option>
+                                <option value="reject">reject</option>
+                            </select>
+     */
+
     return (
         <Page>
             <Header/>
@@ -60,17 +71,21 @@ export default function ReceivedInvites() {
                     {invites.map(recInv => (
                         <StyledSection onClick={() => setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
-                            <select onChange={(event) => {
-                                handleSelect(event.target.value)
-                            }}>
-                                <option value="">Please select..</option>
-                                <option value="accept">accept</option>
-                                <option value="reject">reject</option>
-                            </select>
+                            <FormControl variant="standard">
+
+                                <InputLabel>please choose..</InputLabel>
+                                <Select onChange={(event) => {
+                                    handleSelect(event.target.value).then(reloadPage)
+                                }}
+                                >
+                                    <MenuItem value="accept">accept</MenuItem>
+                                    <MenuItem value="reject">reject</MenuItem>
+                                </Select>
+                            </FormControl>
+
                         </StyledSection>
                     ))}
                 </div>}
-                <button onClick={history.goBack}>back</button>
             </Main>
             <NavBar/>
         </Page>

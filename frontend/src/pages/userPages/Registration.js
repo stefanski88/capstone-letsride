@@ -1,13 +1,10 @@
 import Main from "../../components/Main";
 import {useState} from "react";
 import {createUser} from "../../services/API-Service";
-import Error from "../../components/Error";
 import Header from "../../components/Header";
-import {Redirect} from "react-router-dom";
 import Page from "../../components/Page";
 import NavBar from "../../components/NavBar";
-import {drivingExpOptions, drivingStyleOptions} from "../../services/FilterOptions";
-import {Button, InputLabel, MenuItem} from "@material-ui/core";
+import {InputLabel, MenuItem} from "@material-ui/core";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -16,6 +13,7 @@ import TextField from '@mui/material/TextField';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 
 
 export default function Registration() {
@@ -124,7 +122,7 @@ export default function Registration() {
                                 </Select>
                             </Box>
                         </Box>
-                        <Button onClick={handleSubmit}>Sign up</Button>
+                        <Button variant="outlined" onClick={handleSubmit}>Sign up</Button>
                     </FormControl>
                 </Box>
             </Main>

@@ -7,8 +7,9 @@ import NavBar from "../../components/NavBar";
 import SentInviteCard from "../../components/cards/SentInviteCard";
 import Page from "../../components/Page";
 import {useHistory} from "react-router-dom";
-import Button from '@material-ui/core/Button';
 import {StyledSection} from "../../components/StyledSection";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 export default function SentInvites() {
 
@@ -33,7 +34,7 @@ export default function SentInvites() {
                 {invites.map(sentInv => (
                     <StyledSection>
                         <SentInviteCard key={sentInv.inviteID} sentInv={sentInv}/>
-                        <Button variant="outlined" size="small" onClick={() =>
+                        <Button variant="outlined" size="small" startIcon={<DeleteIcon/>} onClick={() =>
                             deleteInvite(sentInv.inviteID, token).then(reloadPage)}>Delete Invite
                         </Button>
                     </StyledSection>

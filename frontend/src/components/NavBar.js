@@ -12,6 +12,7 @@ import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox'
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler'
 import {useAuth} from "../auth/AuthProvider";
 
 export default function NavBar() {
@@ -52,7 +53,7 @@ export default function NavBar() {
                     <BottomNavigationAction
                         label="Edit Account"
                         value="/editAccount"
-                        icon={<AccountCircleIcon/>}
+                        icon={<SportsMotorsportsIcon/>}
                         component={Link}
                         to="/editAccount"
                     />
@@ -61,7 +62,7 @@ export default function NavBar() {
                     <BottomNavigationAction
                         label="My Motorcycles"
                         value="/myMotorcycles"
-                        icon={<SportsMotorsportsIcon/>}
+                        icon={<TwoWheelerIcon/>}
                         component={Link}
                         to="/myMotorcycles"
                     />

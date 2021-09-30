@@ -1,15 +1,17 @@
 import {createGlobalStyle} from "styled-components";
 
 export default createGlobalStyle`
-/*
+
   * {
     box-sizing: border-box;
   }
   html, body {
     margin: 0;
-    font-family: Monaco, sans-serif ,'Source Sans Pro', Arial;
+    font-family: Arial;
   }
   
+
+/*
   :root {
     --background-dark: #303841;
     --background-light: #3a4750;
@@ -25,6 +27,6 @@ export default createGlobalStyle`
     --size-xl: 24px;
     --size-xxl: 32px;
   }
-  
- */
+   */
+
 `

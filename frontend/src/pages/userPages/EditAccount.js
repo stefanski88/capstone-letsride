@@ -10,18 +10,11 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
-import {Button, InputLabel, MenuItem} from "@material-ui/core";
+import {InputLabel, MenuItem} from "@material-ui/core";
 import Select from "@mui/material/Select";
 import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
-
-const drivingStyleOptions = [
-    "---",
-    "comfortable",
-    "sporty",
-    "knee slider",
-]
+import Button from '@mui/material/Button';
 
 export default function EditAccount() {
 
@@ -89,7 +82,7 @@ export default function EditAccount() {
                                 <Select
                                     value={update.drivingExp}
                                     name="drivingExp"
-                                    label="Driving Experience"
+                                    label="Driving Experie"
                                     onChange={handleUpdate}
                                 >
                                     <MenuItem value="beginner">beginner</MenuItem>
@@ -115,10 +108,10 @@ export default function EditAccount() {
                                     onChange={handleUpdate}
                                     multiline
                                     rows={4}
-                                    maxRows={12}/>
+                                    maxRows={8}/>
                             </Box>
                         </Box>
-                        <Button onClick={handleSubmit}>Save Account Information</Button>
+                        <Button variant="outlined" onClick={handleSubmit}>Save Account Information</Button>
                     </FormControl>
                 </Box>
             </Main>

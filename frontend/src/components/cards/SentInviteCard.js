@@ -25,8 +25,12 @@ export default function SentInviteCard({sentInv}) {
                             <TableCell align="left">{sentInv.status}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell align="left">Sent on:</TableCell>
+                            <TableCell align="left">When?</TableCell>
                             <TableCell align="left">{sentInv.timeStamp}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell align="left">Where?</TableCell>
+                            <TableCell align="left">{sentInv.location}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
