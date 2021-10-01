@@ -58,25 +58,6 @@ public class InviteService {
         return allSentMeetings.get();
     }
 
-    public InviteEntity createInvite(UserEntity authUser, InviteDTO inviteDTO) {
-        Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        Optional<UserEntity> receiverEntity = userService.getUserByUserName(inviteDTO.getReceiver());
-
-        if (userEntity.isEmpty() || receiverEntity.isEmpty()) {
-            throw new EntityNotFoundException("Entity not found! (custom)");
-        }
-        InviteEntity inviteEntity = new InviteEntity();
-
-        inviteEntity.setStatus("pending");
-        inviteEntity.setLocation(inviteDTO.getLocation());
-        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
-        inviteEntity.setSender(userEntity.get());
-        inviteEntity.setReceiver(receiverEntity.get());
-
-        inviteRepository.save(inviteEntity);
-        return inviteEntity;
-    }
-
     public InviteEntity getInvite(UserEntity authUser, Long inviteID) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
         Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
@@ -135,18 +116,35 @@ public class InviteService {
         return inviteEntitiesToDelete;
     }
 
-
-    public InviteEntity updateInvite(UserEntity authUser, InviteUpdateDTO inviteUpdateDTO, Long inviteID) {
+    public InviteEntity createInvite(UserEntity authUser, InviteDTO inviteDTO) {
         Optional<UserEntity> userEntity = userService.getUserByUserName(authUser.getUserName());
-        InviteEntity inviteEntity = getInvite(authUser, inviteID);
+        Optional<UserEntity> receiverEntity = userService.getUserByUserName(inviteDTO.getReceiver());
 
-        if (!inviteEntity.getInviteID().equals(inviteID)) {
-            throw new EntityNotFoundException("Invite not found..");
+        if (userEntity.isEmpty() || receiverEntity.isEmpty()) {
+            throw new EntityNotFoundException("Entity not found! (custom)");
         }
-        if (inviteUpdateDTO.getStatus().equals("accepted")) {
-            inviteEntity.setStatus("accepted");
-        }
+        InviteEntity inviteEntity = new InviteEntity();
+
+        inviteEntity.setStatus("pending");
+        inviteEntity.setLocation(inviteDTO.getLocation());
+        inviteEntity.setTimeStamp(inviteDTO.getTimeStamp());
+        inviteEntity.setSender(userEntity.get());
+        inviteEntity.setReceiver(receiverEntity.get());
+
         inviteRepository.save(inviteEntity);
         return inviteEntity;
+    }
+
+    public InviteEntity updateInvite(UserEntity authUser, InviteUpdateDTO inviteUpdateDTO, Long inviteID) {
+        Optional<InviteEntity> inviteEntity = inviteRepository.findByInviteID(inviteID);
+
+        if (!inviteEntity.get().getInviteID().equals(inviteID)) {
+            throw new EntityNotFoundException("Invite not found..");
+        }
+        if (inviteUpdateDTO.getStatus().equals("accept")) {
+            inviteEntity.get().setStatus("accepted");
+        }
+        inviteRepository.save(inviteEntity.get());
+        return inviteEntity.get();
     }
 }
