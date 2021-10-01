@@ -14,6 +14,7 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import {Wrapper} from "../../components/styled/Wrapper";
 
 
 export default function Registration() {
@@ -52,9 +53,9 @@ export default function Registration() {
             <Main>
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
-                        <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                            <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                             <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                <Wrapper>
+                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                 <TextField label="Username"
                                            variant="standard"
                                            name="userName"
@@ -120,8 +121,8 @@ export default function Registration() {
                                     <MenuItem value="sporty">sporty</MenuItem>
                                     <MenuItem value="knee slider">knee slider</MenuItem>
                                 </Select>
+                            </Wrapper>
                             </Box>
-                        </Box>
                         <Button variant="outlined" onClick={handleSubmit}>Sign up</Button>
                     </FormControl>
                 </Box>

@@ -7,6 +7,10 @@ import Header from "../../components/Header";
 import Main from "../../components/Main";
 import TextField from "../../components/TextField";
 import NavBar from "../../components/NavBar";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import TwoWheelerIcon from "@mui/icons-material/TwoWheeler";
+import Button from "@mui/material/Button";
 
 export default function MyMotorcycle() {
 
@@ -19,7 +23,7 @@ export default function MyMotorcycle() {
     useEffect(() => {
         getMyMotorcycle(id, token)
             .then(motorcycle => setMotorcycle(motorcycle))
-    },[])
+    }, [])
 
     const [loading, setLoading] = useState(false)
     const [motorcycle, setMotorcycle] = useState({})
@@ -38,35 +42,42 @@ export default function MyMotorcycle() {
     return (
         <Page>
             <Header/>
-            <Main as="form" onSubmit={handleSubmit}>
-                <TextField
-                    title="Moto Nickname :"
-                    name="motoNickName"
-                    value={motorcycle.motoNickName}
-                    onChange={handleUpdateChange}
-                />
-                <TextField
-                    title="Manufacturer :"
-                    name="manufacturer"
-                    value={motorcycle.manufacturer}
-                    onChange={handleUpdateChange}
-                />
-                <TextField
-                    title="Model :"
-                    name="model"
-                    value={motorcycle.model}
-                    onChange={handleUpdateChange}
-                />
-                <TextField
-                    title="Construction year:"
-                    name="constructionYear"
-                    value={motorcycle.constructionYear}
-                    onChange={handleUpdateChange}
-                />
-                <button>save!</button>
-            </Main>
-            <button onClick={history.goBack}>back</button>
-            <NavBar/>
-        </Page>
-    );
+            <Main as="form">
+                <Box sx={{'& > :not(style)': {m: 1}}}>
+                    <FormControl variant="standard">
+                        <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField label="Nickname"
+                                       variant="standard"
+                                       name="motoNickName"
+                                       value={motorcycle.motoNickName}
+                                       onChange={handleUpdateChange}/>
+                            <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField label="Manufacturer"
+                                       variant="standard"
+                                       name="manufacturer"
+                                       value={motorcycle.manufacturer}
+                                       onChange={handleUpdateChange}/>
+                            <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField label="Model"
+                                       variant="standard"
+                                       name="model"
+                                       value={motorcycle.model}
+                                       onChange={handleUpdateChange}/>
+                            <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField variant="standard"
+                                       type="date"
+                                       name="constructionYear"
+                                       value={motorcycle.constructionYear}
+                                       onChange={handleUpdateChange}/>
+                        </Box>
+                        <Button variant="outlined" size="small" onClick={handleSubmit}>
+                            Update Motorcycle Profile</Button>
+                    </FormControl>
+                </Box>
+        </Main>
+    <NavBar/>
+</Page>
+)
+    ;
 }

@@ -15,7 +15,6 @@ export default function SentInvites() {
 
     const {token} = useAuth()
     const [invites, setInvites] = useState([])
-    const history = useHistory()
 
     useEffect(() => {
         getAllSentInvites(token)
@@ -34,7 +33,8 @@ export default function SentInvites() {
                 {invites.map(sentInv => (
                     <StyledSection>
                         <SentInviteCard key={sentInv.inviteID} sentInv={sentInv}/>
-                        <Button variant="outlined" size="small" startIcon={<DeleteIcon/>} onClick={() =>
+                        <Button variant="outlined" size="small" startIcon={<DeleteIcon/>}
+                                onClick={() =>
                             deleteInvite(sentInv.inviteID, token).then(reloadPage)}>Delete Invite
                         </Button>
                     </StyledSection>

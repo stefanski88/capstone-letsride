@@ -23,7 +23,6 @@ export default function NavBar() {
     return (
         <BottomNavi>
             <BottomNavigation value={location.pathname}>
-
                 <BottomNavigationAction
                     label="Landing Page"
                     value="/"
@@ -127,9 +126,6 @@ export default function NavBar() {
 }
 
 const BottomNavi = styled.nav`
-  bottom: 0;
-  position: fixed;
   display: flex;
   justify-content: center;
-
 `

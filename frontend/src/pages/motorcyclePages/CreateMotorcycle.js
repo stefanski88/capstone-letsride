@@ -43,7 +43,6 @@ export default function CreateMotorcycle() {
                     <FormControl variant="standard">
                         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                             <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                            <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                                 <TextField label="Nickname"
                                            variant="standard"
                                            name="motoNickName"
@@ -67,9 +66,7 @@ export default function CreateMotorcycle() {
                                            name="firstName"
                                            value={newMotorcycle.constructionYear}
                                            onChange={handleChange}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                             </Box>
-                        </Box>
                         <Button variant="outlined" size="small" onClick={handleSubmit}>Add Motorcycle</Button>
                     </FormControl>
                 </Box>

@@ -33,7 +33,8 @@ export default function MyMotorcycles() {
                     {motorcycles.map(moto => (
                         <section>
                             <MotoCard key={moto.motoID} moto={moto}/>
-                            <Button variant="outlined" size="small" startIcon={<DeleteIcon />} onClick={() =>
+                            <Button variant="outlined" size="small" startIcon={<DeleteIcon />}
+                                    onClick={() =>
                                 deleteMotorcycle(moto.motoID, token).then(reloadPage)}>Delete Motorcycle
                             </Button>
                         </section>

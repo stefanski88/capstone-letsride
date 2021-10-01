@@ -12,22 +12,24 @@ import ReceivedInviteCard from "../../components/cards/ReceivedInviteCard";
 import Page from "../../components/Page";
 import {StyledSection} from "../../components/StyledSection";
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import {useParams} from "react-router-dom";
 
 export default function ReceivedInvites() {
 
     const {token} = useAuth()
     const [invites, setInvites] = useState([])
     const [getID, setID] = useState('')
+    console.log("getID: ", getID)
 
     useEffect(() => {
         getAllReceivedInvites(token)
             .then(invites => setInvites(invites))
     }, [])
-
 
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject') {
@@ -39,7 +41,7 @@ export default function ReceivedInvites() {
             }
         }
         if (selectValue === 'accept') {
-            const updateRequest = await updateInvite(getID, {status: "accepted"}, token)
+            const updateRequest = await updateInvite(getID, {status: "accept"}, token)
             if (updateRequest) {
                 alert(`invite ${updateRequest.inviteID} has been accepted.`)
             } else {
@@ -53,16 +55,6 @@ export default function ReceivedInvites() {
             .then(invites => (setInvites(invites)))
     }
 
-    /*
-    <select onChange={(event) => {
-                                handleSelect(event.target.value)
-                            }}>
-                                <option value="">Please select..</option>
-                                <option value="accept">accept</option>
-                                <option value="reject">reject</option>
-                            </select>
-     */
-
     return (
         <Page>
             <Header/>
@@ -71,18 +63,22 @@ export default function ReceivedInvites() {
                     {invites.map(recInv => (
                         <StyledSection onClick={() => setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
-                            <FormControl variant="standard">
-
-                                <InputLabel>please choose..</InputLabel>
-                                <Select onChange={(event) => {
-                                    handleSelect(event.target.value).then(reloadPage)
-                                }}
-                                >
-                                    <MenuItem value="accept">accept</MenuItem>
-                                    <MenuItem value="reject">reject</MenuItem>
-                                </Select>
-                            </FormControl>
-
+                                <Stack direction="row" spacing={2}>
+                                    <Button variant="outlined" startIcon={<DeleteIcon/>}
+                                            onClick={() =>
+                                                deleteInvite(recInv.inviteID, token)
+                                                    .then(reloadPage)}
+                                    >
+                                        Delete
+                                    </Button>
+                                    <Button variant="contained" endIcon={<SendIcon/>}
+                                            onClick={() =>
+                                            updateInvite(recInv.inviteID, {status:"accept", token})
+                                                .then(reloadPage)}
+                                    >
+                                        Accept Invite
+                                    </Button>
+                                </Stack>
                         </StyledSection>
                     ))}
                 </div>}

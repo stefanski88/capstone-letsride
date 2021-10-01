@@ -11,7 +11,7 @@ export default function MotoCard({moto}) {
     }
 
     return (
-        <TableContainer component={Paper} oonClick={() => {
+        <TableContainer component={Paper} onClick={() => {
             selectMotorcycle(moto.motoID)
         }}>
             <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">

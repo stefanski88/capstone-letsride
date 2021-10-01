@@ -7,7 +7,7 @@ export default createGlobalStyle`
   }
   html, body {
     margin: 0;
-    font-family: Arial;
+    font-family: Monaco, sans-serif ,'Source Sans Pro', Arial;
   }
   
 

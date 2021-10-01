@@ -131,7 +131,7 @@ export const deleteInvite = async (inviteID, token) => {
 export const updateInvite = async (inviteID, updatedInvite, token) => {
     try {
         const request = await axios
-            .put(`/api/invite/updateInvite/${inviteID}`, updatedInvite, headers(token))
+            .put(`/api/invite/updateInvite/${inviteID}`, updatedInvite, headersJson(token))
         return request.data;
     } catch (error) {
         console.warn(error)

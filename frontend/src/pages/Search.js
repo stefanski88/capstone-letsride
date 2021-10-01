@@ -4,10 +4,14 @@ import NavBar from "../components/NavBar";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {getCitiesFromGeoNames, getUsers} from "../services/API-Service";
-import Select from "../components/Select";
 import {drivingStyleOptions, drivingExpOptions, locations} from '../services/FilterOptions'
 import RiderCard from "../components/cards/RiderCard";
 import Page from "../components/Page";
+import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
+import {MenuItem} from "@material-ui/core";
+import Select from '@mui/material/Select';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import TextField from "@mui/material/TextField";
 
 export default function Search() {
 
@@ -74,11 +78,7 @@ export default function Search() {
         rider.drivingExp === (drivingExp) &&
         locationMatch(rider, searchPlaceName))
 
-    return (
-        <Page>
-            <Header/>
-            <Main>
-                <Select
+    /*                <Select
                     name="drivingExp"
                     value={drivingExp}
                     options={drivingExpOptions}
@@ -98,6 +98,40 @@ export default function Search() {
                     value={searchPlaceName}
                     placeholder="Search by location.."
                 />
+*/
+
+    return (
+        <Page>
+            <Header/>
+            <Main>
+                <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                <Select
+                    label="Driving Experience"
+                    name="drivingExp"
+                    value={drivingExp}
+                    onChange={handleChangeDrivingExp}
+                >
+                    <MenuItem value="beginner">beginner</MenuItem>
+                    <MenuItem value="experienced">experienced</MenuItem>
+                    <MenuItem value="expert">expert</MenuItem>
+                </Select>
+                <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                <Select
+                    label="Driving Style"
+                    name="drivingStyle"
+                    value={drivingStyle}
+                    onChange={handleChangeDrivingStyle}
+                    >
+                    <MenuItem value="comfortable">comfortable</MenuItem>
+                    <MenuItem value="sporty">sporty</MenuItem>
+                    <MenuItem value="knee slider">knee slider</MenuItem>
+                </Select>
+                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                <TextField variant="standard"
+                           name="age"
+                           type="text"
+                           value={searchPlaceName}
+                           onChange={handleSearchPlaceName}/>
             </Main>
             {filteredRiders.length === 0 && <p>No Riders found yet! Change the driving style, experience, or location.</p>}
             {filteredRiders.map(filteredRider => (

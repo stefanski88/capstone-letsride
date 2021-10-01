@@ -45,71 +45,68 @@ export default function EditAccount() {
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
                         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            <VpnKeyIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField
+                                variant="standard"
+                                name="password"
+                                type="password"
+                                value={update.password}
+                                onChange={handleUpdate}/>
                             <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                            <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                <VpnKeyIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField
-                                    variant="standard"
-                                    name="password"
-                                    type="password"
-                                    value={update.password}
-                                    onChange={handleUpdate}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField
-                                    variant="standard"
-                                    name="firstName"
-                                    value={update.firstName}
-                                    onChange={handleUpdate}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField
-                                    variant="standard"
-                                    name="lastName"
-                                    value={update.lastName}
-                                    onChange={handleUpdate}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField variant="standard"
-                                           name="age"
-                                           type="date"
-                                           value={update.age}
-                                           onChange={handleUpdate}/>
-                                <LocationCityIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField
-                                    variant="standard"
-                                    name="location"
-                                    value={update.location}
-                                    onChange={handleUpdate}/>
-                                <InputLabel>Driving Experience</InputLabel>
-                                <Select
-                                    value={update.drivingExp}
-                                    name="drivingExp"
-                                    label="Driving Experie"
-                                    onChange={handleUpdate}
-                                >
-                                    <MenuItem value="beginner">beginner</MenuItem>
-                                    <MenuItem value="experienced">experienced</MenuItem>
-                                    <MenuItem value="expert">expert</MenuItem>
-                                </Select>
-                                <InputLabel>Driving Style</InputLabel>
-                                <Select
-                                    value={update.drivingStyle}
-                                    name="drivingStyle"
-                                    label="Driving Style"
-                                    onChange={handleUpdate}
-                                >
-                                    <MenuItem value="comfortable">comfortable</MenuItem>
-                                    <MenuItem value="sporty">sporty</MenuItem>
-                                    <MenuItem value="knee slider">knee slider</MenuItem>
-                                </Select>
-                                <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField
-                                    variant="standard"
-                                    name="aboutMe"
-                                    value={update.aboutMe}
-                                    onChange={handleUpdate}
-                                    multiline
-                                    rows={4}
-                                    maxRows={8}/>
-                            </Box>
+                            <TextField
+                                variant="standard"
+                                name="firstName"
+                                value={update.firstName}
+                                onChange={handleUpdate}/>
+                            <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField
+                                variant="standard"
+                                name="lastName"
+                                value={update.lastName}
+                                onChange={handleUpdate}/>
+                            <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField variant="standard"
+                                       name="age"
+                                       type="date"
+                                       value={update.age}
+                                       onChange={handleUpdate}/>
+                            <LocationCityIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField
+                                variant="standard"
+                                name="location"
+                                value={update.location}
+                                onChange={handleUpdate}/>
+                            <InputLabel>Driving Experience</InputLabel>
+                            <Select
+                                value={update.drivingExp}
+                                name="drivingExp"
+                                label="Driving Experie"
+                                onChange={handleUpdate}
+                            >
+                                <MenuItem value="beginner">beginner</MenuItem>
+                                <MenuItem value="experienced">experienced</MenuItem>
+                                <MenuItem value="expert">expert</MenuItem>
+                            </Select>
+                            <InputLabel>Driving Style</InputLabel>
+                            <Select
+                                value={update.drivingStyle}
+                                name="drivingStyle"
+                                label="Driving Style"
+                                onChange={handleUpdate}
+                            >
+                                <MenuItem value="comfortable">comfortable</MenuItem>
+                                <MenuItem value="sporty">sporty</MenuItem>
+                                <MenuItem value="knee slider">knee slider</MenuItem>
+                            </Select>
+                            <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                            <TextField
+                                variant="standard"
+                                name="aboutMe"
+                                value={update.aboutMe}
+                                onChange={handleUpdate}
+                                multiline
+                                rows={4}
+                                maxRows={8}/>
                         </Box>
                         <Button variant="outlined" onClick={handleSubmit}>Save Account Information</Button>
                     </FormControl>
