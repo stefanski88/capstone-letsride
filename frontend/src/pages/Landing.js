@@ -5,8 +5,6 @@ import NavBar from "../components/NavBar";
 import Header from "../components/Header";
 import MainGallery from "../components/MainGallery";
 import Page from "../components/Page";
-import Main from "../components/Main";
-
 
 export default function Landing() {
 
@@ -19,14 +17,17 @@ export default function Landing() {
     return (
         <Page>
             <Header/>
+            <div>
             <MainGallery>
-                <button onClick={handleClick}>load riders</button>
                 {riders.map(rider => (
                     <RiderCard key={rider.userName} rider={rider}/>
                 ))}
             </MainGallery>
-            <NavBar/>
+                <button onClick={handleClick}>load riders</button>
 
+            </div>
+
+            <NavBar/>
         </Page>
     );
 }

@@ -1,5 +1,4 @@
 import styled from "styled-components/macro";
-import {StyledSection} from "../StyledSection";
 import {useHistory} from "react-router-dom";
 
 export default function RiderCard( { rider } ) {
@@ -11,7 +10,7 @@ export default function RiderCard( { rider } ) {
     }
 
     return(
-        <StyledSection onClick={()=>selectRiderCard(rider.userName)}>
+        <StyledRiderCard onClick={()=>selectRiderCard(rider.userName)}>
             <ul>
             <h4>{rider.userName}</h4>
             <StyledImg src="https://thiscatdoesnotexist.com/?ref=producthunt" alt="rider profile picture"/>
@@ -23,9 +22,18 @@ export default function RiderCard( { rider } ) {
             <li>Driving Style: {rider.drivingStyle}</li>
             <li>About: {rider.about}</li>
             </ul>
-        </StyledSection>
+        </StyledRiderCard>
     );
 }
+
+const StyledRiderCard = styled.section`
+  padding: 10px;  
+  width: 300px;
+  text-align: left;
+  border: 1px solid #3f50b5;
+  border-radius: 12px;
+  box-shadow: 1px 2px 8px #3f50b5;
+`
 
 const StyledImg = styled.img`
   width  : 10rem;

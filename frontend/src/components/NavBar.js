@@ -126,6 +126,12 @@ export default function NavBar() {
 }
 
 const BottomNavi = styled.nav`
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+
+/*
+  bottom: 0;
+  position: fixed;
+ */
 `
