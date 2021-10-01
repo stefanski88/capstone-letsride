@@ -3,8 +3,10 @@ import RiderCard from "../components/cards/RiderCard";
 import {getUsers} from "../services/API-Service";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
-import Main from "../components/Main";
+import MainGallery from "../components/MainGallery";
 import Page from "../components/Page";
+import Main from "../components/Main";
+
 
 export default function Landing() {
 
@@ -17,13 +19,14 @@ export default function Landing() {
     return (
         <Page>
             <Header/>
-            <button onClick={handleClick}>load riders</button>
-            <Main>
+            <MainGallery>
+                <button onClick={handleClick}>load riders</button>
                 {riders.map(rider => (
                     <RiderCard key={rider.userName} rider={rider}/>
                 ))}
-            </Main>
+            </MainGallery>
             <NavBar/>
+
         </Page>
     );
 }

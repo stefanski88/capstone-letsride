@@ -17,5 +17,6 @@ public class InviteDTO {
     private String receiver;
     private String sender;
     private String status;
-    private Date timeStamp;
+    private String timeStamp;
+    private String location;
 }

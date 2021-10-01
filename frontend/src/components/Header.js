@@ -1,4 +1,7 @@
-import styled from 'styled-components/macro'
+import {StyledHeader} from "./styled/StyledHeaderImg";
+import {StyledHeaderImage} from "./styled/StyledHeaderImage";
+import {StyledHeaderBlockquote} from "./styled/StyledHeaderBlockquote";
+
 
 export default function Header() {
 
@@ -6,31 +9,13 @@ export default function Header() {
     const image = `${process.env.PUBLIC_URL}/letsRideImage.PNG`
     const quote = "enjoy riding motorcycle - together!"
 
-    return(
+    return (
         <StyledHeader>
-            <StyledHeaderImg src={image} alt="lets ride - logo"/>
+            <StyledHeaderImage src={image} alt="lets ride - logo"/>
             <h1>{title}</h1>
             <div>
-            <StyledBlockquote>{quote}</StyledBlockquote>
+                <StyledHeaderBlockquote>{quote}</StyledHeaderBlockquote>
             </div>
         </StyledHeader>
     );
 }
-
-const StyledHeader = styled.header`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-`
-const StyledHeaderImg = styled.img`
-  width : 50%;
-  margin: 0 1rem;
-
-`
-const StyledBlockquote = styled.blockquote`
-  font-size: 1.2rem;
-
-
-
-`

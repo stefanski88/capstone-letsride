@@ -17,12 +17,11 @@ export default function ReceivedInvite() {
     const history = useHistory()
     console.log(id)
 
-    const [deletion, setDeletion] = useState({})
-
     //JSX ausbessern!!
     const handleSelect = async (selectValue) => {
         if (selectValue === 'reject')
         {
+            console.log('deleting ',id)
             const deleteRequest = await deleteInvite(id, token);
             if (deleteRequest) {
                 alert(`The invite ${deleteRequest.inviteID} has been rejected and deleted`)

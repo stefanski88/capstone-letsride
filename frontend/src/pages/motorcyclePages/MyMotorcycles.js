@@ -6,7 +6,9 @@ import {useAuth} from "../../auth/AuthProvider";
 import {deleteMotorcycle, getMyMotorcycles} from "../../services/API-Service";
 import MotoCard from "../../components/cards/MotoCard";
 import Page from "../../components/Page";
-
+import {StyledSection} from "../../components/StyledSection";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 export default function MyMotorcycles() {
 
@@ -17,25 +19,27 @@ export default function MyMotorcycles() {
         getMyMotorcycles(token)
             .then(motorcycles => setMotorcycles(motorcycles))
     }, [])
-    console.log(motorcycles)
 
     const reloadPage = () => {
         getMyMotorcycles(token)
             .then(motorcycles => setMotorcycles(motorcycles))
     }
 
-
     return (
         <Page>
             <Header/>
             <Main>
-                {motorcycles.map(moto => (
-                    <section>
-                        <MotoCard key={moto.motoID} moto={moto}/>
-                        <button onClick={() => deleteMotorcycle(moto.motoID, token).then(reloadPage)}>Delete Motorcycle</button>
-                    </section>
-
+                <StyledSection>
+                    {motorcycles.map(moto => (
+                        <section>
+                            <MotoCard key={moto.motoID} moto={moto}/>
+                            <Button variant="outlined" size="small" startIcon={<DeleteIcon />}
+                                    onClick={() =>
+                                deleteMotorcycle(moto.motoID, token).then(reloadPage)}>Delete Motorcycle
+                            </Button>
+                        </section>
                     ))}
+                </StyledSection>
             </Main>
             <NavBar/>
         </Page>

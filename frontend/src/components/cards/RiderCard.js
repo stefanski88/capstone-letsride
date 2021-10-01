@@ -12,25 +12,21 @@ export default function RiderCard( { rider } ) {
 
     return(
         <StyledSection onClick={()=>selectRiderCard(rider.userName)}>
-            <StyledH>{rider.userName}</StyledH>
+            <ul>
+            <h4>{rider.userName}</h4>
             <StyledImg src="https://thiscatdoesnotexist.com/?ref=producthunt" alt="rider profile picture"/>
-            <StyledP>Firstname: {rider.firstName}</StyledP>
-            <StyledP>Lastname: {rider.lastName}</StyledP>
-            <StyledP>Age: {rider.age}</StyledP>
-            <StyledP>Location: {rider.location}</StyledP>
-            <StyledP>Driving Experience: {rider.drivingExp}</StyledP>
-            <StyledP>Driving Style: {rider.drivingStyle}</StyledP>
-            <StyledP>About: {rider.about}</StyledP>
+            <li>Firstname: {rider.firstName}</li>
+            <li>Lastname: {rider.lastName}</li>
+            <li>Age: {rider.age}</li>
+            <li>Location: {rider.location}</li>
+            <li>Driving Experience: {rider.drivingExp}</li>
+            <li>Driving Style: {rider.drivingStyle}</li>
+            <li>About: {rider.about}</li>
+            </ul>
         </StyledSection>
     );
 }
 
 const StyledImg = styled.img`
   width  : 10rem;
-`
-const StyledP = styled.p`
-  margin: 0.5rem 0;
-`
-const StyledH = styled.h4`
-  text-align: center;
 `

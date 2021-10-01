@@ -6,18 +6,22 @@ export const getToken = credentials =>
         .then(response => response.data)
         .then(dto => dto.token)
 
-const headers = token => {return{
-    headers: {
-        Authorization: `Bearer ${token}`,
-    },
-}}
+const headers = token => {
+    return {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+}
 
-const headersJson = token => {return{
-    headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    },
-}}
+const headersJson = token => {
+    return {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    }
+}
 
 // --- USER API ---
 export const getUser = async (userName, token) => {
@@ -25,8 +29,7 @@ export const getUser = async (userName, token) => {
         const request = await axios
             .get(`/api/getUser/${userName}`, headers(token))
         return request.data
-    }
-    catch (error) {
+    } catch (error) {
         console.warn(error)
         return false;
     }
@@ -37,19 +40,24 @@ export const getUsers = async () => {
         const request = await axios
             .get('/api/getUsers')
         return request.data
-    }
-    catch (error) {
+    } catch (error) {
         console.warn(error)
         return false;
     }
 }
 
 
+export const createUser = async (newUser) => {
+    try {
+        const request = await axios
+            .post('/api/registerUser', newUser)
+        return request.data;
+    } catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
 
-export const createUser = newUser =>
-    axios
-        .post('/api/registerUser', newUser)
-        .then(response => response.data)
 
 export const deleteUser = (token) =>
     axios
@@ -64,7 +72,7 @@ export const updateUser = (token, updateUser) =>
 // --- MOTORCYCLE API ---
 export const getMyMotorcycle = (motoID, token) =>
     axios
-        .get('/api/moto/getMotoByMotoID/'+motoID, headers(token))
+        .get('/api/moto/getMotoByMotoID/' + motoID, headers(token))
         .then(response => response.data)
 
 export const getMyMotorcycles = (token) =>
@@ -90,8 +98,7 @@ export const deleteMotorcycle = async (motoID, token) => {
         const request = await axios
             .delete(`/api/moto/deleteMoto/${motoID}`, headers(token))
         return request.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.warn(error)
         return false;
     }
@@ -111,12 +118,11 @@ export const getAllSentInvites = (token) =>
 
 
 export const deleteInvite = async (inviteID, token) => {
-    try{
+    try {
         const request = await axios
             .delete(`/api/invite/deleteInvite/${inviteID}`, headers(token))
         return request.data;
-    }
-    catch(error) {
+    } catch (error) {
         console.warn(error)
         return false;
     }
@@ -125,10 +131,9 @@ export const deleteInvite = async (inviteID, token) => {
 export const updateInvite = async (inviteID, updatedInvite, token) => {
     try {
         const request = await axios
-            .put(`/api/invite/updateInvite/${inviteID}`, updatedInvite, headers(token))
+            .put(`/api/invite/updateInvite/${inviteID}`, updatedInvite, headersJson(token))
         return request.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.warn(error)
         return false;
     }
@@ -138,14 +143,35 @@ export const createInvite = async (newInvite, token) => {
     try {
         const request = await axios
             .post('/api/invite/createInvite', newInvite, headersJson(token))
-        return request.data
-    }
-    catch (error) {
+        return request.data;
+    } catch (error) {
         console.warn(error)
         return false;
     }
 }
 
+export const getInvite = async (inviteID, token) => {
+    try {
+        const request = await axios
+            .get(`/api/invite/getInvite${inviteID}`, headers())
+        return request.data;
+    } catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
+
+// EXTERNAL API
+export const getCitiesFromGeoNames = async () => {
+    try {
+        const request = await axios
+            .get('http://api.geonames.org/postalCodeSearchJSON?formatted=true&country=DE&postalcode=*&maxRows=500&username=alternative2k&style=full')
+        return request.data.postalCodes
+    } catch (error) {
+        console.warn(error)
+        return false;
+    }
+}
 
 
 

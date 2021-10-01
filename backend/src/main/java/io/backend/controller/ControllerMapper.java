@@ -152,6 +152,7 @@ abstract class ControllerMapper {
         return InviteDTO.builder()
                 .status(inviteEntity.getStatus())
                 .timeStamp(inviteEntity.getTimeStamp())
+                .location(inviteEntity.getLocation())
                 .build();
     }
 
@@ -162,6 +163,7 @@ abstract class ControllerMapper {
                 .sender(inviteEntity.getSender().getUserName())
                 .status(inviteEntity.getStatus())
                 .timeStamp(inviteEntity.getTimeStamp())
+                .location(inviteEntity.getLocation())
                 .build();
     }
 

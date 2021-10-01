@@ -1,7 +1,17 @@
 import styled from 'styled-components/macro'
 
 export default styled.main`
-  padding-top: 0.5rem;
-  overflow-y: scroll;
+
+  width: 100%;
+  height: 100%;
+  
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+  margin-bottom: 50px;
+  overflow-y: scroll;
 `

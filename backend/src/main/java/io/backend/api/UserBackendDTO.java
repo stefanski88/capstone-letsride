@@ -19,7 +19,7 @@ public class UserBackendDTO {
     private String eMail;
     private String firstName;
     private String lastName;
-    private int age;
+    private String age;
     private String location;
     private String drivingExp;
     private String drivingStyle;

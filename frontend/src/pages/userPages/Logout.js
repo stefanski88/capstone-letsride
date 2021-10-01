@@ -1,12 +1,12 @@
-import NavBar from "../components/NavBar";
-import Header from "../components/Header";
+import NavBar from "../../components/NavBar";
+import Header from "../../components/Header";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
-import Main from "../components/Main";
-import PaperComponent from "../components/PaperComponent";
+import Main from "../../components/Main";
+import PaperComponent from "../../components/PaperComponent";
 import {useState} from "react";
-import {useAuth} from "../auth/AuthProvider";
+import {useAuth} from "../../auth/AuthProvider";
 import {Redirect} from "react-router-dom";
-import Page from "../components/Page";
+import Page from "../../components/Page";
 
 export default function Logout() {
 
@@ -22,7 +22,7 @@ export default function Logout() {
     }
 
     if (!user) {
-        return <Redirect to="/login" />
+        return <Redirect to="/login"/>
     }
 
     return (

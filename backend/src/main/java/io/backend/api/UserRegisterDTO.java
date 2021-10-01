@@ -16,7 +16,7 @@ public class UserRegisterDTO {
     private String email;
     private String firstName;
     private String lastName;
-    private int age;
+    private String age;
     private String location;
     private String drivingExp;
     private String drivingStyle;
