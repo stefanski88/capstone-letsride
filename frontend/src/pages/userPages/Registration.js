@@ -15,7 +15,7 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import {Wrapper} from "../../components/styled/Wrapper";
-
+import {UserInfoTextField} from "../../components/UserInfoTextField";
 
 export default function Registration() {
 
@@ -53,76 +53,94 @@ export default function Registration() {
             <Main>
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
-                            <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                <Wrapper>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="Username"
-                                           variant="standard"
-                                           name="userName"
-                                           value={registerUser.userName}
-                                           onChange={handleRegistration}/>
-                                <VpnKeyIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="Password"
-                                           variant="standard"
-                                           name="password"
-                                           type="password"
-                                           value={registerUser.password}
-                                           onChange={handleRegistration}/>
-                                <AlternateEmailIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="E-Mail"
-                                           variant="standard"
-                                           name="email"
-                                           type="email"
-                                           value={registerUser.email}
-                                           onChange={handleRegistration}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="First Name"
-                                           variant="standard"
-                                           name="firstName"
-                                           value={registerUser.firstName}
-                                           onChange={handleRegistration}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="Last Name"
-                                           variant="standard"
-                                           name="lastName"
-                                           value={registerUser.lastName}
-                                           onChange={handleRegistration}/>
-                                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField variant="standard"
-                                           name="age"
-                                           type="date"
-                                           value={registerUser.age}
-                                           onChange={handleRegistration}/>
-                                <LocationCityIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                <TextField label="Location"
-                                           variant="standard"
-                                           name="location"
-                                           value={registerUser.location}
-                                           onChange={handleRegistration}/>
-                                <InputLabel>Driving Experience</InputLabel>
-                                <Select
-                                    value={registerUser.drivingExp}
-                                    name="drivingExp"
-                                    label="Driving Experience"
-                                    onChange={handleRegistration}
-                                >
-                                    <MenuItem value="beginner">beginner</MenuItem>
-                                    <MenuItem value="experienced">experienced</MenuItem>
-                                    <MenuItem value="expert">expert</MenuItem>
-                                </Select>
-                                <InputLabel>Driving Style</InputLabel>
-                                <Select
-                                    value={registerUser.drivingStyle}
-                                    name="drivingStyle"
-                                    label="Driving Style"
-                                    onChange={handleRegistration}
-                                >
-                                    <MenuItem value="comfortable">comfortable</MenuItem>
-                                    <MenuItem value="sporty">sporty</MenuItem>
-                                    <MenuItem value="knee slider">knee slider</MenuItem>
-                                </Select>
+                        <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            <Wrapper>
+                                <UserInfoTextField>
+                                    <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="Username"
+                                               variant="standard"
+                                               name="userName"
+                                               value={registerUser.userName}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <VpnKeyIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="Password"
+                                               variant="standard"
+                                               name="password"
+                                               type="password"
+                                               value={registerUser.password}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <AlternateEmailIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="E-Mail"
+                                               variant="standard"
+                                               name="email"
+                                               type="email"
+                                               value={registerUser.email}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="First Name"
+                                               variant="standard"
+                                               name="firstName"
+                                               value={registerUser.firstName}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="Last Name"
+                                               variant="standard"
+                                               name="lastName"
+                                               value={registerUser.lastName}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField variant="standard"
+                                               name="age"
+                                               type="date"
+                                               value={registerUser.age}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <LocationCityIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                    <TextField label="Location"
+                                               variant="standard"
+                                               name="location"
+                                               value={registerUser.location}
+                                               onChange={handleRegistration}/>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <InputLabel>Driving Experience</InputLabel>
+                                    <Select
+                                        value={registerUser.drivingExp}
+                                        name="drivingExp"
+                                        label="Driving Experience"
+                                        onChange={handleRegistration}
+                                    >
+                                        <MenuItem value="beginner">beginner</MenuItem>
+                                        <MenuItem value="experienced">experienced</MenuItem>
+                                        <MenuItem value="expert">expert</MenuItem>
+                                    </Select>
+                                </UserInfoTextField>
+                                <UserInfoTextField>
+                                    <InputLabel>Driving Style</InputLabel>
+                                    <Select
+                                        value={registerUser.drivingStyle}
+                                        name="drivingStyle"
+                                        label="Driving Style"
+                                        onChange={handleRegistration}
+                                    >
+                                        <MenuItem value="comfortable">comfortable</MenuItem>
+                                        <MenuItem value="sporty">sporty</MenuItem>
+                                        <MenuItem value="knee slider">knee slider</MenuItem>
+                                    </Select>
+                                </UserInfoTextField>
                             </Wrapper>
-                            </Box>
+                        </Box>
                         <Button variant="outlined" onClick={handleSubmit}>Sign up</Button>
                     </FormControl>
                 </Box>

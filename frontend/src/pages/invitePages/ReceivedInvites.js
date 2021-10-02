@@ -10,14 +10,11 @@ import {
 } from "../../services/API-Service";
 import ReceivedInviteCard from "../../components/cards/ReceivedInviteCard";
 import Page from "../../components/Page";
-import {StyledSection} from "../../components/StyledSection";
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import {useParams} from "react-router-dom";
+import {InviteSection} from "../../components/InviteSection";
 
 export default function ReceivedInvites() {
 
@@ -61,17 +58,17 @@ export default function ReceivedInvites() {
             <Main>
                 {invites && <div>
                     {invites.map(recInv => (
-                        <StyledSection onClick={() => setID(recInv.inviteID)}>
+                        <InviteSection onClick={() => setID(recInv.inviteID)}>
                             <ReceivedInviteCard key={recInv.id} recInv={recInv}/>
                                 <Stack direction="row" spacing={2}>
-                                    <Button variant="outlined" startIcon={<DeleteIcon/>}
+                                    <Button variant="outlined" size="small" startIcon={<DeleteIcon/>}
                                             onClick={() =>
                                                 deleteInvite(recInv.inviteID, token)
                                                     .then(reloadPage)}
                                     >
                                         Delete
                                     </Button>
-                                    <Button variant="contained" endIcon={<SendIcon/>}
+                                    <Button variant="contained" size="small" endIcon={<SendIcon/>}
                                             onClick={() =>
                                             updateInvite(recInv.inviteID, {status:"accept", token})
                                                 .then(reloadPage)}
@@ -79,7 +76,7 @@ export default function ReceivedInvites() {
                                         Accept Invite
                                     </Button>
                                 </Stack>
-                        </StyledSection>
+                        </InviteSection>
                     ))}
                 </div>}
             </Main>

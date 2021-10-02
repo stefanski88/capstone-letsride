@@ -8,6 +8,7 @@ import NavBar from "../../components/NavBar";
 import Header from "../../components/Header";
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 import Page from "../../components/Page";
+import MainCenter from "../../components/MainCenter";
 
 export default function DeleteAccount() {
 
@@ -42,7 +43,7 @@ export default function DeleteAccount() {
     return (
         <Page>
             <Header/>
-            <Main>
+            <MainCenter>
                 <Button variant="outlined" onClick={handleClickOpen}>
                     Delete Account
                 </Button>
@@ -68,7 +69,7 @@ export default function DeleteAccount() {
                         <Button as={Link} to="/login" onClick={handleConfirmation}>Confirm</Button>
                     </DialogActions>
                 </Dialog>
-            </Main>
+            </MainCenter>
             <NavBar/>
         </Page>
     );

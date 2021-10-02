@@ -24,7 +24,7 @@ export default function NavBar() {
         <BottomNavi>
             <BottomNavigation value={location.pathname}>
                 <BottomNavigationAction
-                    label="Landing Page"
+                    label="Home"
                     value="/"
                     icon={<HomeIcon/>}
                     component={Link}
@@ -57,9 +57,18 @@ export default function NavBar() {
                         to="/editAccount"
                     />
                 )}
+                {((user && location.pathname === "/editAccount" || location.pathname === "/deleteAccount") && (
+                    <BottomNavigationAction
+                        label="Delete Account"
+                        value="/deleteAccount"
+                        icon={<DeleteForeverIcon/>}
+                        component={Link}
+                        to="/deleteAccount"
+                    />
+                ))}
                 {user && (
                     <BottomNavigationAction
-                        label="My Motorcycles"
+                        label="My Bikes"
                         value="/myMotorcycles"
                         icon={<TwoWheelerIcon/>}
                         component={Link}
@@ -68,22 +77,13 @@ export default function NavBar() {
                 )}
                 {((location.pathname === "/myMotorcycles" || location.pathname === "/createMotorcycle") && (
                     <BottomNavigationAction
-                        label="Add Motorcycle"
+                        label="Add Bikes"
                         value="/createMotorcycle"
                         icon={<AddIcon/>}
                         component={Link}
                         to="/createMotorcycle"
                     />
                 ))}
-                {location.pathname === "/editAccount" && (
-                    <BottomNavigationAction
-                        label="DeleteAccount"
-                        value="/registration"
-                        icon={<DeleteForeverIcon/>}
-                        component={Link}
-                        to="/deleteAccount"
-                    />
-                )}
                 {user && (
                     <BottomNavigationAction
                         label="Received Invites"
@@ -129,9 +129,4 @@ const BottomNavi = styled.nav`
   width: 100%;
   bottom: 0;
   position: fixed;
-
-/*
-  bottom: 0;
-  position: fixed;
- */
 `

@@ -11,12 +11,15 @@ import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import * as PropTypes from "prop-types";
+import MainCenter from '../../components/MainCenter'
 
 const defaultState = {
     userName: '',
     password: '',
 }
 
+MainCenter.propTypes = {children: PropTypes.node};
 export default function Login() {
 
     const {login, user} = useAuth()
@@ -37,7 +40,7 @@ export default function Login() {
     return (
         <Page>
             <Header/>
-            <Main>
+            <MainCenter>
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
                         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
@@ -60,7 +63,7 @@ export default function Login() {
                         <Button variant="outlined" onClick={submitHandler}>Login</Button>
                     </FormControl>
                 </Box>
-            </Main>
+            </MainCenter>
             <NavBar/>
         </Page>
 

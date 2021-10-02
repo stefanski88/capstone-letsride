@@ -9,6 +9,7 @@ import Page from "../../components/Page";
 import {StyledSection} from "../../components/StyledSection";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import MainGallery from "../../components/MainGallery";
 
 export default function MyMotorcycles() {
 
@@ -28,19 +29,17 @@ export default function MyMotorcycles() {
     return (
         <Page>
             <Header/>
-            <Main>
-                <StyledSection>
+            <MainGallery>
                     {motorcycles.map(moto => (
-                        <section>
+                        <StyledSection>
                             <MotoCard key={moto.motoID} moto={moto}/>
                             <Button variant="outlined" size="small" startIcon={<DeleteIcon />}
                                     onClick={() =>
                                 deleteMotorcycle(moto.motoID, token).then(reloadPage)}>Delete Motorcycle
                             </Button>
-                        </section>
+                        </StyledSection>
                     ))}
-                </StyledSection>
-            </Main>
+            </MainGallery>
             <NavBar/>
         </Page>
     );

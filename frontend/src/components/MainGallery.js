@@ -8,8 +8,8 @@ export default styled.main`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
-  margin: 0 20px;
+  justify-content: center;
+
   
   /*
   margin: 20px 20px;

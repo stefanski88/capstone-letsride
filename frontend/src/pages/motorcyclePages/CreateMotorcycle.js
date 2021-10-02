@@ -63,7 +63,7 @@ export default function CreateMotorcycle() {
                                 <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                 <TextField variant="standard"
                                            type="date"
-                                           name="firstName"
+                                           name="constructionYear"
                                            value={newMotorcycle.constructionYear}
                                            onChange={handleChange}/>
                             </Box>

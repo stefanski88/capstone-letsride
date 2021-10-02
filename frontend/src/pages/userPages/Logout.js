@@ -7,6 +7,7 @@ import {useState} from "react";
 import {useAuth} from "../../auth/AuthProvider";
 import {Redirect} from "react-router-dom";
 import Page from "../../components/Page";
+import MainCenter from "../../components/MainCenter";
 
 export default function Logout() {
 
@@ -28,7 +29,7 @@ export default function Logout() {
     return (
         <Page>
             <Header/>
-            <Main>
+            <MainCenter>
                 <Button variant="outlined" onClick={handleClickOpen}>
                     Logout
                 </Button>
@@ -51,7 +52,7 @@ export default function Logout() {
                         <Button onClick={logout}>Logout</Button>
                     </DialogActions>
                 </Dialog>
-            </Main>
+            </MainCenter>
             <NavBar/>
         </Page>
     );
