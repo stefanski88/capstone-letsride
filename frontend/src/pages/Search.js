@@ -79,32 +79,10 @@ export default function Search() {
         rider.drivingExp === (drivingExp) &&
         locationMatch(rider, searchPlaceName))
 
-    /*                <Select
-                    name="drivingExp"
-                    value={drivingExp}
-                    options={drivingExpOptions}
-                    onChange={handleChangeDrivingExp}
-                    title="Driving Experience: "
-                />
-                <Select
-                    name="drivingStyle"
-                    value={drivingStyle}
-                    options={drivingStyleOptions}
-                    onChange={handleChangeDrivingStyle}
-                    title="Driving Style: "
-                />
-                <input
-                    type="text"
-                    onChange={handleSearchPlaceName}
-                    value={searchPlaceName}
-                    placeholder="Search by location.."
-                />
-*/
     return (
         <Page>
             <Header/>
             <MainGallery>
-
                 <UserInfoTextField>
                     <InputLabel>Driving Experience</InputLabel>
                     <Select sx={{width: 200}}
@@ -139,7 +117,6 @@ export default function Search() {
                                placeholder="Location"
                                onChange={handleSearchPlaceName}/>
                 </UserInfoTextField>
-
             </MainGallery>
 
             {filteredRiders.length === 0 &&

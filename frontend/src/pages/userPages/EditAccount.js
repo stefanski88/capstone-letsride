@@ -17,16 +17,20 @@ import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
 import Button from '@mui/material/Button';
 import {UserInfoTextField} from "../../components/UserInfoTextField";
 import {Wrapper} from "../../components/styled/Wrapper";
+import Loading from "../../components/Loading";
 
 export default function EditAccount() {
 
     const {token, user} = useAuth()
     const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
     const [update, setUpdate] = useState({})
 
     useEffect(() => {
+    setLoading(true)
         getUser(user.username)
             .then(data => setUpdate(data))
+        setLoading(false)
     }, [])
 
     const handleUpdate = event =>
@@ -34,16 +38,19 @@ export default function EditAccount() {
 
     const handleSubmit = event => {
         event.preventDefault()
+            setLoading(true)
         updateUser(token, update)
             .then(update => setUpdate(update))
             .catch(error => setError(error))
-            .finally(() => setUpdate(update))
+            .finally(() => setLoading(false))
     }
 
     return (
         <Page>
             <Header/>
             <Main as="form" onSubmit={handleSubmit}>
+                {loading && <Loading/>}
+                {!loading &&
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
                         <Box >
@@ -130,7 +137,7 @@ export default function EditAccount() {
                         </Box>
                         <Button variant="outlined" onClick={handleSubmit}>Save Account Information</Button>
                     </FormControl>
-                </Box>
+                </Box>}
             </Main>
             <NavBar/>
         </Page>
