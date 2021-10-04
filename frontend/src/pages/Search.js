@@ -12,6 +12,13 @@ import {MenuItem} from "@material-ui/core";
 import Select from '@mui/material/Select';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import TextField from "@mui/material/TextField";
+import {UserInfoTextField} from "../components/UserInfoTextField";
+import MainGallery from "../components/MainGallery";
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 
 export default function Search() {
 
@@ -26,22 +33,16 @@ export default function Search() {
 
     const [searchPlaceName, setSearchPlaceName] = useState('')
     const [locationsAPI, setLocationsAPI] = useState([])
-/*
-    useEffect(() => {
-        setLocationsAPI(locations) //DUMMY DATA
-        //getCitiesFromGeoNames().then(request => setLocationsAPI(request))
-    },[])
-    console.log("fetched data: ",locationsAPI)
- */
+
     useEffect(() => {
         console.log({riders})
-    },[riders])
+    }, [riders])
 
     useEffect(() => {
         getUsers()
             .then(riders => setRiders(riders))
             .catch(error => setError(error))
-    },[])
+    }, [])
 
     const handleChangeDrivingExp = event => {
         setDrivingExp(event.target.value)
@@ -59,12 +60,12 @@ export default function Search() {
     const mappedLocationsByPlaceName = locationsAPI.map(singleLocation => {
         return singleLocation.placeName
     })
-    console.log("mappedLocations by placeName: ",mappedLocationsByPlaceName)
+    console.log("mappedLocations by placeName: ", mappedLocationsByPlaceName)
 
 
     const filteredLocations = locationsAPI.filter(filteredLoc =>
-         filteredLoc.placeName.toLowerCase().includes(searchPlaceName.toLowerCase()))
-    console.log("filteredLocations by placeName: ",filteredLocations)
+        filteredLoc.placeName.toLowerCase().includes(searchPlaceName.toLowerCase()))
+    console.log("filteredLocations by placeName: ", filteredLocations)
 
     const locationMatch = (rider, search) => {
         if (!search) {
@@ -78,62 +79,49 @@ export default function Search() {
         rider.drivingExp === (drivingExp) &&
         locationMatch(rider, searchPlaceName))
 
-    /*                <Select
-                    name="drivingExp"
-                    value={drivingExp}
-                    options={drivingExpOptions}
-                    onChange={handleChangeDrivingExp}
-                    title="Driving Experience: "
-                />
-                <Select
-                    name="drivingStyle"
-                    value={drivingStyle}
-                    options={drivingStyleOptions}
-                    onChange={handleChangeDrivingStyle}
-                    title="Driving Style: "
-                />
-                <input
-                    type="text"
-                    onChange={handleSearchPlaceName}
-                    value={searchPlaceName}
-                    placeholder="Search by location.."
-                />
-*/
-
     return (
         <Page>
             <Header/>
-            <Main>
-                <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                <Select
-                    label="Driving Experience"
-                    name="drivingExp"
-                    value={drivingExp}
-                    onChange={handleChangeDrivingExp}
-                >
-                    <MenuItem value="beginner">beginner</MenuItem>
-                    <MenuItem value="experienced">experienced</MenuItem>
-                    <MenuItem value="expert">expert</MenuItem>
-                </Select>
-                <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                <Select
-                    label="Driving Style"
-                    name="drivingStyle"
-                    value={drivingStyle}
-                    onChange={handleChangeDrivingStyle}
+            <MainGallery>
+                <UserInfoTextField>
+                    <InputLabel>Driving Experience</InputLabel>
+                    <Select sx={{width: 200}}
+                        name="drivingExp"
+                        value={drivingExp}
+                        onChange={handleChangeDrivingExp}
+                            input={<OutlinedInput label="Name" />}
                     >
-                    <MenuItem value="comfortable">comfortable</MenuItem>
-                    <MenuItem value="sporty">sporty</MenuItem>
-                    <MenuItem value="knee slider">knee slider</MenuItem>
-                </Select>
-                <AccountCircle sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                <TextField variant="standard"
-                           name="age"
-                           type="text"
-                           value={searchPlaceName}
-                           onChange={handleSearchPlaceName}/>
-            </Main>
-            {filteredRiders.length === 0 && <p>No Riders found yet! Change the driving style, experience, or location.</p>}
+                        <MenuItem value="beginner">beginner</MenuItem>
+                        <MenuItem value="experienced">experienced</MenuItem>
+                        <MenuItem value="expert">expert</MenuItem>
+                    </Select>
+                </UserInfoTextField>
+                <UserInfoTextField>
+                    <InputLabel>Driving Style</InputLabel>
+                    <Select sx={{width: 200}}
+                        name="drivingStyle"
+                        value={drivingStyle}
+                        onChange={handleChangeDrivingStyle}
+                    >
+                        <MenuItem value="comfortable">comfortable</MenuItem>
+                        <MenuItem value="sporty">sporty</MenuItem>
+                        <MenuItem value="knee slider">knee slider</MenuItem>
+                    </Select>
+                </UserInfoTextField>
+                <UserInfoTextField>
+                    <LocationCityIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                    <TextField variant="standard"
+                               name="age"
+                               type="text"
+                               value={searchPlaceName}
+                               placeholder="Location"
+                               onChange={handleSearchPlaceName}/>
+                </UserInfoTextField>
+            </MainGallery>
+
+            {filteredRiders.length === 0 &&
+            <p>No Riders have been found yet! <br/>Change driving style, driving experience, or location to find
+                company.</p>}
             {filteredRiders.map(filteredRider => (
                 <RiderCard key={filteredRider.userName} rider={filteredRider}/>
             ))}

@@ -1,11 +1,11 @@
-import {deleteMotorcycle, getMyMotorcycle, updateMotorcycle} from "../../services/API-Service";
+import {getMyMotorcycle, updateMotorcycle} from "../../services/API-Service";
 import {useHistory, useParams} from "react-router-dom";
 import {useAuth} from "../../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import Page from "../../components/Page";
 import Header from "../../components/Header";
 import Main from "../../components/Main";
-import TextField from "../../components/TextField";
+import TextField from '@mui/material/TextField';
 import NavBar from "../../components/NavBar";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
@@ -47,20 +47,17 @@ export default function MyMotorcycle() {
                     <FormControl variant="standard">
                         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                             <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                            <TextField label="Nickname"
-                                       variant="standard"
+                            <TextField variant="standard"
                                        name="motoNickName"
                                        value={motorcycle.motoNickName}
                                        onChange={handleUpdateChange}/>
                             <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                            <TextField label="Manufacturer"
-                                       variant="standard"
+                            <TextField variant="standard"
                                        name="manufacturer"
                                        value={motorcycle.manufacturer}
                                        onChange={handleUpdateChange}/>
                             <TwoWheelerIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                            <TextField label="Model"
-                                       variant="standard"
+                            <TextField variant="standard"
                                        name="model"
                                        value={motorcycle.model}
                                        onChange={handleUpdateChange}/>

@@ -9,6 +9,13 @@ import {useParams} from "react-router-dom";
 import RiderCard from "../../components/cards/RiderCard";
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import MainGallery from "../../components/MainGallery";
+import TextField from "@mui/material/TextField";
+import TextSnippetOutlinedIcon from '@mui/icons-material/TextSnippetOutlined';
+import {Wrapper} from "../../components/styled/Wrapper";
+import Button from "@mui/material/Button";
+import {WrapperFR} from "../../WrapperFR";
+
 
 export default function FoundRider() {
 
@@ -59,23 +66,34 @@ export default function FoundRider() {
     return (
         <Page>
             <Header/>
-            <Main>
-                <section>
-                    <RiderCard rider={rider}/>
-                    <input
-                        type="text"
-                        value={inputLocation}
-                        onChange={handleInputChange}
-                    />
-                    <Datetime locale="de"
-                              value={dateTime}
-                              onChange={setDateTime}/>
-                    <button onClick={handleCreateInvite}>invite rider!</button>
-                    <h5>Suggest a meeting location that is easy to reach.</h5>
+            <MainGallery>
 
-                </section>
-                <button>go back</button>
-            </Main>
+                    <RiderCard rider={rider}/>
+
+                        <Datetime locale="de"
+                                  value={dateTime}
+                                  onChange={setDateTime}/>
+
+                        <WrapperFR>
+                            <div>
+                        <TextSnippetOutlinedIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                        <TextField
+                            variant="standard"
+                            name="aboutMe"
+                            value={inputLocation}
+                            onChange={handleInputChange}
+                            placeholder="Suggest a meeting place"
+                            multiline
+                            rows={3}
+                            maxRows={3}/>
+                            </div>
+                        <Button variant="outlined" onClick={handleCreateInvite}>Send Invite</Button>
+                        </WrapperFR>
+
+
+
+            </MainGallery>
+
             <NavBar/>
         </Page>
     );

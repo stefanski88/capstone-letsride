@@ -1,4 +1,3 @@
-import Main from '../../components/Main'
 import {useAuth} from '../../auth/AuthProvider'
 import {useState} from "react";
 import {Redirect} from "react-router-dom";
@@ -11,23 +10,34 @@ import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import * as PropTypes from "prop-types";
+import MainCenter from '../../components/MainCenter'
+import Loading from '../../components/Loading'
+import Error from "../../components/Error";
 
 const defaultState = {
     userName: '',
     password: '',
 }
 
+MainCenter.propTypes = {children: PropTypes.node};
 export default function Login() {
 
     const {login, user} = useAuth()
     const [credentials, setCredentials] = useState(defaultState)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
 
     const changeCredentialsHandler = event =>
         setCredentials({...credentials, [event.target.name]: event.target.value})
 
-    const submitHandler = () => {
+    const submitHandler = (event) => {
+        event.preventDefault()
+        setError()
+        setLoading(true)
         login(credentials)
-            .catch(error => console.error(error))
+            .catch(error => setError(error))
+            .finally(() => setLoading(false))
     }
 
     if (user) {
@@ -37,7 +47,9 @@ export default function Login() {
     return (
         <Page>
             <Header/>
-            <Main>
+            <MainCenter>
+                {loading && <Loading/>}
+                {!loading &&
                 <Box sx={{'& > :not(style)': {m: 1}}}>
                     <FormControl variant="standard">
                         <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
@@ -59,11 +71,10 @@ export default function Login() {
                         </Box>
                         <Button variant="outlined" onClick={submitHandler}>Login</Button>
                     </FormControl>
-                </Box>
-            </Main>
+                </Box>}
+            </MainCenter>
+            {error && <Error/>}
             <NavBar/>
         </Page>
-
-
     );
 }

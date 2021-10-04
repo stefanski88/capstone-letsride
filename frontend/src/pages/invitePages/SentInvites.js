@@ -10,6 +10,7 @@ import {useHistory} from "react-router-dom";
 import {StyledSection} from "../../components/StyledSection";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import MainGallery from "../../components/MainGallery";
 
 export default function SentInvites() {
 
@@ -29,7 +30,7 @@ export default function SentInvites() {
     return (
         <Page>
             <Header/>
-            <Main>
+            <MainGallery>
                 {invites.map(sentInv => (
                     <StyledSection>
                         <SentInviteCard key={sentInv.inviteID} sentInv={sentInv}/>
@@ -39,7 +40,7 @@ export default function SentInvites() {
                         </Button>
                     </StyledSection>
                 ))}
-            </Main>
+            </MainGallery>
             <NavBar/>
         </Page>
     );
