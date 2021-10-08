@@ -1,21 +1,16 @@
-import Main from "../components/Main";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {getCitiesFromGeoNames, getUsers} from "../services/API-Service";
-import {drivingStyleOptions, drivingExpOptions, locations} from '../services/FilterOptions'
 import RiderCard from "../components/cards/RiderCard";
 import Page from "../components/Page";
-import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
 import {MenuItem} from "@material-ui/core";
 import Select from '@mui/material/Select';
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import TextField from "@mui/material/TextField";
 import {UserInfoTextField} from "../components/UserInfoTextField";
 import MainGallery from "../components/MainGallery";
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
@@ -23,13 +18,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 export default function Search() {
 
     const {token} = useAuth()
-
     const [drivingStyle, setDrivingStyle] = useState('')
     const [drivingExp, setDrivingExp] = useState('')
     const [riders, setRiders] = useState([])
-
     const [error, setError] = useState()
-    const [loading, setLoading] = useState(false)
 
     const [searchPlaceName, setSearchPlaceName] = useState('')
     const [locationsAPI, setLocationsAPI] = useState([])
@@ -43,6 +35,13 @@ export default function Search() {
             .then(riders => setRiders(riders))
             .catch(error => setError(error))
     }, [])
+/*
+    useEffect(() => {
+        getCitiesFromGeoNames()
+            .then(locationsAPI => setLocationsAPI(locationsAPI))
+            .catch(error => setError(error))
+    },[])
+ */
 
     const handleChangeDrivingExp = event => {
         setDrivingExp(event.target.value)
